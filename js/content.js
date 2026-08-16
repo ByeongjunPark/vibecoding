@@ -121,7 +121,7 @@ window.SESSIONS = [
         ]
       },
       { type: 'promptGenerator', mode: 'canva', title: '🛠️ 2차시 실습: 캔바 AI 전용 백엔드 프롬프트 제작소', description: '1차시와 달리 화면 기능 외에 \'저장할 데이터 항목(백엔드 데이터 구조)\'까지 함께 설계하여 캔바 AI에 주문합니다!' },
-      { type: 'tip', variant: 'warning', content: '🚨 <b>캔바 AI의 한계점 & 다음 시간 예고:</b><br>캔바 AI가 데이터 구조를 받아주긴 하지만, <b>구체적인 고난도 백엔드 로직 처리나 AI 기반 실시간 자동 산출(자동 채점, AI 피드백 연동 등)은 불가능합니다.</b><br>이러한 한계를 완벽하게 해결하기 위해! 다음 3차시에서는 구글 시트와 코드를 직접 연동하는 <b>'앱스스크립트(Google Apps Script)'</b>를 배워볼 예정입니다!' },
+      { type: 'tip', variant: 'warning', content: '🚨 <b>캔바 AI의 한계점 & 다음 시간 예고:</b><br>캔바 AI가 데이터 구조를 받아주긴 하지만, <b>구체적인 고난도 백엔드 로직 처리나 AI 기반 실시간 자동 산출(자동 채점, AI 피드백 연동 등)은 불가능합니다.</b><br>이러한 한계를 완벽하게 해결하기 위해! 다음 3차시에서는 구글 시트와 코드를 직접 연동하는 <b>"앱스스크립트(Google Apps Script)"</b>를 배워볼 예정입니다!' },
       { type: 'checklist', sessionId: 'session-2', items: [
           { id: 's2-c1', label: '캔바 추천 예시 2종(상벌점, TO-DO list) 체험' },
           { id: 's2-c2', label: 'canva.com/ai 접속 완료' },
