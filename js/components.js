@@ -83,7 +83,7 @@ window.Components = (function () {
           <div class="step-number">${i + 1}</div>
           <div class="step-content">
             <h3>${esc(s.title)}</h3>
-            <p style="margin:0;color:var(--text);line-height:1.6;">${esc(s.description)}</p>
+            <p style="margin:0;color:var(--text);line-height:1.6;">${s.description}</p>
             ${imgHTML}
           </div>
         </div>`;
@@ -131,15 +131,43 @@ window.Components = (function () {
   ────────────────────────────── */
   const renderLinkGrid = (data) => {
     const { cols = 2, links = [] } = data; // cols: 2 (2x2) or 3 (3x1)
-    const cards = links.map(item => `
-      <div class="link-card" style="margin:0;height:100%;align-items:flex-start;">
-        <div class="link-icon" style="margin-top:4px;"><span style="font-size:1.25rem;">${item.icon || '🔗'}</span></div>
-        <div class="link-content">
-          <div class="link-title" style="margin-bottom:8px;font-size:1.05rem;">${esc(item.title)}</div>
-          <div class="link-desc" style="line-height:1.6;color:var(--text);">${item.description}</div>
-        </div>
-      </div>
-    `).join('');
+    const cards = links.map(item => {
+      let actionButtons = '';
+      if (item.copyUrl || item.demoUrl) {
+        const copyBtn = item.copyUrl
+          ? `<a href="${esc(item.copyUrl)}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;padding:8px 14px;background:var(--primary-light);color:var(--primary-hover);border:1px solid var(--primary);border-radius:var(--radius-sm);font-weight:700;font-size:0.85rem;text-decoration:none;transition:all 0.2s ease;">📄 [구글시트 사본 복사하기]</a>`
+          : '';
+        const demoBtn = item.demoUrl
+          ? `<a href="${esc(item.demoUrl)}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;padding:8px 14px;background:#EFF6FF;color:#2563EB;border:1px solid #3B82F6;border-radius:var(--radius-sm);font-weight:700;font-size:0.85rem;text-decoration:none;transition:all 0.2s ease;">🚀 [웹앱 실행화면 체험하기]</a>`
+          : '';
+        actionButtons = `<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;">${copyBtn}${demoBtn}</div>`;
+      }
+
+      if (item.copyUrl || item.demoUrl) {
+        return `
+          <div class="link-card" style="margin:0;height:100%;align-items:flex-start;flex-direction:row;padding:20px;">
+            <div class="link-icon" style="margin-top:2px;flex-shrink:0;"><span style="font-size:1.25rem;">${item.icon || '🔗'}</span></div>
+            <div class="link-content" style="flex:1;">
+              <div class="link-title" style="margin-bottom:8px;font-size:1.05rem;font-weight:700;">${esc(item.title)}</div>
+              <div class="link-desc" style="line-height:1.65;color:var(--text);font-size:0.9rem;">${item.description}</div>
+              ${actionButtons}
+            </div>
+          </div>
+        `;
+      }
+
+      // 일반 URL 카드
+      return `
+        <a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="margin:0;height:100%;">
+          <div class="link-icon"><span style="font-size:1.25rem;">${item.icon || '🔗'}</span></div>
+          <div class="link-content">
+            <div class="link-title">${esc(item.title)}</div>
+            <div class="link-desc">${item.description}</div>
+          </div>
+          <div class="link-arrow">→</div>
+        </a>
+      `;
+    }).join('');
 
     const gridCols = cols === 3 ? 'repeat(auto-fit, minmax(260px, 1fr))' : 'repeat(auto-fit, minmax(340px, 1fr))';
 

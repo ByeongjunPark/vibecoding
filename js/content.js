@@ -151,10 +151,33 @@ window.SESSIONS = [
       { type: 'concept', icon: '🔍', title: '본격적인 바이브코딩 전, 예제 코드 뜯어보기!', body: '스스로 코드를 주문하기 전! 이미 완성된 <b>4가지 완성형 교육용 웹앱의 구글 시트 사본</b>을 복사해보고, <code>확장 프로그램 → Apps Script</code> 메뉴를 열어 코드가 어떻게 시트(DB)와 연결되어 작동하는지 직접 뜯어봅시다.' },
       { type: 'concept', icon: '🌟', title: '앱스스크립트 템플릿 예제 4종 (구글시트 사본 + 웹앱)', body: '아래 4가지 예제에서 <b>[구글시트 사본 만들기]</b>를 클릭해 내 구글 드라이브로 복사한 뒤, 시트의 <code>확장 프로그램 → Apps Script</code>를 열어 코드를 확인해 보세요!' },
       { type: 'linkGrid', cols: 2, links: [
-          { title: '1. 분리배출 챌린지 웹앱 ♻️', description: '학반별 재활용 기록 누적 ➔ 포인트/학교 쓰레기 통계/뱃지 자동 부여<br><br><a href="https://docs.google.com/spreadsheets/d/17UfYys852t6LKmB2KZWUsF1cm7IKwW2px0J8Or6gkXc/copy" target="_blank" style="color:#0D7377;font-weight:700;">📄 [구글시트 사본 복사하기]</a><br><a href="https://script.google.com/macros/s/AKfycbwQdTFo1MptLvvlaREDPaRC1WzNglQA-kMS8XN15VhAETOLxAUH9zNwwKvUFglhench/exec" target="_blank" style="color:#2563EB;font-weight:700;">🚀 [웹앱 실행화면 체험하기]</a>', url: 'https://docs.google.com/spreadsheets/d/17UfYys852t6LKmB2KZWUsF1cm7IKwW2px0J8Or6gkXc/copy', icon: '♻️' },
-          { title: '2. 인터랙티브 보드게임 웹앱 🎲', description: 'Quiz 탭(퀴즈) + BoardConfig 탭(칸 설정) ➔ 실시간 보드게임 구동<br><br><a href="https://docs.google.com/spreadsheets/d/1_EjAtMnMJK9j8t7FDO59fAMXYhxTnO9YffRJiQrUY1A/copy" target="_blank" style="color:#0D7377;font-weight:700;">📄 [구글시트 사본 복사하기]</a><br><a href="https://script.google.com/a/macros/gdeal.io/s/AKfycbzgtBHpl9dpapjw6yzreIC3SzwlsKXlrpCkkQehNJAWe_NYqgIdT1QkAYktTxAEnKoU/exec" target="_blank" style="color:#2563EB;font-weight:700;">🚀 [웹앱 실행화면 체험하기]</a>', url: 'https://docs.google.com/spreadsheets/d/1_EjAtMnMJK9j8t7FDO59fAMXYhxTnO9YffRJiQrUY1A/copy', icon: '🎲' },
-          { title: '3. 연수 이수증 제출 도구 📑', description: '구글드라이브 연동 ➔ 이수증 제출(교사이름 자동 저장) & 실시간 명단 확인<br><br><a href="https://docs.google.com/spreadsheets/d/1BFS-il1rfTyX2Lk7B7tuefCefPi0H-cspsGryoapEZk/copy" target="_blank" style="color:#0D7377;font-weight:700;">📄 [구글시트 사본 복사하기]</a><br><a href="https://script.google.com/a/macros/cwyeo-h.gne.go.kr/s/AKfycbxz8dCITEq4_bhA_fBeeX_aM7xQe8hBe6Ci8wT5oiJc-LhhS6sGZekkL6XX_uiaoB1y/exec" target="_blank" style="color:#2563EB;font-weight:700;">🚀 [웹앱 실행화면 체험하기]</a>', url: 'https://docs.google.com/spreadsheets/d/1BFS-il1rfTyX2Lk7B7tuefCefPi0H-cspsGryoapEZk/copy', icon: '📑' },
-          { title: '4. 영단어 학습/테스트기 🔤', description: '시트 단어 데이터 연동 ➔ 단어 테스트, 틀린 오답 Top 50 및 재시험 제공<br><br><a href="https://docs.google.com/spreadsheets/d/1M4yWlXdyA91qEA3fR1CBICvns0cVjMiga1VfUw1XI9w/copy" target="_blank" style="color:#0D7377;font-weight:700;">📄 [구글시트 사본 복사하기]</a><br><a href="https://script.google.com/macros/s/AKfycbxrXww_9P7HLNfFvSWOMHHK-nFapy7IkND3huJtW8UE_TulFBbZmhVGB70Vb_uhT8c/exec" target="_blank" style="color:#2563EB;font-weight:700;">🚀 [웹앱 실행화면 체험하기]</a>', url: 'https://docs.google.com/spreadsheets/d/1M4yWlXdyA91qEA3fR1CBICvns0cVjMiga1VfUw1XI9w/copy', icon: '🔤' }
+          {
+            title: '1. 분리배출 챌린지 웹앱 ♻️',
+            description: '학반별로 교사들이 재활용 기록을 누적 입력하면, 학반별 누적 포인트와 학교 전체의 쓰레기 배출 통계가 실시간으로 집계되고 각 학반별 달성 뱃지가 자동으로 부여되는 환경 교육용 대시보드 웹앱입니다.',
+            copyUrl: 'https://docs.google.com/spreadsheets/d/17UfYys852t6LKmB2KZWUsF1cm7IKwW2px0J8Or6gkXc/copy',
+            demoUrl: 'https://script.google.com/macros/s/AKfycbwQdTFo1MptLvvlaREDPaRC1WzNglQA-kMS8XN15VhAETOLxAUH9zNwwKvUFglhench/exec',
+            icon: '♻️'
+          },
+          {
+            title: '2. 인터랙티브 보드게임 웹앱 🎲',
+            description: '구글 시트의 [Quiz] 탭에 퀴즈 문제와 정답을 넣고, [BoardConfig] 탭에 보드게임 각 칸의 이벤트 상황을 설정해두면 실시간으로 움직이는 생생한 인터랙티브형 수업용 보드게임 웹앱이 자동으로 구동됩니다.',
+            copyUrl: 'https://docs.google.com/spreadsheets/d/1_EjAtMnMJK9j8t7FDO59fAMXYhxTnO9YffRJiQrUY1A/copy',
+            demoUrl: 'https://script.google.com/a/macros/gdeal.io/s/AKfycbzgtBHpl9dpapjw6yzreIC3SzwlsKXlrpCkkQehNJAWe_NYqgIdT1QkAYktTxAEnKoU/exec',
+            icon: '🎲'
+          },
+          {
+            title: '3. 연수 이수증 제출 도구 웹앱 📑',
+            description: '교사들이 웹앱에서 이수증 파일(PDF/이미지)을 업로드하면 구글 드라이브와 자동 연동되어 파일명이 해당 교사 이름으로 자동 저장되고, 업무 담당자는 구글 시트에서 제출 교사 명단을 실시간으로 바로 확인하는 행정 자동화 도구입니다.',
+            copyUrl: 'https://docs.google.com/spreadsheets/d/1BFS-il1rfTyX2Lk7B7tuefCefPi0H-cspsGryoapEZk/copy',
+            demoUrl: 'https://script.google.com/a/macros/cwyeo-h.gne.go.kr/s/AKfycbxz8dCITEq4_bhA_fBeeX_aM7xQe8hBe6Ci8wT5oiJc-LhhS6sGZekkL6XX_uiaoB1y/exec',
+            icon: '📑'
+          },
+          {
+            title: '4. 영단어 학습 / 테스트기 🔤', description: '구글 시트에 정해진 양식대로 영어 단어 데이터를 넣어두면 영단어 테스트 웹앱이 자동 생성되며, 학생이 틀린 횟수를 감지하여 Top 50 오답 단어 목록 제공 및 오답 재시험까지 지원하는 맞춤형 학습 도구입니다.',
+            copyUrl: 'https://docs.google.com/spreadsheets/d/1M4yWlXdyA91qEA3fR1CBICvns0cVjMiga1VfUw1XI9w/copy',
+            demoUrl: 'https://script.google.com/macros/s/AKfycbxrXww_9P7HLNfFvSWOMHHK-nFapy7IkND3huJtW8UE_TulFBbZmhVGB70Vb_uhT8c/exec',
+            icon: '🔤'
+          }
         ]
       },
       { type: 'divider' },
