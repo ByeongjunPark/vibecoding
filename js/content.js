@@ -8,7 +8,65 @@ window.SESSIONS = [
     objectives: ['프론트엔드/백엔드 개념 이해', '바이브코딩 개념 이해', '제미나이 캔버스로 간단한 웹앱 만들기'],
     sections: [
       { type: 'concept', icon: '💡', title: '바이브코딩이란?', body: 'AI에게 대화로 코드를 주문하는 것을 말합니다. 코딩 지식이 전혀 없어도, 우리가 일상적으로 쓰는 자연어로 원하는 프로그램을 만들어낼 수 있는 새롭고 혁신적인 개발 방식입니다. 선생님의 아이디어가 곧바로 프로그램이 됩니다!' },
-      { type: 'concept', icon: '🧑‍🍳', title: '프론트엔드 vs 백엔드', body: '식당으로 비유하면 이해하기 쉽습니다. 손님이 머무는 \'홀\'이 프론트엔드, 요리가 만들어지는 보이지 않는 \'주방\'이 백엔드입니다. 웹사이트에서 HTML은 메뉴판, CSS는 예쁜 인테리어, JavaScript는 음식을 나르고 주문을 받는 서빙 로봇이라고 생각하시면 됩니다.' },
+      { type: 'concept', icon: '🏛️', title: '웹 서비스의 3대 요소: 프론트엔드 + 백엔드 + 데이터베이스(DB)', body: `
+        맞습니다! 웹 서비스가 제대로 작동하려면 <b>프론트엔드, 백엔드, 그리고 데이터베이스(DB)</b> 3가지가 모두 필요합니다.<br>
+        선생님들께서 이해하기 가장 쉬운 <b>'식당 구조'</b>로 비교해 볼까요?<br><br>
+        
+        <div style="background:var(--code-bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;margin:16px 0;">
+          <div style="text-align:center;font-weight:700;font-size:1.05rem;color:var(--primary);margin-bottom:16px;">
+            🍱 [식당 비유로 보는 웹 서비스 구조도]
+          </div>
+          
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:16px;text-align:center;">
+            <!-- 프론트엔드 -->
+            <div style="background:white;padding:16px;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);border-top:4px solid #0D7377;">
+              <div style="font-size:2rem;margin-bottom:8px;">🍽️</div>
+              <div style="font-weight:700;font-size:1rem;color:var(--text);margin-bottom:4px;">1. 프론트엔드 (Frontend)</div>
+              <div style="font-size:0.85rem;color:var(--primary);font-weight:600;margin-bottom:8px;">"식당의 홀 & 인테리어"</div>
+              <div style="font-size:0.85rem;color:var(--text-muted);line-height:1.5;text-align:left;">
+                • 사용자가 눈으로 보는 화면<br>
+                • <b>HTML</b>: 메뉴판 (기본 구조)<br>
+                • <b>CSS</b>: 식당 인테리어 (디자인)<br>
+                • <b>JS</b>: 서빙 로봇 (버튼 클릭 동작)
+              </div>
+            </div>
+
+            <!-- 백엔드 -->
+            <div style="background:white;padding:16px;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);border-top:4px solid #3B82F6;">
+              <div style="font-size:2rem;margin-bottom:8px;">👨‍🍳</div>
+              <div style="font-weight:700;font-size:1rem;color:var(--text);margin-bottom:4px;">2. 백엔드 (Backend)</div>
+              <div style="font-size:0.85rem;color:#2563EB;font-weight:600;margin-bottom:8px;">"식당의 주방 (로직)"</div>
+              <div style="font-size:0.85rem;color:var(--text-muted);line-height:1.5;text-align:left;">
+                • 보이지 않는 곳에서 계산/처리<br>
+                • 주문을 받아서 요리 조리<br>
+                • 암호 처리, 점수 계산, AI 연결<br>
+                • (3~4차시: 앱스스크립트로 맛보기)
+              </div>
+            </div>
+
+            <!-- 데이터베이스 -->
+            <div style="background:white;padding:16px;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);border-top:4px solid #8B5CF6;">
+              <div style="font-size:2rem;margin-bottom:8px;">🗄️</div>
+              <div style="font-weight:700;font-size:1rem;color:var(--text);margin-bottom:4px;">3. 데이터베이스 (DB)</div>
+              <div style="font-size:0.85rem;color:#7C3AED;font-weight:600;margin-bottom:8px;">"주방의 대형 냉장고/창고"</div>
+              <div style="font-size:0.85rem;color:var(--text-muted);line-height:1.5;text-align:left;">
+                • 영구적으로 저장하는 창고<br>
+                • 학생 성적, 로그인 아이디/비번<br>
+                • 웹페이지를 닫아도 데이터가 유지됨<br>
+                • <b>(구글 시트 = 선생님들의 무료 DB!)</b>
+              </div>
+            </div>
+          </div>
+
+          <!-- 흐름 설명 -->
+          <div style="margin-top:16px;background:white;padding:14px;border-radius:var(--radius-sm);font-size:0.9rem;line-height:1.6;color:var(--text);">
+            🔄 <b>실제 작동 흐름:</b> <br>
+            손님이 화면에서 버튼 클릭(프론트엔드) ➔ 주방에서 주문 처리(백엔드) ➔ 창고에서 재료 꺼내기/저장(DB) ➔ 완성된 요리를 화면에 보여줌!
+          </div>
+        </div>
+
+        💡 <b>선생님을 위한 꿀팁:</b> 전문 개발자들은 복잡한 DB(MySQL, PostgreSQL 등)를 쓰지만, 교사 바이브코딩에서는 <b>'구글 시트'</b>가 가장 훌륭하고 쉬운 <b>데이터베이스(DB)</b> 역할을 해줍니다! 3~4차시에서 구글 시트를 DB처럼 활용하는 법을 배웁니다.
+      ` },
       { type: 'concept', icon: '✨', title: '제미나이 캔버스란?', body: '구글이 만든 강력한 AI 코딩 도구입니다. 대화창에 원하는 것을 말하면 AI가 알아서 코드를 작성해주고, 화면 한쪽에 결과물을 실시간으로 미리 보여줍니다. 코드를 몰라도 눈으로 확인하며 뚝딱뚝딱 웹페이지를 수정할 수 있어요.' },
       { type: 'concept', icon: '🌟', title: '강사 추천! 제미나이 캔버스 실습 예시 모음', body: '실습을 시작하기 전, 제미나이 캔버스로 작성된 실제 웹앱 예시들을 직접 체험해보세요. 코딩 없이 대화만으로 이런 멋진 학습용 도구들이 완성됩니다!' },
       { type: 'link', title: '예시 1: 기후분류 탐험지도 🌍', description: '기후대별 특징을 시각적으로 탐험하는 인터랙티브 지도 웹앱', url: 'https://gemini.google.com/share/af2377c2089b', icon: '🗺️' },
