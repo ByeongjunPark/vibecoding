@@ -158,20 +158,25 @@ window.SESSIONS = [
         ]
       },
       { type: 'divider' },
+      { type: 'concept', icon: '🚀', title: '구글 시트 앱스스크립트(Apps Script) 웹앱 배포 방법 (상세 가이드)', body: `
+        구글 시트 사본을 내 드라이브로 복사한 뒤, 이 스크립트를 실제로 작동하는 웹사이트(웹앱)로 배포하는 전체 순서입니다. 그대로 따라해 보세요!
+      ` },
       { type: 'steps', steps: [
-          { title: 'Step 1', description: '위 4가지 예제 중 마음에 드는 구글시트 [사본 복사하기] 링크를 눌러 내 구글 드라이브로 복사합니다.' },
-          { title: 'Step 2', description: '구글 시트 상단 메뉴에서 [확장 프로그램] ➔ [Apps Script]를 클릭합니다.' },
-          { title: 'Step 3', description: '열린 편집기에서 Code.gs (백엔드 로직) 파일과 Index.html (프론트엔드 화면) 파일을 살펴봅니다.' },
-          { title: 'Step 4', description: '시트의 데이터(DB)가 어떻게 코드로 전달되어 웹앱으로 렌더링되는지 구조를 탐색합니다.' }
+          { title: 'Step 1: 앱스스크립트 편집기 열기', description: '복사한 구글 시트 상단 메뉴에서 [확장 프로그램] ➔ [Apps Script]를 클릭합니다.' },
+          { title: 'Step 2: 배포 메뉴 진입', description: '열린 코드 편집기 우측 상단의 파란색 [배포] 버튼을 누른 뒤 [새 배포]를 클릭합니다.' },
+          { title: 'Step 3: 웹앱 유형 선택', description: '왼쪽 톱니바퀴(유형 선택) 아이콘을 눌러 [웹 앱]을 선택합니다.' },
+          { title: 'Step 4: 실행 및 액세스 권한 설정', description: '• 다음 사용자 인증 정보로 실행: <b>나 (My Account)</b> 선택<br>• 액세스 권한 있는 사용자: <b>모든 사용자 (Anyone)</b> 선택 후 [배포] 버튼 클릭' },
+          { title: 'Step 5: 액세스 승인 및 팝업 대처', description: '• [액세스 승인] 클릭 ➔ 구글 계정 선택 팝업창이 뜨면 한 번 더 로그인합니다.<br>• <i>"Google에서 이 앱을 검증하지 않았습니다"</i> 경고창이 뜨면 당황하지 마시고 하단의 <b>[고급]</b> ➔ <b>[안전하지 않은 페이지로 이동]</b> ➔ <b>[허용]</b>을 순서대로 클릭합니다.' },
+          { title: 'Step 6: 웹앱 URL 복사', description: '배포가 완료되면 생성된 <b>웹앱 URL</b>(<code>https://script.google.com/macros/s/.../exec</code>)을 복사하여 새 탭에서 열어봅니다!' }
         ]
       },
-      { type: 'tip', variant: 'tip', content: '💡 <b>코드 탐색 관전 포인트:</b><br>• <code>doGet()</code> 함수: 웹앱 링크로 접속했을 때 첫 화면(Index.html)을 띄워주는 백엔드 함수입니다.<br>• <code>SpreadsheetApp.getActiveSpreadsheet()</code>: 시트 데이터를 읽고 쓰는 데이터베이스 연결 함수입니다.' },
+      { type: 'tip', variant: 'warning', content: '⚠️ <b>배포 관련 핵심 팁:</b><br>• <b>액세스 권한:</b> 반드시 "모든 사용자(Anyone)"로 지정해야 학생이나 타 교사가 로그인 없이 접속할 수 있습니다.<br>• <b>코드 수정 후 재배포:</b> 코드를 새로 고친 후에는 반드시 <code>배포 ➔ 새 배포</code>를 통해 새로운 버전으로 배포해야 웹앱에 변경사항이 즉시 적용됩니다!' },
       { type: 'checklist', sessionId: 'session-3', items: [
           { id: 's3-c1', label: '예제 템플릿 4종 웹앱 체험 및 동작 확인' },
           { id: 's3-c2', label: '최소 1개 이상 구글 시트 사본 복사 완료' },
           { id: 's3-c3', label: '확장 프로그램 ➔ Apps Script 편집기 열기' },
           { id: 's3-c4', label: 'Code.gs 파일과 Index.html 파일 구조 뜯어보기' },
-          { id: 's3-c5', label: '구글 시트(DB)와 웹앱이 연결되는 백엔드 흐름 이해하기' }
+          { id: 's3-c5', label: '상세 가이드에 따라 웹앱 새 배포 실행 및 URL 접속 성공' }
         ]
       }
     ]

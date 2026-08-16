@@ -132,17 +132,16 @@ window.Components = (function () {
   const renderLinkGrid = (data) => {
     const { cols = 2, links = [] } = data; // cols: 2 (2x2) or 3 (3x1)
     const cards = links.map(item => `
-      <a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="margin:0;height:100%;">
-        <div class="link-icon"><span style="font-size:1.25rem;">${item.icon || '🔗'}</span></div>
+      <div class="link-card" style="margin:0;height:100%;align-items:flex-start;">
+        <div class="link-icon" style="margin-top:4px;"><span style="font-size:1.25rem;">${item.icon || '🔗'}</span></div>
         <div class="link-content">
-          <div class="link-title">${esc(item.title)}</div>
-          <div class="link-desc">${esc(item.description)}</div>
+          <div class="link-title" style="margin-bottom:8px;font-size:1.05rem;">${esc(item.title)}</div>
+          <div class="link-desc" style="line-height:1.6;color:var(--text);">${item.description}</div>
         </div>
-        <div class="link-arrow">→</div>
-      </a>
+      </div>
     `).join('');
 
-    const gridCols = cols === 3 ? 'repeat(auto-fit, minmax(260px, 1fr))' : 'repeat(auto-fit, minmax(320px, 1fr))';
+    const gridCols = cols === 3 ? 'repeat(auto-fit, minmax(260px, 1fr))' : 'repeat(auto-fit, minmax(340px, 1fr))';
 
     return `
       <div class="fade-in" style="display:grid;grid-template-columns:${gridCols};gap:16px;margin:16px 0 24px;">
