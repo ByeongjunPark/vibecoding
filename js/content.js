@@ -142,29 +142,36 @@ window.SESSIONS = [
   {
     id: 'session-3',
     number: 3,
-    title: '앱스스크립트 기초',
-    subtitle: '구글 시트에 코드를 붙여보자',
+    title: '앱스스크립트 기초: 템플릿 실습 및 코드 구조 분석',
+    subtitle: '완성된 앱스스크립트 예제 템플릿 4종 코드 뜯어보기',
     duration: '50분',
-    objectives: ['앱스스크립트가 무엇인지 이해하기', '구글 시트에서 앱스스크립트 편집기 열기', '템플릿 코드 실행해보기'],
+    objectives: ['앱스스크립트의 백엔드 작동 원리 이해하기', '구글 시트 사본 복사 후 Apps Script 편집기 열어보기', '완성된 교육용 웹앱 4종의 코드 구조 뜯어보기'],
     sections: [
-      { type: 'concept', icon: '📜', title: '앱스스크립트란?', body: '구글 워크스페이스(시트, 독스, 폼 등)의 기능을 확장하고 자동화할 수 있게 해주는 마법의 도구입니다. 복잡하고 반복적인 업무를 코드를 통해 클릭 한 번으로 자동으로 처리해줍니다.' },
-      { type: 'concept', icon: '🏫', title: '왜 앱스스크립트인가?', body: '선생님들이 가장 많이 사용하시는 구글 시트를 훨씬 더 강력하게 만들어줍니다. 성적 자동 계산, 학부모 알림 메일 일괄 자동 발송, 방대한 데이터 정리 등 불가능해 보였던 작업들이 가능해집니다.' },
-      { type: 'steps', steps: [
-          { title: 'Step 1', description: '인터넷 주소창에 sheets.new를 입력하여 구글 시트를 새로 만듭니다.' },
-          { title: 'Step 2', description: '상단 메뉴에서 \'확장 프로그램\' → \'Apps Script\'를 차례로 클릭합니다.' },
-          { title: 'Step 3', description: '새 탭으로 열리는 코드 편집기 화면의 구성을 가볍게 살펴봅니다.' },
-          { title: 'Step 4', description: '아래 샘플 코드를 복사하여 편집기에 붙여넣고 상단의 실행 버튼(▶)을 클릭합니다.' }
+      { type: 'concept', icon: '📜', title: '앱스스크립트(Google Apps Script)란?', body: '구글 시트를 강력한 <b>데이터베이스(DB)</b>로 만들어주고, 구글 드라이브·폼과 연동하여 진정한 <b>백엔드 로직(자동 저장, 파일 업로드, 점수 집계)</b>을 수행할 수 있게 해주는 구글의 백엔드 엔진입니다.' },
+      { type: 'concept', icon: '🔍', title: '본격적인 바이브코딩 전, 예제 코드 뜯어보기!', body: '스스로 코드를 주문하기 전! 이미 완성된 <b>4가지 완성형 교육용 웹앱의 구글 시트 사본</b>을 복사해보고, <code>확장 프로그램 → Apps Script</code> 메뉴를 열어 코드가 어떻게 시트(DB)와 연결되어 작동하는지 직접 뜯어봅시다.' },
+      { type: 'concept', icon: '🌟', title: '앱스스크립트 템플릿 예제 4종 (구글시트 사본 + 웹앱)', body: '아래 4가지 예제에서 <b>[구글시트 사본 만들기]</b>를 클릭해 내 구글 드라이브로 복사한 뒤, 시트의 <code>확장 프로그램 → Apps Script</code>를 열어 코드를 확인해 보세요!' },
+      { type: 'linkGrid', cols: 2, links: [
+          { title: '1. 분리배출 챌린지 웹앱 ♻️', description: '학반별 재활용 기록 누적 ➔ 포인트/학교 쓰레기 통계/뱃지 자동 부여<br><br><a href="https://docs.google.com/spreadsheets/d/17UfYys852t6LKmB2KZWUsF1cm7IKwW2px0J8Or6gkXc/copy" target="_blank" style="color:#0D7377;font-weight:700;">📄 [구글시트 사본 복사하기]</a><br><a href="https://script.google.com/macros/s/AKfycbwQdTFo1MptLvvlaREDPaRC1WzNglQA-kMS8XN15VhAETOLxAUH9zNwwKvUFglhench/exec" target="_blank" style="color:#2563EB;font-weight:700;">🚀 [웹앱 실행화면 체험하기]</a>', url: 'https://docs.google.com/spreadsheets/d/17UfYys852t6LKmB2KZWUsF1cm7IKwW2px0J8Or6gkXc/copy', icon: '♻️' },
+          { title: '2. 인터랙티브 보드게임 웹앱 🎲', description: 'Quiz 탭(퀴즈) + BoardConfig 탭(칸 설정) ➔ 실시간 보드게임 구동<br><br><a href="https://docs.google.com/spreadsheets/d/1_EjAtMnMJK9j8t7FDO59fAMXYhxTnO9YffRJiQrUY1A/copy" target="_blank" style="color:#0D7377;font-weight:700;">📄 [구글시트 사본 복사하기]</a><br><a href="https://script.google.com/a/macros/gdeal.io/s/AKfycbzgtBHpl9dpapjw6yzreIC3SzwlsKXlrpCkkQehNJAWe_NYqgIdT1QkAYktTxAEnKoU/exec" target="_blank" style="color:#2563EB;font-weight:700;">🚀 [웹앱 실행화면 체험하기]</a>', url: 'https://docs.google.com/spreadsheets/d/1_EjAtMnMJK9j8t7FDO59fAMXYhxTnO9YffRJiQrUY1A/copy', icon: '🎲' },
+          { title: '3. 연수 이수증 제출 도구 📑', description: '구글드라이브 연동 ➔ 이수증 제출(교사이름 자동 저장) & 실시간 명단 확인<br><br><a href="https://docs.google.com/spreadsheets/d/1BFS-il1rfTyX2Lk7B7tuefCefPi0H-cspsGryoapEZk/copy" target="_blank" style="color:#0D7377;font-weight:700;">📄 [구글시트 사본 복사하기]</a><br><a href="https://script.google.com/a/macros/cwyeo-h.gne.go.kr/s/AKfycbxz8dCITEq4_bhA_fBeeX_aM7xQe8hBe6Ci8wT5oiJc-LhhS6sGZekkL6XX_uiaoB1y/exec" target="_blank" style="color:#2563EB;font-weight:700;">🚀 [웹앱 실행화면 체험하기]</a>', url: 'https://docs.google.com/spreadsheets/d/1BFS-il1rfTyX2Lk7B7tuefCefPi0H-cspsGryoapEZk/copy', icon: '📑' },
+          { title: '4. 영단어 학습/테스트기 🔤', description: '시트 단어 데이터 연동 ➔ 단어 테스트, 틀린 오답 Top 50 및 재시험 제공<br><br><a href="https://docs.google.com/spreadsheets/d/1M4yWlXdyA91qEA3fR1CBICvns0cVjMiga1VfUw1XI9w/copy" target="_blank" style="color:#0D7377;font-weight:700;">📄 [구글시트 사본 복사하기]</a><br><a href="https://script.google.com/macros/s/AKfycbxrXww_9P7HLNfFvSWOMHHK-nFapy7IkND3huJtW8UE_TulFBbZmhVGB70Vb_uhT8c/exec" target="_blank" style="color:#2563EB;font-weight:700;">🚀 [웹앱 실행화면 체험하기]</a>', url: 'https://docs.google.com/spreadsheets/d/1M4yWlXdyA91qEA3fR1CBICvns0cVjMiga1VfUw1XI9w/copy', icon: '🔤' }
         ]
       },
-      { type: 'code', language: 'javascript', code: `function onOpen() {\n  SpreadsheetApp.getUi()\n    .createMenu('🎓 우리반 도구')\n    .addItem('인사하기', 'sayHello')\n    .addToUi();\n}\n\nfunction sayHello() {\n  SpreadsheetApp.getUi().alert('안녕하세요! 앱스스크립트 첫 실행 성공! 🎉');\n}` },
-      { type: 'tip', variant: 'tip', content: '\'권한 승인\' 팝업이 뜨면 당황하지 마세요! 구글의 보안 정책입니다. 본인이 직접 작성한 스크립트이므로 안심하고 \'고급\' -> \'계속\' -> \'허용\'을 차례로 눌러주시면 됩니다.' },
-      { type: 'tip', variant: 'warning', content: '코드를 수정한 후에는 반드시 디스켓 모양 아이콘을 누르거나 저장 단축키(Ctrl+S / Cmd+S)를 눌러야 합니다. 저장하지 않으면 수정하기 전의 옛날 코드가 실행됩니다!' },
+      { type: 'divider' },
+      { type: 'steps', steps: [
+          { title: 'Step 1', description: '위 4가지 예제 중 마음에 드는 구글시트 [사본 복사하기] 링크를 눌러 내 구글 드라이브로 복사합니다.' },
+          { title: 'Step 2', description: '구글 시트 상단 메뉴에서 [확장 프로그램] ➔ [Apps Script]를 클릭합니다.' },
+          { title: 'Step 3', description: '열린 편집기에서 Code.gs (백엔드 로직) 파일과 Index.html (프론트엔드 화면) 파일을 살펴봅니다.' },
+          { title: 'Step 4', description: '시트의 데이터(DB)가 어떻게 코드로 전달되어 웹앱으로 렌더링되는지 구조를 탐색합니다.' }
+        ]
+      },
+      { type: 'tip', variant: 'tip', content: '💡 <b>코드 탐색 관전 포인트:</b><br>• <code>doGet()</code> 함수: 웹앱 링크로 접속했을 때 첫 화면(Index.html)을 띄워주는 백엔드 함수입니다.<br>• <code>SpreadsheetApp.getActiveSpreadsheet()</code>: 시트 데이터를 읽고 쓰는 데이터베이스 연결 함수입니다.' },
       { type: 'checklist', sessionId: 'session-3', items: [
-          { id: 's3-c1', label: '구글 시트에서 Apps Script 편집기 열기 성공' },
-          { id: 's3-c2', label: '샘플 코드 붙여넣기 완료' },
-          { id: 's3-c3', label: '권한 승인 완료' },
-          { id: 's3-c4', label: '스크립트 실행 성공 (알림창 확인)' },
-          { id: 's3-c5', label: '시트에서 \'우리반 도구\' 메뉴 확인' }
+          { id: 's3-c1', label: '예제 템플릿 4종 웹앱 체험 및 동작 확인' },
+          { id: 's3-c2', label: '최소 1개 이상 구글 시트 사본 복사 완료' },
+          { id: 's3-c3', label: '확장 프로그램 ➔ Apps Script 편집기 열기' },
+          { id: 's3-c4', label: 'Code.gs 파일과 Index.html 파일 구조 뜯어보기' },
+          { id: 's3-c5', label: '구글 시트(DB)와 웹앱이 연결되는 백엔드 흐름 이해하기' }
         ]
       }
     ]
