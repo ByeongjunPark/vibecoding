@@ -127,6 +127,31 @@ window.Components = (function () {
   };
 
   /* ──────────────────────────────
+     5-2. 링크 그리드 컨테이너 (2*2, 3*1 등)
+  ────────────────────────────── */
+  const renderLinkGrid = (data) => {
+    const { cols = 2, links = [] } = data; // cols: 2 (2x2) or 3 (3x1)
+    const cards = links.map(item => `
+      <a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" class="link-card" style="margin:0;height:100%;">
+        <div class="link-icon"><span style="font-size:1.25rem;">${item.icon || '🔗'}</span></div>
+        <div class="link-content">
+          <div class="link-title">${esc(item.title)}</div>
+          <div class="link-desc">${esc(item.description)}</div>
+        </div>
+        <div class="link-arrow">→</div>
+      </a>
+    `).join('');
+
+    const gridCols = cols === 3 ? 'repeat(auto-fit, minmax(260px, 1fr))' : 'repeat(auto-fit, minmax(320px, 1fr))';
+
+    return `
+      <div class="fade-in" style="display:grid;grid-template-columns:${gridCols};gap:16px;margin:16px 0 24px;">
+        ${cards}
+      </div>
+    `;
+  };
+
+  /* ──────────────────────────────
      6. 팁 / 경고 카드
   ────────────────────────────── */
   const renderTipCard = (data) => {
@@ -215,6 +240,7 @@ window.Components = (function () {
       case 'steps':     return renderStepCard(section);
       case 'code':      return renderCodeBlock(section);
       case 'link':      return renderLinkCard(section);
+      case 'linkGrid':  return renderLinkGrid(section);
       case 'tip':       return renderTipCard(section);
       case 'warning':   return renderTipCard(section);
       case 'checklist': return renderChecklist(section);

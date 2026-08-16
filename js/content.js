@@ -68,11 +68,14 @@ window.SESSIONS = [
         💡 <b>선생님을 위한 꿀팁:</b> 전문 개발자들은 복잡한 DB(MySQL, PostgreSQL 등)를 쓰지만, 교사 바이브코딩에서는 <b>'구글 시트'</b>가 가장 훌륭하고 쉬운 <b>데이터베이스(DB)</b> 역할을 해줍니다! 3~4차시에서 구글 시트를 DB처럼 활용하는 법을 배웁니다.
       ` },
       { type: 'concept', icon: '✨', title: '제미나이 캔버스란?', body: '구글이 만든 강력한 AI 코딩 도구입니다. 대화창에 원하는 것을 말하면 AI가 알아서 코드를 작성해주고, 화면 한쪽에 결과물을 실시간으로 미리 보여줍니다. 코드를 몰라도 눈으로 확인하며 뚝딱뚝딱 웹페이지를 수정할 수 있어요.' },
-      { type: 'concept', icon: '🌟', title: '강사 추천! 제미나이 캔버스 실습 예시 모음', body: '실습을 시작하기 전, 제미나이 캔버스로 작성된 실제 웹앱 예시들을 직접 체험해보세요. 코딩 없이 대화만으로 이런 멋진 학습용 도구들이 완성됩니다!' },
-      { type: 'link', title: '예시 1: 기후분류 탐험지도 🌍', description: '기후대별 특징을 시각적으로 탐험하는 인터랙티브 지도 웹앱', url: 'https://gemini.google.com/share/af2377c2089b', icon: '🗺️' },
-      { type: 'link', title: '예시 2: 보완대체의사소통(AAC) 도구 🗣️', description: '그림 상징을 눌러 의사를 표현하는 보완대체의사소통 웹앱', url: 'https://gemini.google.com/share/d4b5b9ec839c', icon: '💬' },
-      { type: 'link', title: '예시 3: 수도 이름 맞히는 슈퍼마리오 게임 🎮', description: '게임 요소와 퀴즈를 결합한 수도 맞히기 퀴즈 게임', url: 'https://gemini.google.com/share/801a43d57c3c', icon: '🍄' },
-      { type: 'link', title: '예시 4: 공정무역 설득 챌린지 챗봇 🤝', description: '상황별 설득 시뮬레이션을 해볼 수 있는 인공지능 챗봇 웹앱', url: 'https://gemini.google.com/share/eeaad1cdf8e1', icon: '🤖' },
+      { type: 'concept', icon: '🌟', title: '강사 추천! 제미나이 캔버스 실습 예시 모음 (2×2)', body: '실습을 시작하기 전, 제미나이 캔버스로 작성된 실제 웹앱 예시들을 직접 체험해보세요. 코딩 없이 대화만으로 이런 멋진 학습용 도구들이 완성됩니다!' },
+      { type: 'linkGrid', cols: 2, links: [
+          { title: '예시 1: 기후분류 탐험지도 🌍', description: '기후대별 특징을 시각적으로 탐험하는 인터랙티브 지도 웹앱', url: 'https://gemini.google.com/share/af2377c2089b', icon: '🗺️' },
+          { title: '예시 2: 보완대체의사소통(AAC) 도구 🗣️', description: '그림 상징을 눌러 의사를 표현하는 보완대체의사소통 웹앱', url: 'https://gemini.google.com/share/d4b5b9ec839c', icon: '💬' },
+          { title: '예시 3: 수도 이름 맞히는 슈퍼마리오 게임 🎮', description: '게임 요소와 퀴즈를 결합한 수도 맞히기 퀴즈 게임', url: 'https://gemini.google.com/share/801a43d57c3c', icon: '🍄' },
+          { title: '예시 4: 공정무역 설득 챌린지 챗봇 🤝', description: '상황별 설득 시뮬레이션을 해볼 수 있는 인공지능 챗봇 웹앱', url: 'https://gemini.google.com/share/eeaad1cdf8e1', icon: '🤖' }
+        ]
+      },
       { type: 'divider' },
       { type: 'link', title: '제미나이 캔버스 접속하기 (gemini.google.com)', description: '구글 계정으로 로그인 후 대화창에서 \'캔버스\' 모드를 실행해보세요.', url: 'https://gemini.google.com', icon: '🚀' },
       { type: 'steps', steps: [
@@ -109,9 +112,13 @@ window.SESSIONS = [
         반면 <b>캔바 AI</b>는 단순한 화면 생성을 넘어서 <b>백엔드 데이터 구조(입력 폼, 목록 저장, 단순 점수 합산 구조)까지 부분적으로 지원</b>합니다!<br>
         선생님께서 프롬프트 작성 시 <i>"어떤 데이터를 저장하고 수집할 것인지"</i> <b>백엔드 데이터 항목</b>을 함께 주문해 주는 것이 2차시 바이브코딩의 핵심입니다.
       ` },
-      { type: 'concept', icon: '🌟', title: '강사 추천 캔바 AI 실습 예시 2종', body: '백엔드 데이터 구조가 부분적으로 녹아든 캔바 AI 웹사이트 실습 예시입니다. 직접 접속해서 입력해 보세요!' },
-      { type: 'link', title: '예시 1: 우리반 상벌점 관리 시스템 🏆', description: '학생별 상점/벌점 데이터 항목을 입력하고 조회하는 캔바 웹사이트', url: 'https://pbjgdeal.my.canva.site/meritpunish', icon: '📋' },
-      { type: 'link', title: '예시 2: 오늘 나의 TO-DO list 관리 📝', description: '할일 내용, 마감일, 완료 여부 데이터 구조가 설계된 할일 관리 웹사이트', url: 'https://pbjgdeal.my.canva.site/todolist', icon: '✅' },
+      { type: 'concept', icon: '🌟', title: '강사 추천 캔바 AI 실습 예시 3종 (3×1 그리드)', body: '백엔드 데이터 구조가 부분적으로 녹아든 캔바 AI 웹사이트 실습 예시입니다. 직접 접속해서 입력해 보세요!' },
+      { type: 'linkGrid', cols: 3, links: [
+          { title: '예시 1: 우리반 상벌점 관리 시스템 🏆', description: '학생별 상점/벌점 데이터 항목을 입력하고 조회하는 캔바 웹사이트', url: 'https://pbjgdeal.my.canva.site/meritpunish', icon: '📋' },
+          { title: '예시 2: 오늘 나의 TO-DO list 관리 📝', description: '할일 내용, 마감일, 완료 여부 데이터 구조가 설계된 할일 관리 웹사이트', url: 'https://pbjgdeal.my.canva.site/todolist', icon: '✅' },
+          { title: '예시 3: 우리 반 재활용 업사이클링 대시보드 ♻️', description: '재활용 품목 및 실천 점수를 기록하고 공유하는 학급 업사이클링 대시보드', url: 'https://pbjgdeal.my.canva.site/upcycle', icon: '🌱' }
+        ]
+      },
       { type: 'divider' },
       { type: 'link', title: '캔바 AI 대화창 바로가기 (canva.com/ai)', description: '로그인 후 프롬프트만 입력하면 바이브코딩 준비 끝!', url: 'https://www.canva.com/ai', icon: '🚀' },
       { type: 'steps', steps: [
@@ -123,7 +130,7 @@ window.SESSIONS = [
       { type: 'promptGenerator', mode: 'canva', title: '🛠️ 2차시 실습: 캔바 AI 전용 백엔드 프롬프트 제작소', description: '1차시와 달리 화면 기능 외에 \'저장할 데이터 항목(백엔드 데이터 구조)\'까지 함께 설계하여 캔바 AI에 주문합니다!' },
       { type: 'tip', variant: 'warning', content: '🚨 <b>캔바 AI의 한계점 & 다음 시간 예고:</b><br>캔바 AI가 데이터 구조를 받아주긴 하지만, <b>구체적인 고난도 백엔드 로직 처리나 AI 기반 실시간 자동 산출(자동 채점, AI 피드백 연동 등)은 불가능합니다.</b><br>이러한 한계를 완벽하게 해결하기 위해! 다음 3차시에서는 구글 시트와 코드를 직접 연동하는 <b>"앱스스크립트(Google Apps Script)"</b>를 배워볼 예정입니다!' },
       { type: 'checklist', sessionId: 'session-2', items: [
-          { id: 's2-c1', label: '캔바 추천 예시 2종(상벌점, TO-DO list) 체험' },
+          { id: 's2-c1', label: '캔바 추천 예시 3종(상벌점, TO-DO, 업사이클링) 체험' },
           { id: 's2-c2', label: 'canva.com/ai 접속 완료' },
           { id: 's2-c3', label: '백엔드 데이터 구조 항목을 포함하여 맞춤 프롬프트 생성' },
           { id: 's2-c4', label: '캔바 AI에 프롬프트 입력 및 생성 확인' },
