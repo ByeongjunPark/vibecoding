@@ -1,0 +1,262 @@
+window.SESSIONS = [
+  {
+    id: 'session-1',
+    number: 1,
+    title: '바이브코딩의 기초 원리 이해',
+    subtitle: '제미나이 캔버스로 웹앱 만들기 기초',
+    duration: '50분',
+    objectives: ['프론트엔드/백엔드 개념 이해', '바이브코딩 개념 이해', '제미나이 캔버스로 간단한 웹앱 만들기'],
+    sections: [
+      { type: 'concept', icon: '💡', title: '바이브코딩이란?', body: 'AI에게 대화로 코드를 주문하는 것을 말합니다. 코딩 지식이 전혀 없어도, 우리가 일상적으로 쓰는 자연어로 원하는 프로그램을 만들어낼 수 있는 새롭고 혁신적인 개발 방식입니다. 선생님의 아이디어가 곧바로 프로그램이 됩니다!' },
+      { type: 'concept', icon: '🧑‍🍳', title: '프론트엔드 vs 백엔드', body: '식당으로 비유하면 이해하기 쉽습니다. 손님이 머무는 \'홀\'이 프론트엔드, 요리가 만들어지는 보이지 않는 \'주방\'이 백엔드입니다. 웹사이트에서 HTML은 메뉴판, CSS는 예쁜 인테리어, JavaScript는 음식을 나르고 주문을 받는 서빙 로봇이라고 생각하시면 됩니다.' },
+      { type: 'concept', icon: '✨', title: '제미나이 캔버스란?', body: '구글이 만든 강력한 AI 코딩 도구입니다. 대화창에 원하는 것을 말하면 AI가 알아서 코드를 작성해주고, 화면 한쪽에 결과물을 실시간으로 미리 보여줍니다. 코드를 몰라도 눈으로 확인하며 뚝딱뚝딱 웹페이지를 수정할 수 있어요.' },
+      { type: 'link', title: '제미나이 캔버스 접속', description: '구글 계정으로 로그인하면 바로 사용 가능합니다', url: 'https://gemini.google.com' },
+      { type: 'steps', steps: [
+          { title: 'Step 1', description: 'gemini.google.com 접속 후 대화창에서 \'캔버스\' 모드를 선택합니다.' },
+          { title: 'Step 2', description: '프롬프트 입력 예시: "학생들의 독서 기록을 관리할 수 있는 예쁜 웹페이지를 만들어줘. 제목, 저자, 한줄 감상을 입력하고 목록으로 볼 수 있게 해줘."' },
+          { title: 'Step 3', description: '생성된 결과가 화면에 나타나면, 미리보기로 어떻게 작동하는지 살펴봅니다.' },
+          { title: 'Step 4', description: '수정 요청하기 예시: "배경색을 파스텔 톤으로 바꿔줘", "버튼을 더 크게 만들어줘" 등 자연스럽게 대화하듯 수정해봅니다.' }
+        ]
+      },
+      { type: 'tip', variant: 'tip', content: '프롬프트 팁 — 구체적으로 말할수록 좋은 결과가 나옵니다! "웹페이지 만들어줘"보다 "학생 이름, 점수를 입력하면 자동으로 평균을 계산해주는 성적 관리 페이지를 만들어줘"가 훨씬 좋습니다.' },
+      { type: 'tip', variant: 'warning', content: '주의 — 캔버스에서 만든 결과물은 창을 닫으면 사라질 수 있으니, 마음에 드는 결과는 꼭 우측 상단의 복사 버튼으로 코드를 복사해두세요!' },
+      { type: 'checklist', sessionId: 'session-1', items: [
+          { id: 's1-c1', label: '제미나이 캔버스 접속 완료' },
+          { id: 's1-c2', label: '캔버스 모드 선택 완료' },
+          { id: 's1-c3', label: '첫 프롬프트 입력 후 결과 확인' },
+          { id: 's1-c4', label: '수정 요청 1회 이상 해보기' },
+          { id: 's1-c5', label: '결과물 코드 복사해두기' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'session-2',
+    number: 2,
+    title: '캔바 AI로 경험해보는 바이브코딩',
+    subtitle: '데이터 시각화와 AI 디자인',
+    duration: '50분',
+    objectives: ['캔바 AI 기능 이해하기', 'AI로 데이터 시각화 콘텐츠 만들기', '교수학습 자료에 활용하기'],
+    sections: [
+      { type: 'concept', icon: '🎨', title: '캔바 AI란?', body: '인기 디자인 도구인 캔바(Canva)에 탑재된 스마트한 AI 기능입니다. 텍스트 입력만으로도 수업에 필요한 멋진 디자인, 이미지, 텍스트 콘텐츠를 뚝딱 생성해줍니다. 디자인 감각이 없어도 누구나 디자이너가 될 수 있습니다.' },
+      { type: 'concept', icon: '📊', title: '데이터 + 디자인 = 설득력', body: '복잡한 텍스트나 숫자 데이터도 시각적으로 예쁘게 표현하면 학생들의 이해도와 흥미가 확연히 높아집니다. AI의 도움을 받으면 번거로웠던 차트나 그래프 작업도 순식간에 끝낼 수 있습니다.' },
+      { type: 'link', title: '캔바 AI 접속', description: '무료 계정으로 대부분의 AI 기능 사용 가능 (교육용 계정은 Pro 기능 무료)', url: 'https://www.canva.com' },
+      { type: 'steps', steps: [
+          { title: 'Step 1', description: 'canva.com 접속 후 로그인합니다. (선생님은 교육용 계정 인증을 추천합니다)' },
+          { title: 'Step 2', description: '디자인 만들기에서 \'프레젠테이션\' 또는 \'인포그래픽\' 템플릿을 선택합니다.' },
+          { title: 'Step 3', description: 'Magic Write(매직 라이트) 기능을 활용해 수업 주제에 맞는 텍스트 콘텐츠를 자동으로 생성해봅니다.' },
+          { title: 'Step 4', description: '데이터를 입력하고 AI가 추천해주는 차트나 그래프를 생성하여 시각화합니다.' },
+          { title: 'Step 5', description: '완성된 자료를 PDF나 이미지 파일로 다운로드합니다.' }
+        ]
+      },
+      { type: 'tip', variant: 'tip', content: '캔바의 \'Magic Design\' 기능을 사용하면 주제만 입력해도 전체 프레젠테이션이나 포스터 디자인을 자동으로 구성해줍니다! 시간을 획기적으로 줄여주는 마법 같은 기능입니다.' },
+      { type: 'checklist', sessionId: 'session-2', items: [
+          { id: 's2-c1', label: '캔바 접속 및 로그인 완료' },
+          { id: 's2-c2', label: 'AI 디자인 기능 1개 이상 사용해보기' },
+          { id: 's2-c3', label: '교수학습용 콘텐츠 1개 완성하기' },
+          { id: 's2-c4', label: '완성물 다운로드하기' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'session-3',
+    number: 3,
+    title: '앱스스크립트 기초',
+    subtitle: '구글 시트에 코드를 붙여보자',
+    duration: '50분',
+    objectives: ['앱스스크립트가 무엇인지 이해하기', '구글 시트에서 앱스스크립트 편집기 열기', '템플릿 코드 실행해보기'],
+    sections: [
+      { type: 'concept', icon: '📜', title: '앱스스크립트란?', body: '구글 워크스페이스(시트, 독스, 폼 등)의 기능을 확장하고 자동화할 수 있게 해주는 마법의 도구입니다. 복잡하고 반복적인 업무를 코드를 통해 클릭 한 번으로 자동으로 처리해줍니다.' },
+      { type: 'concept', icon: '🏫', title: '왜 앱스스크립트인가?', body: '선생님들이 가장 많이 사용하시는 구글 시트를 훨씬 더 강력하게 만들어줍니다. 성적 자동 계산, 학부모 알림 메일 일괄 자동 발송, 방대한 데이터 정리 등 불가능해 보였던 작업들이 가능해집니다.' },
+      { type: 'steps', steps: [
+          { title: 'Step 1', description: '인터넷 주소창에 sheets.new를 입력하여 구글 시트를 새로 만듭니다.' },
+          { title: 'Step 2', description: '상단 메뉴에서 \'확장 프로그램\' → \'Apps Script\'를 차례로 클릭합니다.' },
+          { title: 'Step 3', description: '새 탭으로 열리는 코드 편집기 화면의 구성을 가볍게 살펴봅니다.' },
+          { title: 'Step 4', description: '아래 샘플 코드를 복사하여 편집기에 붙여넣고 상단의 실행 버튼(▶)을 클릭합니다.' }
+        ]
+      },
+      { type: 'code', language: 'javascript', code: `function onOpen() {\n  SpreadsheetApp.getUi()\n    .createMenu('🎓 우리반 도구')\n    .addItem('인사하기', 'sayHello')\n    .addToUi();\n}\n\nfunction sayHello() {\n  SpreadsheetApp.getUi().alert('안녕하세요! 앱스스크립트 첫 실행 성공! 🎉');\n}` },
+      { type: 'tip', variant: 'tip', content: '\'권한 승인\' 팝업이 뜨면 당황하지 마세요! 구글의 보안 정책입니다. 본인이 직접 작성한 스크립트이므로 안심하고 \'고급\' -> \'계속\' -> \'허용\'을 차례로 눌러주시면 됩니다.' },
+      { type: 'tip', variant: 'warning', content: '코드를 수정한 후에는 반드시 디스켓 모양 아이콘을 누르거나 저장 단축키(Ctrl+S / Cmd+S)를 눌러야 합니다. 저장하지 않으면 수정하기 전의 옛날 코드가 실행됩니다!' },
+      { type: 'checklist', sessionId: 'session-3', items: [
+          { id: 's3-c1', label: '구글 시트에서 Apps Script 편집기 열기 성공' },
+          { id: 's3-c2', label: '샘플 코드 붙여넣기 완료' },
+          { id: 's3-c3', label: '권한 승인 완료' },
+          { id: 's3-c4', label: '스크립트 실행 성공 (알림창 확인)' },
+          { id: 's3-c5', label: '시트에서 \'우리반 도구\' 메뉴 확인' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'session-4',
+    number: 4,
+    title: '앱스스크립트 심화',
+    subtitle: '챗봇으로 앱스스크립트 프롬프트 만들어보기',
+    duration: '50분',
+    objectives: ['Gems 챗봇 활용법 익히기', '프롬프트 엔지니어링 기초 이해', '챗봇 대화로 앱스스크립트 코드 생성하기'],
+    sections: [
+      { type: 'concept', icon: '🗣️', title: '프롬프트 엔지니어링이란?', body: 'AI에게서 우리가 딱 원하는 결과를 얻어내기 위해, 질문이나 지시사항을 잘 구성하고 다듬는 기술입니다. 똑똑한 AI라도 어떻게 질문하느냐(프롬프트)에 따라 완전히 다른 결과물을 내놓는답니다.' },
+      { type: 'concept', icon: '🤖', title: 'Gems 챗봇', body: '일반 AI보다 특정 작업에 특화된 전문가 AI입니다. 이 과정에서 제공하는 Gems 챗봇은 앱스스크립트 작성의 전문가입니다. 선생님이 원하시는 기능을 말로만 설명하면, 바로 붙여넣기 할 수 있는 완벽한 코드를 짜줍니다.' },
+      { type: 'link', title: 'Gems 챗봇 접속', description: '앱스스크립트 전용 AI 챗봇 - 클릭하면 바로 대화 시작', url: 'https://gemini.google.com/gem/13holjQ_PRtsGjldPydMg4LiU34JEx5Ih?usp=sharing' },
+      { type: 'steps', steps: [
+          { title: 'Step 1', description: '위의 링크를 클릭하여 교육용 Gems 챗봇에 접속합니다.' },
+          { title: 'Step 2', description: '필요한 기능 설명하기. 예: "구글 시트 A열에 학생 이름, B열에 점수가 있을 때, 80점 이상인 학생에게 자동으로 \'우수\' 표시를 C열에 넣어주는 스크립트 만들어줘"' },
+          { title: 'Step 3', description: '챗봇이 작성해준 코드를 복사해서 내 구글 시트의 앱스스크립트 편집기에 붙여넣습니다.' },
+          { title: 'Step 4', description: '코드를 실행해보고 구글 시트에서 결과가 맞게 나왔는지 확인합니다.' },
+          { title: 'Step 5', description: '원하는 대로 작동하지 않거나 추가 기능이 필요하면 챗봇에게 다시 수정 요청을 합니다.' }
+        ]
+      },
+      { type: 'tip', variant: 'tip', content: '좋은 프롬프트의 3요소! ① 현재 상황 설명 ② 원하는 결과 설명 ③ 구체적 조건 명시. 예시: "A열에 날짜가 있고(상황), 오늘 날짜와 같은 행을 노란색으로(결과), 자동으로 색칠해줘(조건)"' },
+      { type: 'checklist', sessionId: 'session-4', items: [
+          { id: 's4-c1', label: 'Gems 챗봇 접속 성공' },
+          { id: 's4-c2', label: '프롬프트 작성 후 코드 생성 1회' },
+          { id: 's4-c3', label: '생성된 코드 앱스스크립트에 붙여넣기' },
+          { id: 's4-c4', label: '코드 실행 및 결과 확인' },
+          { id: 's4-c5', label: '수정 요청 1회 이상 시도' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'session-5',
+    number: 5,
+    title: '인공지능 API를 붙인 솔루션 만들어보기',
+    subtitle: '업스테이지 API 시작하기',
+    duration: '50분',
+    objectives: ['API 개념 이해하기', '업스테이지 AI 이니셔티브 가입', 'API 키 발급받기'],
+    sections: [
+      { type: 'concept', icon: '🔌', title: 'API란?', body: '택배 서비스로 비유해볼까요? 우리가 물건(데이터/요청)을 보내면, 배송센터(AI 서버)가 복잡한 처리를 대신 해주고 결과물만 우리 집으로 쏙 보내주는 시스템입니다. 덕분에 코드 한 줄만으로 강력한 AI의 능력을 내 프로그램에 얹어 쓸 수 있어요.' },
+      { type: 'concept', icon: '🚀', title: '업스테이지란?', body: '세계적인 기술력을 인정받는 한국의 대표적인 AI 스타트업입니다. 학생들의 손글씨를 읽어내는 문서 이해(Document AI), 번역, 텍스트 분석 등 교육 현장에서 유용하게 쓰일 수 있는 다양한 AI 기능을 API 형태로 제공하고 있습니다.' },
+      { type: 'concept', icon: '🎁', title: 'AI 이니셔티브', body: '선생님들의 교육 혁신과 연구를 지원하기 위해, 업스테이지에서 교육 목적으로 API를 무료로 사용할 수 있게 혜택을 제공하는 뜻깊은 프로그램입니다.' },
+      { type: 'link', title: '업스테이지 API 문서', description: 'API 사용법이 정리된 공식 문서', url: 'https://console.upstage.ai/docs/getting-started' },
+      { type: 'link', title: 'AI 이니셔티브 신청', description: '교육용 API 무료 사용 신청 페이지', url: 'https://www.upstage.ai/ko/events/ai-initiative-2026-ko' },
+      { type: 'steps', steps: [
+          { title: 'Step 1', description: '업스테이지 콘솔 홈페이지에 접속하여 회원가입을 진행합니다.' },
+          { title: 'Step 2', description: 'AI 이니셔티브 안내 페이지로 이동하여 교육용 무료 사용 혜택을 신청합니다.' },
+          { title: 'Step 3', description: '콘솔 화면에서 \'API 키(Key)\'를 발급받습니다.' },
+          { title: 'Step 4', description: '발급받은 복잡한 문자열(API 키)을 안전한 메모장 등에 복사해둡니다.' }
+        ]
+      },
+      { type: 'tip', variant: 'warning', content: 'API 키는 내 통장의 비밀번호와 같습니다! 절대 다른 사람에게 알려주거나 인터넷 공개된 곳에 올리면 안 됩니다. 누군가 내 키를 도용해서 요금이 발생할 수 있어요.' },
+      { type: 'tip', variant: 'tip', content: '방금 발급받은 API 키를 내 컴퓨터의 메모장에 안전하게 저장해두세요. 다음 6차시 실습에서 바로 사용할 예정입니다.' },
+      { type: 'checklist', sessionId: 'session-5', items: [
+          { id: 's5-c1', label: 'API 개념 이해하기' },
+          { id: 's5-c2', label: '업스테이지 콘솔 회원가입 완료' },
+          { id: 's5-c3', label: 'AI 이니셔티브 신청 완료' },
+          { id: 's5-c4', label: 'API 키 발급 및 안전하게 저장하기' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'session-6',
+    number: 6,
+    title: 'API 도큐먼트를 활용해서 바이브코딩으로 인공지능 기반 솔루션 주문해보기',
+    subtitle: 'AI API 연동 실습',
+    duration: '50분',
+    objectives: ['API 도큐먼트 읽는 법 배우기', '바이브코딩으로 API 연동 앱 만들기', 'AI 기반 솔루션 직접 만들어보기'],
+    sections: [
+      { type: 'concept', icon: '📖', title: 'API 도큐먼트 읽기', body: '새로운 전자제품을 사면 들어있는 \'사용 설명서\'와 같습니다. ① 어떤 인터넷 주소로 ② 어떤 형태의 데이터를 보내면 ③ 어떤 결과값을 돌려주는지 아주 상세히 적혀있습니다.' },
+      { type: 'concept', icon: '🤝', title: '바이브코딩 + API = 무한한 가능성', body: 'API 도큐먼트를 우리가 직접 다 이해할 필요는 없습니다. AI 챗봇에게 "이 사용 설명서(API)를 참고해서 이런 기능을 하는 프로그램을 만들어줘"라고 주문하기만 하면, 어려운 연동 코드까지 알아서 척척 짜줍니다.' },
+      { type: 'steps', steps: [
+          { title: 'Step 1', description: '업스테이지 API 도큐먼트에서 내가 사용해보고 싶은 흥미로운 기능을 하나 고릅니다.' },
+          { title: 'Step 2', description: '제미나이나 Gems 챗봇에게 주문합니다. 예: "업스테이지 Document AI API를 사용해서 학생이 제출한 독후감 사진을 텍스트로 변환하고, 글자 수를 세어주는 구글 시트 앱스스크립트를 만들어줘. API 키는 스크립트 속성에 저장할거야."' },
+          { title: 'Step 3', description: '챗봇이 만들어준 코드를 구글 시트 앱스스크립트 편집기에 복사하여 붙여넣습니다.' },
+          { title: 'Step 4', description: '지난 시간에 메모장에 적어둔 내 API 키를 스크립트 설정에 붙여넣습니다.' },
+          { title: 'Step 5', description: '실행 버튼을 눌러 내 시트에서 AI 기능이 잘 작동하는지 테스트해봅니다.' }
+        ]
+      },
+      { type: 'tip', variant: 'tip', content: '프롬프트를 작성할 때, API 도큐먼트의 URL 주소를 함께 복사해서 AI에게 알려주면 최신 정보를 바탕으로 훨씬 정확한 코드를 만들어냅니다!' },
+      { type: 'tip', variant: 'warning', content: 'API 호출(사용)에는 사용량 제한이 있거나 요금이 부과될 수 있습니다. 처음 테스트할 때는 1~2개의 적은 데이터로만 조심스럽게 실험해보세요.' },
+      { type: 'checklist', sessionId: 'session-6', items: [
+          { id: 's6-c1', label: 'API 도큐먼트 확인 완료' },
+          { id: 's6-c2', label: '프롬프트 작성하여 코드 생성' },
+          { id: 's6-c3', label: '코드에 내 API 키 설정하기' },
+          { id: 's6-c4', label: 'API 연동 테스트 성공' },
+          { id: 's6-c5', label: '결과 확인 및 추가 수정 요청해보기' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'session-7',
+    number: 7,
+    title: '안티그래비티로 주문해보기 기초',
+    subtitle: '안티그래비티 사용방법',
+    duration: '50분',
+    objectives: ['안티그래비티(Antigravity) 이해하기', '설치 및 기본 사용법 익히기', '안티그래비티로 프로젝트 만들기'],
+    sections: [
+      { type: 'concept', icon: '🛸', title: '안티그래비티란?', body: '구글 딥마인드가 개발한 최첨단 AI 코딩 어시스턴트입니다. 캔버스가 단순한 웹페이지용이라면, 안티그래비티는 대화만으로 복잡한 파일들을 알아서 생성하고 수정하며 하나의 거대한 프로젝트를 통째로 만들어내는 강력한 마법 지팡이입니다.' },
+      { type: 'concept', icon: '💻', title: 'IDE란?', body: '통합 개발 환경(Integrated Development Environment)의 약자입니다. 코드를 쓰고, 실행해보고, 오류를 잡는 등 프로그램 개발의 모든 과정을 한 곳에서 할 수 있는 \'전문 작업실\'입니다. 안티그래비티는 이 작업실에서 선생님을 돕는 유능한 조수입니다.' },
+      { type: 'steps', steps: [
+          { title: 'Step 1', description: '강사가 안내하는 설치 링크를 통해 안티그래비티를 컴퓨터에 설치합니다.' },
+          { title: 'Step 2', description: '프로그램을 실행한 뒤 바탕화면에 새 폴더를 만들고 프로젝트 폴더로 엽니다.' },
+          { title: 'Step 3', description: '채팅창에 첫 지시를 내립니다. 예: "학생들의 출석부를 관리할 수 있는 모던하고 깔끔한 웹페이지를 만들어줘"' },
+          { title: 'Step 4', description: 'AI가 스스로 여러 파일들을 만들고 코드를 작성하는 놀라운 과정을 지켜봅니다.' },
+          { title: 'Step 5', description: '내장된 미리보기 창을 통해 결과물이 잘 작동하는지 테스트합니다.' }
+        ]
+      },
+      { type: 'tip', variant: 'tip', content: '안티그래비티는 여러 개의 파일을 알아서 만들고 관리해줍니다. 제미나이 캔버스보다 훨씬 정교하고 복잡한, 진짜 서비스 같은 프로젝트를 만들 수 있어요!' },
+      { type: 'tip', variant: 'tip', content: '결과가 마음에 들지 않으면 "이 버튼의 색깔을 이렇게 바꿔줘", "여기에는 이미지가 들어가면 좋겠어"라고 꼬리에 꼬리를 무는 대화를 이어가며 계속 발전시킬 수 있습니다.' },
+      { type: 'checklist', sessionId: 'session-7', items: [
+          { id: 's7-c1', label: '안티그래비티 설치 완료' },
+          { id: 's7-c2', label: '프로그램 실행 및 폴더 열기 성공' },
+          { id: 's7-c3', label: '첫 프로젝트 생성 요청' },
+          { id: 's7-c4', label: 'AI가 생성한 파일 확인' },
+          { id: 's7-c5', label: '미리보기로 결과 확인' },
+          { id: 's7-c6', label: '수정 요청 1회 이상 진행하기' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'session-8',
+    number: 8,
+    title: '깃허브와 연동시켜보기',
+    subtitle: '안티그래비티로 웹 호스팅하기',
+    duration: '50분',
+    objectives: ['깃허브 개념 이해하기', '안티그래비티로 깃허브 연동하기', '만든 웹앱을 세상에 공개하기'],
+    sections: [
+      { type: 'concept', icon: '🐙', title: '깃허브란?', body: '전 세계의 수많은 개발자들이 코드를 보관하고 공유하는 거대한 저장소(Repository)입니다. 구글 드라이브에 문서를 안전하게 저장하듯, 깃허브(GitHub)에는 우리가 만든 프로그램 코드를 체계적으로 저장합니다.' },
+      { type: 'concept', icon: '🌐', title: '웹 호스팅이란?', body: '지금까지 내 컴퓨터 안에서만 돌아가던 웹페이지를 인터넷 세상에 띄워, 전 세계 누구나 주소를 치고 들어올 수 있게 만드는 과정입니다. GitHub Pages나 Vercel 같은 서비스를 쓰면 이 과정을 무료로 할 수 있습니다.' },
+      { type: 'steps', steps: [
+          { title: 'Step 1', description: 'github.com에 접속하여 회원가입을 하고 나만의 계정을 만듭니다.' },
+          { title: 'Step 2', description: '안티그래비티 채팅창에 말합니다: "지금까지 만든 이 프로젝트를 내 깃허브에 올려줘"' },
+          { title: 'Step 3', description: '화면에 뜨는 깃허브 로그인 및 인증 절차를 차분히 따라갑니다.' },
+          { title: 'Step 4', description: '깃허브 사이트에 내 코드가 담긴 새로운 저장소가 잘 만들어졌는지 확인합니다.' },
+          { title: 'Step 5', description: '인터넷에 배포하기 위해 요청합니다: "이 프로젝트를 다른 사람들도 인터넷에서 볼 수 있게 배포해줘"' }
+        ]
+      },
+      { type: 'tip', variant: 'tip', content: '배포가 성공적으로 완료되면 고유한 웹사이트 주소(URL)가 생깁니다! 이 주소를 카카오톡 등으로 학생이나 동료 선생님들께 바로 공유해보세요.' },
+      { type: 'tip', variant: 'tip', content: '한 번 배포했다고 끝이 아닙니다. 안티그래비티에서 코드를 수정하고 다시 깃허브에 올리면, 배포된 웹사이트도 자동으로 최신 버전으로 업데이트됩니다.' },
+      { type: 'concept', icon: '🎉', title: '축하합니다!', body: '드디어 8차시의 모든 과정을 훌륭하게 완료하셨습니다! 이제 선생님은 코딩을 전혀 모르더라도 바이브코딩과 다양한 AI 도구를 지휘하여, 수업에 꼭 필요한 교수학습 콘텐츠를 뚝딱 만들고 전 세계와 공유할 수 있는 막강한 능력을 갖추셨습니다. 선생님의 다음 프로젝트를 응원합니다!' },
+      { type: 'checklist', sessionId: 'session-8', items: [
+          { id: 's8-c1', label: 'GitHub 계정 생성 완료' },
+          { id: 's8-c2', label: '안티그래비티로 깃허브 연동 성공' },
+          { id: 's8-c3', label: '내 깃허브 저장소 생성 확인' },
+          { id: 's8-c4', label: '웹 배포 성공 (Vercel 등)' },
+          { id: 's8-c5', label: '배포된 URL로 접속 확인' },
+          { id: 's8-c6', label: '동료 선생님이나 학생에게 URL 공유하기' }
+        ]
+      }
+    ]
+  }
+];
+
+window.HOME_DATA = {
+  title: '구글 도구와 함께하는 바이브코딩으로\n교수학습 콘텐츠 만들기',
+  subtitle: '왕초보 교사를 위한 8차시 실습형 과정',
+  description: '코딩을 전혀 몰라도 괜찮습니다! AI에게 대화로 주문하는 "바이브코딩"으로 나만의 교수학습 콘텐츠를 만들어 봅시다.',
+  sessions: [
+    { number: 1, title: '바이브코딩의 기초 원리 이해', tool: '제미나이 캔버스', icon: '🚀' },
+    { number: 2, title: '캔바 AI로 경험해보는 바이브코딩', tool: '캔바 AI', icon: '🎨' },
+    { number: 3, title: '앱스스크립트 기초', tool: 'Google Apps Script', icon: '📝' },
+    { number: 4, title: '앱스스크립트 심화', tool: 'Gems 챗봇', icon: '🤖' },
+    { number: 5, title: '인공지능 API 소개', tool: '업스테이지 API', icon: '🔌' },
+    { number: 6, title: 'API로 AI 솔루션 주문하기', tool: 'API + 바이브코딩', icon: '⚡' },
+    { number: 7, title: '안티그래비티 기초', tool: 'Antigravity', icon: '🛸' },
+    { number: 8, title: '깃허브 연동 + 웹 호스팅', tool: 'GitHub + Vercel', icon: '🌐' }
+  ]
+};
