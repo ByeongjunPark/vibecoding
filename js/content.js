@@ -10,22 +10,29 @@ window.SESSIONS = [
       { type: 'concept', icon: '💡', title: '바이브코딩이란?', body: 'AI에게 대화로 코드를 주문하는 것을 말합니다. 코딩 지식이 전혀 없어도, 우리가 일상적으로 쓰는 자연어로 원하는 프로그램을 만들어낼 수 있는 새롭고 혁신적인 개발 방식입니다. 선생님의 아이디어가 곧바로 프로그램이 됩니다!' },
       { type: 'concept', icon: '🧑‍🍳', title: '프론트엔드 vs 백엔드', body: '식당으로 비유하면 이해하기 쉽습니다. 손님이 머무는 \'홀\'이 프론트엔드, 요리가 만들어지는 보이지 않는 \'주방\'이 백엔드입니다. 웹사이트에서 HTML은 메뉴판, CSS는 예쁜 인테리어, JavaScript는 음식을 나르고 주문을 받는 서빙 로봇이라고 생각하시면 됩니다.' },
       { type: 'concept', icon: '✨', title: '제미나이 캔버스란?', body: '구글이 만든 강력한 AI 코딩 도구입니다. 대화창에 원하는 것을 말하면 AI가 알아서 코드를 작성해주고, 화면 한쪽에 결과물을 실시간으로 미리 보여줍니다. 코드를 몰라도 눈으로 확인하며 뚝딱뚝딱 웹페이지를 수정할 수 있어요.' },
-      { type: 'link', title: '제미나이 캔버스 접속', description: '구글 계정으로 로그인하면 바로 사용 가능합니다', url: 'https://gemini.google.com' },
+      { type: 'concept', icon: '🌟', title: '강사 추천! 제미나이 캔버스 실습 예시 모음', body: '실습을 시작하기 전, 제미나이 캔버스로 작성된 실제 웹앱 예시들을 직접 체험해보세요. 코딩 없이 대화만으로 이런 멋진 학습용 도구들이 완성됩니다!' },
+      { type: 'link', title: '예시 1: 기후분류 탐험지도 🌍', description: '기후대별 특징을 시각적으로 탐험하는 인터랙티브 지도 웹앱', url: 'https://gemini.google.com/share/af2377c2089b', icon: '🗺️' },
+      { type: 'link', title: '예시 2: 보완대체의사소통(AAC) 도구 🗣️', description: '그림 상징을 눌러 의사를 표현하는 보완대체의사소통 웹앱', url: 'https://gemini.google.com/share/d4b5b9ec839c', icon: '💬' },
+      { type: 'link', title: '예시 3: 수도 이름 맞히는 슈퍼마리오 게임 🎮', description: '게임 요소와 퀴즈를 결합한 수도 맞히기 퀴즈 게임', url: 'https://gemini.google.com/share/801a43d57c3c', icon: '🍄' },
+      { type: 'link', title: '예시 4: 공정무역 설득 챌린지 챗봇 🤝', description: '상황별 설득 시뮬레이션을 해볼 수 있는 인공지능 챗봇 웹앱', url: 'https://gemini.google.com/share/eeaad1cdf8e1', icon: '🤖' },
+      { type: 'divider' },
+      { type: 'link', title: '제미나이 캔버스 접속하기 (gemini.google.com)', description: '구글 계정으로 로그인 후 대화창에서 \'캔버스\' 모드를 실행해보세요.', url: 'https://gemini.google.com', icon: '🚀' },
       { type: 'steps', steps: [
           { title: 'Step 1', description: 'gemini.google.com 접속 후 대화창에서 \'캔버스\' 모드를 선택합니다.' },
-          { title: 'Step 2', description: '프롬프트 입력 예시: "학생들의 독서 기록을 관리할 수 있는 예쁜 웹페이지를 만들어줘. 제목, 저자, 한줄 감상을 입력하고 목록으로 볼 수 있게 해줘."' },
-          { title: 'Step 3', description: '생성된 결과가 화면에 나타나면, 미리보기로 어떻게 작동하는지 살펴봅니다.' },
-          { title: 'Step 4', description: '수정 요청하기 예시: "배경색을 파스텔 톤으로 바꿔줘", "버튼을 더 크게 만들어줘" 등 자연스럽게 대화하듯 수정해봅니다.' }
+          { title: 'Step 2', description: '아래 \'교육용 프롬프트 제작소\'에서 원하는 조건을 입력하고 프롬프트를 생성합니다.' },
+          { title: 'Step 3', description: '복사한 프롬프트를 제미나이 대화창에 붙여넣고 엔터를 누릅니다.' },
+          { title: 'Step 4', description: '생성된 웹앱 미리보기를 확인하고, "배경색 바꿔줘", "버튼 크게 해줘" 등 자유롭게 추가 대화로 수정합니다.' }
         ]
       },
+      { type: 'promptGenerator', title: '🛠️ 1차시 실습: 교육용 웹앱 프롬프트 제작소', description: '대상, 사용목적, 웹앱 제목, 필요한 기능을 적으면 제미나이 캔버스용 맞춤 프롬프트가 완성됩니다!' },
       { type: 'tip', variant: 'tip', content: '프롬프트 팁 — 구체적으로 말할수록 좋은 결과가 나옵니다! "웹페이지 만들어줘"보다 "학생 이름, 점수를 입력하면 자동으로 평균을 계산해주는 성적 관리 페이지를 만들어줘"가 훨씬 좋습니다.' },
       { type: 'tip', variant: 'warning', content: '주의 — 캔버스에서 만든 결과물은 창을 닫으면 사라질 수 있으니, 마음에 드는 결과는 꼭 우측 상단의 복사 버튼으로 코드를 복사해두세요!' },
       { type: 'checklist', sessionId: 'session-1', items: [
-          { id: 's1-c1', label: '제미나이 캔버스 접속 완료' },
-          { id: 's1-c2', label: '캔버스 모드 선택 완료' },
-          { id: 's1-c3', label: '첫 프롬프트 입력 후 결과 확인' },
-          { id: 's1-c4', label: '수정 요청 1회 이상 해보기' },
-          { id: 's1-c5', label: '결과물 코드 복사해두기' }
+          { id: 's1-c1', label: '강사 추천 예시 웹앱 4종 둘러보기' },
+          { id: 's1-c2', label: '제미나이 캔버스 접속 완료' },
+          { id: 's1-c3', label: '프롬프트 제작소에서 맞춤 프롬프트 생성 및 복사' },
+          { id: 's1-c4', label: '제미나이 캔버스에 프롬프트 입력 후 웹앱 생성' },
+          { id: 's1-c5', label: '수정 요청 1회 이상 해보기 및 코드 저장' }
         ]
       }
     ]

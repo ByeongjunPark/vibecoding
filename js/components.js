@@ -219,6 +219,7 @@ window.Components = (function () {
       case 'warning':   return renderTipCard(section);
       case 'checklist': return renderChecklist(section);
       case 'quiz':      return renderQuizCard(section);
+      case 'promptGenerator': return renderPromptGenerator(section);
       case 'divider':   return renderSectionDivider();
       case 'video':     return renderVideoEmbed(section);
       default:          return '';
@@ -335,12 +336,134 @@ window.Components = (function () {
     });
   };
 
+  /* ──────────────────────────────
+     11. 교육용 프롬프트 제작소
+  ────────────────────────────── */
+  const renderPromptGenerator = (data = {}) => {
+    const title = data.title || '🛠️ 교육용 웹앱 프롬프트 제작소';
+    const desc = data.description || '아래 항목을 입력하면 제미나이 캔버스에 바로 사용할 수 있는 완벽한 프롬프트가 생성됩니다!';
+    return `
+      <div class="card prompt-generator-card fade-in" style="background:var(--surface);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);border:2px solid var(--primary-light);margin-bottom:24px;">
+        <h3 style="display:flex;align-items:center;gap:8px;margin-bottom:8px;color:var(--primary);font-size:1.25rem;">
+          ${esc(title)}
+        </h3>
+        <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:20px;">${esc(desc)}</p>
+        
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;margin-bottom:20px;">
+          <div>
+            <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">👨‍🎓 교육 대상</label>
+            <input type="text" id="pg-target" class="pg-input" placeholder="예: 초등학교 5학년, 중학생, 교사" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+          </div>
+          <div>
+            <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🎯 사용 목적 / 수업 주제</label>
+            <input type="text" id="pg-purpose" class="pg-input" placeholder="예: 사회 시간에 세계 수도 복습게임, 독서록 관리" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+          </div>
+          <div>
+            <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">💡 웹앱 제목</label>
+            <input type="text" id="pg-appname" class="pg-input" placeholder="예: 수도 이름 맞히기 퀴즈, 나의 독서 일기장" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">⚡ 구체적으로 필요한 기능 (쉼표나 줄바꿈으로 구분)</label>
+          <textarea id="pg-features" class="pg-input" rows="3" placeholder="예: 
+1. 퀴즈 10문항 제시 및 바로 정답 확인 기능
+2. 점수 집계 및 귀여운 축하 효과음/애니메이션
+3. 다시 도전하기 버튼" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;"></textarea>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">✨ 디자인 스타일 / 무드</label>
+          <select id="pg-style" class="pg-input" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;background:white;">
+            <option value="학생들이 좋아할 만한 밝고 귀여운 파스텔 톤 디자인">🎨 밝고 귀여운 파스텔 스타일 (초등/중등 추천)</option>
+            <option value="깔끔하고 모던하며 신뢰감을 주는 블루/슬레이트 톤 디자인">💻 깔끔하고 모던한 스타일 (고등/선생님 추천)</option>
+            <option value="레트로 8비트 게임 느낌의 알록달록하고 재미있는 스타일">🎮 레트로 게임 스타일</option>
+            <option value="눈이 편안하고 따뜻한 크림/우드 파스텔 톤 디자인">🌿 따뜻하고 편안한 친환경 스타일</option>
+          </select>
+        </div>
+
+        <div style="text-align:center;margin-bottom:20px;">
+          <button id="pg-generate-btn" style="background:var(--primary);color:white;border:none;padding:12px 28px;font-size:1rem;font-weight:700;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s ease;box-shadow:0 4px 12px rgba(13,115,119,0.25);">
+            ✨ 맞춤형 프롬프트 생성하기
+          </button>
+        </div>
+
+        <div id="pg-result-container" style="display:none;margin-top:20px;padding-top:20px;border-top:1px dashed var(--border);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <strong style="color:var(--primary);font-size:0.95rem;">🚀 생성된 제미나이 캔버스 프롬프트</strong>
+            <button id="pg-copy-btn" style="background:var(--primary-light);color:var(--primary-hover);border:1px solid var(--primary);padding:6px 14px;border-radius:var(--radius-sm);font-weight:600;font-size:0.85rem;cursor:pointer;">
+              📋 프롬프트 복사하기
+            </button>
+          </div>
+          <pre id="pg-result-code" style="background:var(--code-bg);padding:16px;border-radius:var(--radius-sm);white-space:pre-wrap;word-break:break-word;font-family:'Fira Code', monospace;font-size:0.875rem;line-height:1.6;color:var(--text);border:1px solid var(--border);"></pre>
+        </div>
+      </div>`;
+  };
+
+  const initPromptGenerator = () => {
+    const genBtn = document.getElementById('pg-generate-btn');
+    if (!genBtn || genBtn.dataset.init) return;
+    genBtn.dataset.init = 'true';
+
+    const copyBtn = document.getElementById('pg-copy-btn');
+    const resultBox = document.getElementById('pg-result-container');
+    const resultCode = document.getElementById('pg-result-code');
+
+    genBtn.addEventListener('click', () => {
+      const target = document.getElementById('pg-target')?.value.trim() || '학생';
+      const purpose = document.getElementById('pg-purpose')?.value.trim() || '교수학습 활동';
+      const appName = document.getElementById('pg-appname')?.value.trim() || '맞춤형 교육 웹앱';
+      const features = document.getElementById('pg-features')?.value.trim() || '사용하기 편리하고 직관적인 기능';
+      const style = document.getElementById('pg-style')?.value || '밝고 예쁜 스타일';
+
+      const generatedPrompt = `다음 조건에 맞는 HTML/CSS/JavaScript 싱글 페이지 웹 애플리케이션을 제미나이 캔버스(Canvas)용으로 만들어줘.
+
+[기본 정보]
+- 교육 대상: ${target}
+- 사용 목적: ${purpose}
+- 웹앱 제목: ${appName}
+
+[핵심 기능 및 구성]
+${features}
+
+[디자인 요구사항]
+- 디자인 스타일: ${style}
+- 사용자가 반응형 화면으로 PC와 모바일 모두에서 편리하게 사용할 수 있도록 해줘.
+- 사용자 인터페이스(UI)가 매우 직관적이고 시각적으로 흥미롭도록 제작해줘.
+
+지금 바로 전체 완성된 코드(HTML/CSS/JS 통합)로 웹앱을 제작해줘!`;
+
+      resultCode.textContent = generatedPrompt;
+      resultBox.style.display = 'block';
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      showToast('✨ 프롬프트가 성공적으로 생성되었습니다!');
+    });
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const text = resultCode.textContent;
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          copyBtn.textContent = '✅ 복사 완료!';
+          showToast('클립보드에 복사되었습니다! 제미나이 캔버스에 붙여넣으세요.');
+          setTimeout(() => {
+            copyBtn.textContent = '📋 프롬프트 복사하기';
+          }, 2000);
+        } catch {
+          showToast('복사에 실패했습니다.');
+        }
+      });
+    }
+  };
+
   const initAllInteractions = () => {
     document.querySelectorAll('.checklist[data-session-wrapper]').forEach(el => {
       initChecklist(el.dataset.sessionWrapper);
     });
     initQuiz();
     initCodeCopy();
+    initPromptGenerator();
   };
 
   // Public API
