@@ -340,11 +340,25 @@ window.Components = (function () {
      11. 교육용 프롬프트 제작소
   ────────────────────────────── */
   const renderPromptGenerator = (data = {}) => {
-    const title = data.title || '🛠️ 교육용 웹앱 프롬프트 제작소';
-    const desc = data.description || '아래 항목을 입력하면 제미나이 캔버스에 바로 사용할 수 있는 완벽한 프롬프트가 생성됩니다!';
+    const mode = data.mode || 'gemini'; // 'gemini' | 'canva'
+    const isCanva = mode === 'canva';
+    const title = data.title || (isCanva ? '🛠️ 캔바 AI 전용 데이터구조 프롬프트 제작소' : '🛠️ 교육용 웹앱 프롬프트 제작소');
+    const desc = data.description || (isCanva ? '캔바 AI는 임시 데이터구조(백엔드 데이터)를 정의하여 폼 입력, 목록 저장, 단순 점수 합산 등을 구조화할 수 있습니다.' : '아래 항목을 입력하면 제미나이 캔버스에 바로 사용할 수 있는 완벽한 프롬프트가 생성됩니다!');
+    const prefix = isCanva ? 'canva-' : 'pg-';
+
+    const dataStructureField = isCanva ? `
+      <div style="margin-bottom:20px;">
+        <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🗄️ 백엔드 데이터 구조 설계 (저장할 데이터 항목)</label>
+        <textarea id="${prefix}datastruct" class="pg-input" rows="3" placeholder="예: 
+1. 상벌점 데이터: 학생이름, 구분(상점/벌점), 항목명, 점수, 입력일자
+2. 할일(TO-DO) 데이터: 항목내용, 마감일, 완료여부(true/false), 우선순위" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;"></textarea>
+        <span style="font-size:0.8rem;color:var(--primary);font-weight:500;">💡 캔바 AI는 1차시 제미나이 캔버스와 달리 단순 화면(프론트)을 넘어 폼 데이터를 받는 구조(백엔드 데이터)까지 프롬프트로 설계할 수 있습니다!</span>
+      </div>
+    ` : '';
+
     return `
-      <div class="card prompt-generator-card fade-in" style="background:var(--surface);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);border:2px solid var(--primary-light);margin-bottom:24px;">
-        <h3 style="display:flex;align-items:center;gap:8px;margin-bottom:8px;color:var(--primary);font-size:1.25rem;">
+      <div class="card prompt-generator-card fade-in" data-mode="${mode}" style="background:var(--surface);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);border:2px solid ${isCanva ? '#8B5CF6' : 'var(--primary-light)'};margin-bottom:24px;">
+        <h3 style="display:flex;align-items:center;gap:8px;margin-bottom:8px;color:${isCanva ? '#6D28D9' : 'var(--primary)'};font-size:1.25rem;">
           ${esc(title)}
         </h3>
         <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:20px;">${esc(desc)}</p>
@@ -352,29 +366,31 @@ window.Components = (function () {
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;margin-bottom:20px;">
           <div>
             <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">👨‍🎓 교육 대상</label>
-            <input type="text" id="pg-target" class="pg-input" placeholder="예: 초등학교 5학년, 중학생, 교사" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+            <input type="text" id="${prefix}target" class="pg-input" placeholder="예: 초등학교 5학년, 중학생, 교사" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
           </div>
           <div>
             <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🎯 사용 목적 / 수업 주제</label>
-            <input type="text" id="pg-purpose" class="pg-input" placeholder="예: 사회 시간에 세계 수도 복습게임, 독서록 관리" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+            <input type="text" id="${prefix}purpose" class="pg-input" placeholder="예: 상벌점 관리, TO-DO 할일 목록 관리" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
           </div>
           <div>
-            <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">💡 웹앱 제목</label>
-            <input type="text" id="pg-appname" class="pg-input" placeholder="예: 수도 이름 맞히기 퀴즈, 나의 독서 일기장" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+            <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">💡 콘텐츠 / 앱 제목</label>
+            <input type="text" id="${prefix}appname" class="pg-input" placeholder="예: 우리반 상벌점 게시판, 오늘 나의 할일" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
           </div>
         </div>
 
         <div style="margin-bottom:20px;">
-          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">⚡ 구체적으로 필요한 기능 (쉼표나 줄바꿈으로 구분)</label>
-          <textarea id="pg-features" class="pg-input" rows="3" placeholder="예: 
-1. 퀴즈 10문항 제시 및 바로 정답 확인 기능
-2. 점수 집계 및 귀여운 축하 효과음/애니메이션
-3. 다시 도전하기 버튼" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;"></textarea>
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">⚡ 화면 기능 및 UI 디자인 요구사항</label>
+          <textarea id="${prefix}features" class="pg-input" rows="3" placeholder="예: 
+1. 상단에 상점/벌점 통계 그래프 표시
+2. 학생 이름 선택 후 점수 부여 폼 제시
+3. 전체 내역 표 및 필터링 기능" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;"></textarea>
         </div>
+
+        ${dataStructureField}
 
         <div style="margin-bottom:20px;">
           <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">✨ 디자인 스타일 / 무드</label>
-          <select id="pg-style" class="pg-input" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;background:white;">
+          <select id="${prefix}style" class="pg-input" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;background:white;">
             <option value="학생들이 좋아할 만한 밝고 귀여운 파스텔 톤 디자인">🎨 밝고 귀여운 파스텔 스타일 (초등/중등 추천)</option>
             <option value="깔끔하고 모던하며 신뢰감을 주는 블루/슬레이트 톤 디자인">💻 깔끔하고 모던한 스타일 (고등/선생님 추천)</option>
             <option value="레트로 8비트 게임 느낌의 알록달록하고 재미있는 스타일">🎮 레트로 게임 스타일</option>
@@ -383,40 +399,40 @@ window.Components = (function () {
         </div>
 
         <div style="text-align:center;margin-bottom:20px;">
-          <button id="pg-generate-btn" style="background:var(--primary);color:white;border:none;padding:12px 28px;font-size:1rem;font-weight:700;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s ease;box-shadow:0 4px 12px rgba(13,115,119,0.25);">
-            ✨ 맞춤형 프롬프트 생성하기
+          <button id="${prefix}generate-btn" style="background:${isCanva ? '#7C3AED' : 'var(--primary)'};color:white;border:none;padding:12px 28px;font-size:1rem;font-weight:700;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s ease;box-shadow:0 4px 12px ${isCanva ? 'rgba(124,58,237,0.25)' : 'rgba(13,115,119,0.25)'};">
+            ✨ ${isCanva ? '캔바 AI 전용 프롬프트 생성하기' : '맞춤형 프롬프트 생성하기'}
           </button>
         </div>
 
-        <div id="pg-result-container" style="display:none;margin-top:20px;padding-top:20px;border-top:1px dashed var(--border);">
+        <div id="${prefix}result-container" style="display:none;margin-top:20px;padding-top:20px;border-top:1px dashed var(--border);">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-            <strong style="color:var(--primary);font-size:0.95rem;">🚀 생성된 제미나이 캔버스 프롬프트</strong>
-            <button id="pg-copy-btn" style="background:var(--primary-light);color:var(--primary-hover);border:1px solid var(--primary);padding:6px 14px;border-radius:var(--radius-sm);font-weight:600;font-size:0.85rem;cursor:pointer;">
+            <strong style="color:${isCanva ? '#6D28D9' : 'var(--primary)'};font-size:0.95rem;">🚀 생성된 프롬프트</strong>
+            <button id="${prefix}copy-btn" style="background:${isCanva ? '#F3E8FF' : 'var(--primary-light)'};color:${isCanva ? '#6D28D9' : 'var(--primary-hover)'};border:1px solid ${isCanva ? '#7C3AED' : 'var(--primary)'};padding:6px 14px;border-radius:var(--radius-sm);font-weight:600;font-size:0.85rem;cursor:pointer;">
               📋 프롬프트 복사하기
             </button>
           </div>
-          <pre id="pg-result-code" style="background:var(--code-bg);padding:16px;border-radius:var(--radius-sm);white-space:pre-wrap;word-break:break-word;font-family:'Fira Code', monospace;font-size:0.875rem;line-height:1.6;color:var(--text);border:1px solid var(--border);"></pre>
+          <pre id="${prefix}result-code" style="background:var(--code-bg);padding:16px;border-radius:var(--radius-sm);white-space:pre-wrap;word-break:break-word;font-family:'Fira Code', monospace;font-size:0.875rem;line-height:1.6;color:var(--text);border:1px solid var(--border);"></pre>
         </div>
       </div>`;
   };
 
   const initPromptGenerator = () => {
-    const genBtn = document.getElementById('pg-generate-btn');
-    if (!genBtn || genBtn.dataset.init) return;
-    genBtn.dataset.init = 'true';
+    // 1. Gemini 모드
+    const genBtnGemini = document.getElementById('pg-generate-btn');
+    if (genBtnGemini && !genBtnGemini.dataset.init) {
+      genBtnGemini.dataset.init = 'true';
+      const copyBtn = document.getElementById('pg-copy-btn');
+      const resultBox = document.getElementById('pg-result-container');
+      const resultCode = document.getElementById('pg-result-code');
 
-    const copyBtn = document.getElementById('pg-copy-btn');
-    const resultBox = document.getElementById('pg-result-container');
-    const resultCode = document.getElementById('pg-result-code');
+      genBtnGemini.addEventListener('click', () => {
+        const target = document.getElementById('pg-target')?.value.trim() || '학생';
+        const purpose = document.getElementById('pg-purpose')?.value.trim() || '교수학습 활동';
+        const appName = document.getElementById('pg-appname')?.value.trim() || '맞춤형 교육 웹앱';
+        const features = document.getElementById('pg-features')?.value.trim() || '사용하기 편리하고 직관적인 기능';
+        const style = document.getElementById('pg-style')?.value || '밝고 예쁜 스타일';
 
-    genBtn.addEventListener('click', () => {
-      const target = document.getElementById('pg-target')?.value.trim() || '학생';
-      const purpose = document.getElementById('pg-purpose')?.value.trim() || '교수학습 활동';
-      const appName = document.getElementById('pg-appname')?.value.trim() || '맞춤형 교육 웹앱';
-      const features = document.getElementById('pg-features')?.value.trim() || '사용하기 편리하고 직관적인 기능';
-      const style = document.getElementById('pg-style')?.value || '밝고 예쁜 스타일';
-
-      const generatedPrompt = `다음 조건에 맞는 HTML/CSS/JavaScript 싱글 페이지 웹 애플리케이션을 제미나이 캔버스(Canvas)용으로 만들어줘.
+        const generatedPrompt = `다음 조건에 맞는 HTML/CSS/JavaScript 싱글 페이지 웹 애플리케이션을 제미나이 캔버스(Canvas)용으로 만들어줘.
 
 [기본 정보]
 - 교육 대상: ${target}
@@ -433,27 +449,82 @@ ${features}
 
 지금 바로 전체 완성된 코드(HTML/CSS/JS 통합)로 웹앱을 제작해줘!`;
 
-      resultCode.textContent = generatedPrompt;
-      resultBox.style.display = 'block';
-      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      showToast('✨ 프롬프트가 성공적으로 생성되었습니다!');
-    });
-
-    if (copyBtn) {
-      copyBtn.addEventListener('click', async () => {
-        const text = resultCode.textContent;
-        if (!text) return;
-        try {
-          await navigator.clipboard.writeText(text);
-          copyBtn.textContent = '✅ 복사 완료!';
-          showToast('클립보드에 복사되었습니다! 제미나이 캔버스에 붙여넣으세요.');
-          setTimeout(() => {
-            copyBtn.textContent = '📋 프롬프트 복사하기';
-          }, 2000);
-        } catch {
-          showToast('복사에 실패했습니다.');
-        }
+        resultCode.textContent = generatedPrompt;
+        resultBox.style.display = 'block';
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        showToast('✨ 제미나이 캔버스 프롬프트가 성공적으로 생성되었습니다!');
       });
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          const text = resultCode.textContent;
+          if (!text) return;
+          try {
+            await navigator.clipboard.writeText(text);
+            copyBtn.textContent = '✅ 복사 완료!';
+            showToast('클립보드에 복사되었습니다! 제미나이 캔버스에 붙여넣으세요.');
+            setTimeout(() => { copyBtn.textContent = '📋 프롬프트 복사하기'; }, 2000);
+          } catch {
+            showToast('복사에 실패했습니다.');
+          }
+        });
+      }
+    }
+
+    // 2. Canva 모드
+    const genBtnCanva = document.getElementById('canva-generate-btn');
+    if (genBtnCanva && !genBtnCanva.dataset.init) {
+      genBtnCanva.dataset.init = 'true';
+      const copyBtn = document.getElementById('canva-copy-btn');
+      const resultBox = document.getElementById('canva-result-container');
+      const resultCode = document.getElementById('canva-result-code');
+
+      genBtnCanva.addEventListener('click', () => {
+        const target = document.getElementById('canva-target')?.value.trim() || '학생/교사';
+        const purpose = document.getElementById('canva-purpose')?.value.trim() || '학급 관리 및 데이터 기록';
+        const appName = document.getElementById('canva-appname')?.value.trim() || '캔바 인터랙티브 웹앱';
+        const features = document.getElementById('canva-features')?.value.trim() || '목록 보기, 폼 입력 기능';
+        const datastruct = document.getElementById('canva-datastruct')?.value.trim() || '항목명, 점수/상태, 작성일자';
+        const style = document.getElementById('canva-style')?.value || '밝고 예쁜 파스텔 톤';
+
+        const generatedPrompt = `캔바 AI(Canva AI) 웹사이트 생성용 프롬프트입니다.
+
+[기본 정보]
+- 대상: ${target}
+- 주제/목적: ${purpose}
+- 콘텐츠/앱 제목: ${appName}
+
+[프론트엔드 UI/기능 요구사항]
+${features}
+
+[백엔드 데이터 구조 설계 (Data Structure)]
+- 다음 항목을 수집하고 저장 및 처리할 수 있는 데이터 구조를 포함해줘:
+${datastruct}
+
+[디자인 & 스타일]
+- ${style}
+- 캔바의 시각적 디자인 요소와 결합하여 직관적인 인터랙션 웹페이지로 구성해줘.`;
+
+        resultCode.textContent = generatedPrompt;
+        resultBox.style.display = 'block';
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        showToast('✨ 캔바 AI 프롬프트가 성공적으로 생성되었습니다!');
+      });
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          const text = resultCode.textContent;
+          if (!text) return;
+          try {
+            await navigator.clipboard.writeText(text);
+            copyBtn.textContent = '✅ 복사 완료!';
+            showToast('클립보드에 복사되었습니다! canva.com/ai 대화창에 붙여넣으세요.');
+            setTimeout(() => { copyBtn.textContent = '📋 프롬프트 복사하기'; }, 2000);
+          } catch {
+            showToast('복사에 실패했습니다.');
+          }
+        });
+      }
     }
   };
 

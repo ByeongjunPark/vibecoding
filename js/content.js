@@ -84,13 +84,13 @@ window.SESSIONS = [
       },
       { type: 'promptGenerator', title: '🛠️ 1차시 실습: 교육용 웹앱 프롬프트 제작소', description: '대상, 사용목적, 웹앱 제목, 필요한 기능을 적으면 제미나이 캔버스용 맞춤 프롬프트가 완성됩니다!' },
       { type: 'tip', variant: 'tip', content: '프롬프트 팁 — 구체적으로 말할수록 좋은 결과가 나옵니다! "웹페이지 만들어줘"보다 "학생 이름, 점수를 입력하면 자동으로 평균을 계산해주는 성적 관리 페이지를 만들어줘"가 훨씬 좋습니다.' },
-      { type: 'tip', variant: 'warning', content: '주의 — 캔버스에서 만든 결과물은 창을 닫으면 사라질 수 있으니, 마음에 드는 결과는 꼭 우측 상단의 복사 버튼으로 코드를 복사해두세요!' },
+      { type: 'tip', variant: 'warning', content: '🚨 <b>1차시 핵심 정리 & 한계:</b> 제미나이 캔버스는 대화만으로 예쁜 <b>프론트엔드(화면 UI)</b>를 즉시 만들어내지만, 보이지 않는 곳에서 데이터를 처리하고 저장하는 <b>백엔드(Backend) 및 데이터베이스 기능은 전혀 지원되지 않습니다.</b> 창을 닫으면 입력했던 정보가 모두 사라지니, 완성된 코드(HTML/CSS/JS)는 반드시 복사해두세요!' },
       { type: 'checklist', sessionId: 'session-1', items: [
           { id: 's1-c1', label: '강사 추천 예시 웹앱 4종 둘러보기' },
           { id: 's1-c2', label: '제미나이 캔버스 접속 완료' },
           { id: 's1-c3', label: '프롬프트 제작소에서 맞춤 프롬프트 생성 및 복사' },
           { id: 's1-c4', label: '제미나이 캔버스에 프롬프트 입력 후 웹앱 생성' },
-          { id: 's1-c5', label: '수정 요청 1회 이상 해보기 및 코드 저장' }
+          { id: 's1-c5', label: '제미나이 캔버스의 백엔드 한계점 이해하기' }
         ]
       }
     ]
@@ -99,27 +99,35 @@ window.SESSIONS = [
     id: 'session-2',
     number: 2,
     title: '캔바 AI로 경험해보는 바이브코딩',
-    subtitle: '데이터 시각화와 AI 디자인',
+    subtitle: '백엔드 데이터 구조 설계와 캔바 AI 바이브코딩',
     duration: '50분',
-    objectives: ['캔바 AI 기능 이해하기', 'AI로 데이터 시각화 콘텐츠 만들기', '교수학습 자료에 활용하기'],
+    objectives: ['캔바 AI(canva.com/ai) 사용법 익히기', '제미나이 캔버스와 캔바 AI의 차이점 이해하기', '백엔드 데이터 구조(Data Structure)를 포함한 바이브코딩 실습', '캔바 AI의 한계점과 앱스스크립트 필요성 이해하기'],
     sections: [
-      { type: 'concept', icon: '🎨', title: '캔바 AI란?', body: '인기 디자인 도구인 캔바(Canva)에 탑재된 스마트한 AI 기능입니다. 텍스트 입력만으로도 수업에 필요한 멋진 디자인, 이미지, 텍스트 콘텐츠를 뚝딱 생성해줍니다. 디자인 감각이 없어도 누구나 디자이너가 될 수 있습니다.' },
-      { type: 'concept', icon: '📊', title: '데이터 + 디자인 = 설득력', body: '복잡한 텍스트나 숫자 데이터도 시각적으로 예쁘게 표현하면 학생들의 이해도와 흥미가 확연히 높아집니다. AI의 도움을 받으면 번거로웠던 차트나 그래프 작업도 순식간에 끝낼 수 있습니다.' },
-      { type: 'link', title: '캔바 AI 접속', description: '무료 계정으로 대부분의 AI 기능 사용 가능 (교육용 계정은 Pro 기능 무료)', url: 'https://www.canva.com' },
+      { type: 'concept', icon: '🎨', title: '캔바 AI란? (아주 간단한 접속법!)', body: '복잡할 것 전혀 없습니다! 캔바 계정으로 로그인한 뒤, <a href="https://www.canva.com/ai" target="_blank" style="color:var(--primary);font-weight:700;">canva.com/ai</a>에 접속해서 원하는 대화(프롬프트)만 입력하면 AI가 알아서 사이트와 인터랙티브 콘텐츠를 만들어줍니다!' },
+      { type: 'concept', icon: '⚙️', title: '제미나이 캔버스 vs 캔바 AI: 무엇이 다른가요?', body: `
+        1차시에서 배운 <b>제미나이 캔버스</b>는 오직 <b>프론트엔드(화면 UI)만</b> 만들어주었습니다.<br>
+        반면 <b>캔바 AI</b>는 단순한 화면 생성을 넘어서 <b>백엔드 데이터 구조(입력 폼, 목록 저장, 단순 점수 합산 구조)까지 부분적으로 지원</b>합니다!<br>
+        선생님께서 프롬프트 작성 시 <i>"어떤 데이터를 저장하고 수집할 것인지"</i> <b>백엔드 데이터 항목</b>을 함께 주문해 주는 것이 2차시 바이브코딩의 핵심입니다.
+      ` },
+      { type: 'concept', icon: '🌟', title: '강사 추천 캔바 AI 실습 예시 2종', body: '백엔드 데이터 구조가 부분적으로 녹아든 캔바 AI 웹사이트 실습 예시입니다. 직접 접속해서 입력해 보세요!' },
+      { type: 'link', title: '예시 1: 우리반 상벌점 관리 시스템 🏆', description: '학생별 상점/벌점 데이터 항목을 입력하고 조회하는 캔바 웹사이트', url: 'https://pbjgdeal.my.canva.site/meritpunish', icon: '📋' },
+      { type: 'link', title: '예시 2: 오늘 나의 TO-DO list 관리 📝', description: '할일 내용, 마감일, 완료 여부 데이터 구조가 설계된 할일 관리 웹사이트', url: 'https://pbjgdeal.my.canva.site/todolist', icon: '✅' },
+      { type: 'divider' },
+      { type: 'link', title: '캔바 AI 대화창 바로가기 (canva.com/ai)', description: '로그인 후 프롬프트만 입력하면 바이브코딩 준비 끝!', url: 'https://www.canva.com/ai', icon: '🚀' },
       { type: 'steps', steps: [
-          { title: 'Step 1', description: 'canva.com 접속 후 로그인합니다. (선생님은 교육용 계정 인증을 추천합니다)' },
-          { title: 'Step 2', description: '디자인 만들기에서 \'프레젠테이션\' 또는 \'인포그래픽\' 템플릿을 선택합니다.' },
-          { title: 'Step 3', description: 'Magic Write(매직 라이트) 기능을 활용해 수업 주제에 맞는 텍스트 콘텐츠를 자동으로 생성해봅니다.' },
-          { title: 'Step 4', description: '데이터를 입력하고 AI가 추천해주는 차트나 그래프를 생성하여 시각화합니다.' },
-          { title: 'Step 5', description: '완성된 자료를 PDF나 이미지 파일로 다운로드합니다.' }
+          { title: 'Step 1', description: 'canva.com 로그인 후 canva.com/ai 로 접속합니다.' },
+          { title: 'Step 2', description: '아래 캔바 AI 전용 프롬프트 제작소에서 화면 기능뿐 아니라 \'저장할 백엔드 데이터 구조\' 항목까지 작성합니다.' },
+          { title: 'Step 3', description: '생성된 프롬프트를 복사하여 canva.com/ai 대화창에 입력하고 결과를 확인합니다.' }
         ]
       },
-      { type: 'tip', variant: 'tip', content: '캔바의 \'Magic Design\' 기능을 사용하면 주제만 입력해도 전체 프레젠테이션이나 포스터 디자인을 자동으로 구성해줍니다! 시간을 획기적으로 줄여주는 마법 같은 기능입니다.' },
+      { type: 'promptGenerator', mode: 'canva', title: '🛠️ 2차시 실습: 캔바 AI 전용 백엔드 프롬프트 제작소', description: '1차시와 달리 화면 기능 외에 \'저장할 데이터 항목(백엔드 데이터 구조)\'까지 함께 설계하여 캔바 AI에 주문합니다!' },
+      { type: 'tip', variant: 'warning', content: '🚨 <b>캔바 AI의 한계점 & 다음 시간 예고:</b><br>캔바 AI가 데이터 구조를 받아주긴 하지만, <b>구체적인 고난도 백엔드 로직 처리나 AI 기반 실시간 자동 산출(자동 채점, AI 피드백 연동 등)은 불가능합니다.</b><br>이러한 한계를 완벽하게 해결하기 위해! 다음 3차시에서는 구글 시트와 코드를 직접 연동하는 <b>'앱스스크립트(Google Apps Script)'</b>를 배워볼 예정입니다!' },
       { type: 'checklist', sessionId: 'session-2', items: [
-          { id: 's2-c1', label: '캔바 접속 및 로그인 완료' },
-          { id: 's2-c2', label: 'AI 디자인 기능 1개 이상 사용해보기' },
-          { id: 's2-c3', label: '교수학습용 콘텐츠 1개 완성하기' },
-          { id: 's2-c4', label: '완성물 다운로드하기' }
+          { id: 's2-c1', label: '캔바 추천 예시 2종(상벌점, TO-DO list) 체험' },
+          { id: 's2-c2', label: 'canva.com/ai 접속 완료' },
+          { id: 's2-c3', label: '백엔드 데이터 구조 항목을 포함하여 맞춤 프롬프트 생성' },
+          { id: 's2-c4', label: '캔바 AI에 프롬프트 입력 및 생성 확인' },
+          { id: 's2-c5', label: '캔바 AI 한계 이해 및 3차시 앱스스크립트 연계 확인' }
         ]
       }
     ]
