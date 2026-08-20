@@ -152,8 +152,8 @@ window.SESSIONS = [
       { type: 'steps', steps: [
           { title: 'Step 1: 새 구글 시트 만들기', description: '인터넷 브라우저 주소창에 <b>sheets.new</b> 입력 후 엔터를 누릅니다.' },
           { title: 'Step 2: 앱스스크립트 편집기 열기', description: '구글 시트 상단 메뉴에서 <b>[확장 프로그램] ➔ [Apps Script]</b>를 클릭합니다.' },
-          { title: 'Step 3: 뒷단 코드(Code.gs) 입력', description: '기존 코드를 지우고, 아래 <b>[Code.gs]</b> 코드를 복사해서 붙여넣고 저장(Ctrl + S)합니다.<br><i>(※ 웹앱이 실행되면 시트에 [작성일시, 이름, 방명록 내용] 제목행이 <b>짝!</b> 하고 자동으로 준비됩니다.)</i>' },
-          { title: 'Step 4: 화면 코드(Index.html) 추가', description: '좌측 파일 목록의 <b>+</b> 버튼 ➔ <b>[HTML]</b>을 선택하고 이름을 <code>Index</code>로 입력합니다. 아래 <b>[Index.html]</b> 코드를 복사해서 붙여넣고 저장(Ctrl + S)합니다.' },
+          { title: 'Step 3: 백엔드 코드(Code.gs) 입력', description: '기존 코드를 지우고, 아래 <b>[Code.gs]</b> 코드를 복사해서 붙여넣고 저장(Ctrl + S)합니다.<br><i>(※ 웹앱이 실행되면 시트에 [작성일시, 이름, 방명록 내용] 제목행이 <b>짝!</b> 하고 자동으로 준비됩니다.)</i>' },
+          { title: 'Step 4: 프론트엔드 코드(Index.html) 추가', description: '좌측 파일 목록의 <b>+</b> 버튼 ➔ <b>[HTML]</b>을 선택하고 이름을 <code>Index</code>로 입력합니다. 아래 <b>[Index.html]</b> 코드를 복사해서 붙여넣고 저장(Ctrl + S)합니다.' },
           { title: 'Step 5: 웹앱으로 배포하기', description: '우측 상단 <b>[배포] ➔ [새 배포]</b> ➔ 톱니바퀴 <b>[웹 앱]</b> 선택 ➔ 실행: <b>나 (My Account)</b>, 액세스 권한: <b>모든 사용자 (Anyone)</b> 설정 후 배포! 생성된 URL로 접속해 테스트합니다.' }
         ]
       },
