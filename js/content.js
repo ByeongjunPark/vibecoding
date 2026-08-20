@@ -142,13 +142,113 @@ window.SESSIONS = [
   {
     id: 'session-3',
     number: 3,
-    title: '앱스스크립트 기초: 템플릿 실습 및 코드 구조 분석',
-    subtitle: '완성된 앱스스크립트 예제 템플릿 4종 코드 뜯어보기',
+    title: '앱스스크립트 기초: 5분 실습 및 코드 구조 분석',
+    subtitle: 'sheets.new로 만드는 방명록 실습과 템플릿 코드 뜯어보기',
     duration: '50분',
-    objectives: ['앱스스크립트의 백엔드 작동 원리 이해하기', '구글 시트 사본 복사 후 Apps Script 편집기 열어보기', '완성된 교육용 웹앱 4종의 코드 구조 뜯어보기'],
+    objectives: ['sheets.new로 5분 만에 우리반 방명록 웹앱 직접 만들어보기', '웹 화면(프론트엔드)과 구글 시트(백엔드)가 연결되는 원리 이해하기', '완성된 교육용 웹앱 4종의 코드 구조 뜯어보기'],
     sections: [
-      { type: 'concept', icon: '📜', title: '앱스스크립트(Google Apps Script)란?', body: '구글 시트를 강력한 <b>데이터베이스(DB)</b>로 만들어주고, 구글 드라이브·폼과 연동하여 진정한 <b>백엔드 로직(자동 저장, 파일 업로드, 점수 집계)</b>을 수행할 수 있게 해주는 구글의 백엔드 엔진입니다.' },
-      { type: 'concept', icon: '🔍', title: '본격적인 바이브코딩 전, 예제 코드 뜯어보기!', body: '스스로 코드를 주문하기 전! 이미 완성된 <b>4가지 완성형 교육용 웹앱의 구글 시트 사본</b>을 복사해보고, <code>확장 프로그램 → Apps Script</code> 메뉴를 열어 코드가 어떻게 시트(DB)와 연결되어 작동하는지 직접 뜯어봅시다.' },
+      { type: 'concept', icon: '📜', title: '앱스스크립트(Google Apps Script)란?', body: '구글 시트를 단순한 문서가 아닌 <b>데이터 저장 창고</b>로 만들어주고, 웹 화면과 연결하여 <b>자동 저장, 결과 집계</b>를 도와주는 구글의 핵심 엔진입니다.' },
+      { type: 'concept', icon: '⚡', title: '5분 만에 만드는 첫 웹앱: 우리반 방명록 실습', body: '복잡한 설명보다 직접 하나 만들어보는 것이 가장 빠릅니다! 주소창에 <code>sheets.new</code>를 치고 들어가서, 아래 코드를 그대로 붙여넣고 내 첫 번째 웹앱을 배포해보세요.' },
+      { type: 'steps', steps: [
+          { title: 'Step 1: 새 구글 시트 만들기', description: '인터넷 브라우저 주소창에 <b>sheets.new</b> 입력 후 엔터를 누릅니다.' },
+          { title: 'Step 2: 앱스스크립트 편집기 열기', description: '구글 시트 상단 메뉴에서 <b>[확장 프로그램] ➔ [Apps Script]</b>를 클릭합니다.' },
+          { title: 'Step 3: 뒷단 코드(Code.gs) 입력', description: '기존 코드를 지우고, 아래 <b>[Code.gs]</b> 코드를 복사해서 붙여넣고 저장(Ctrl + S)합니다.<br><i>(※ 웹앱이 실행되면 시트에 [작성일시, 이름, 방명록 내용] 제목행이 <b>짝!</b> 하고 자동으로 준비됩니다.)</i>' },
+          { title: 'Step 4: 화면 코드(Index.html) 추가', description: '좌측 파일 목록의 <b>+</b> 버튼 ➔ <b>[HTML]</b>을 선택하고 이름을 <code>Index</code>로 입력합니다. 아래 <b>[Index.html]</b> 코드를 복사해서 붙여넣고 저장(Ctrl + S)합니다.' },
+          { title: 'Step 5: 웹앱으로 배포하기', description: '우측 상단 <b>[배포] ➔ [새 배포]</b> ➔ 톱니바퀴 <b>[웹 앱]</b> 선택 ➔ 실행: <b>나 (My Account)</b>, 액세스 권한: <b>모든 사용자 (Anyone)</b> 설정 후 배포! 생성된 URL로 접속해 테스트합니다.' }
+        ]
+      },
+      { type: 'code', filename: 'Code.gs (구글 시트 제어 - 뒷단 코드)', language: 'javascript', code: `// 1. 웹앱 접속 시 Index.html 화면을 보여주는 함수
+function doGet() {
+  // 웹앱이 실행될 때 시트가 완전히 비어있다면 제목행(헤더)을 자동으로 짝! 하고 넣어줍니다.
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(['작성일시', '이름', '방명록 내용']);
+  }
+  
+  return HtmlService.createHtmlOutputFromFile('Index')
+    .setTitle('우리반 학생 방명록')
+    .setXframeOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+// 2. 학생이 입력한 이름과 방명록 글을 구글 시트에 저장하는 함수
+function addGuestbookEntry(name, message) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  
+  // 혹시 제목행이 없다면 자동으로 먼저 추가합니다.
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(['작성일시', '이름', '방명록 내용']);
+  }
+  
+  // 작성된 날짜와 시간 (년-월-일 시:분:초)
+  var now = new Date();
+  var formattedDate = Utilities.formatDate(now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm:ss");
+  
+  // 구글 시트에 한 줄 추가 (방명록 데이터 기록!)
+  sheet.appendRow([formattedDate, name, message]);
+  
+  return '방명록이 구글 시트에 잘 저장되었습니다!';
+}` },
+      { type: 'code', filename: 'Index.html (학생들이 보는 화면 코드)', language: 'html', code: `<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    body { font-family: 'Malgun Gothic', sans-serif; padding: 20px; background-color: #f8fafc; color: #334155; }
+    .card { background: white; padding: 24px; border-radius: 12px; max-width: 400px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
+    h2 { color: #0D7377; margin-top: 0; text-align: center; font-size: 1.4rem; }
+    p.desc { font-size: 0.9rem; color: #64748b; text-align: center; margin-bottom: 20px; }
+    label { font-weight: bold; font-size: 0.9rem; display: block; margin-bottom: 6px; }
+    input, textarea { width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 0.95rem; font-family: inherit; }
+    button { width: 100%; padding: 12px; background-color: #0D7377; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+    button:hover { background-color: #095255; }
+    #status { margin-top: 14px; text-align: center; font-weight: bold; color: #2563EB; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>📝 우리반 방명록</h2>
+    <p class="desc">오늘 수업 소감이나 하고 싶은 말을 적어주세요!</p>
+    
+    <label for="studentName">이름 (또는 모둠명)</label>
+    <input type="text" id="studentName" placeholder="예: 홍길동">
+    
+    <label for="guestMessage">방명록 내용</label>
+    <textarea id="guestMessage" rows="3" placeholder="남기고 싶은 말을 자유롭게 적어주세요"></textarea>
+    
+    <button onclick="submitGuestbook()">방명록 제출하기 🚀</button>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    function submitGuestbook() {
+      var name = document.getElementById('studentName').value;
+      var message = document.getElementById('guestMessage').value;
+      var statusDiv = document.getElementById('status');
+
+      if (!name || !message) {
+        alert('이름과 내용을 모두 입력해 주세요!');
+        return;
+      }
+
+      statusDiv.innerText = '구글 시트로 전달하는 중... ⏳';
+
+      // 구글 시트 뒷단 함수 호출하기
+      google.script.run
+        .withSuccessHandler(function(response) {
+          statusDiv.innerText = '🎉 ' + response;
+          document.getElementById('studentName').value = '';
+          document.getElementById('guestMessage').value = '';
+        })
+        .withFailureHandler(function(err) {
+          statusDiv.innerText = '❌ 오류가 발생했습니다: ' + err.message;
+        })
+        .addGuestbookEntry(name, message);
+    }
+  </script>
+</body>
+</html>` },
+      { type: 'divider' },
+      { type: 'concept', icon: '🔍', title: '본격적인 바이브코딩 전, 예제 코드 뜯어보기!', body: '직접 방명록을 만들어보았다면, 이제 더 다양한 <b>4가지 완성형 교육용 웹앱의 구글 시트 사본</b>을 복사해보고, <code>확장 프로그램 → Apps Script</code> 메뉴를 열어 코드가 어떻게 시트와 연결되어 작동하는지 뜯어봅시다.' },
       { type: 'concept', icon: '🌟', title: '앱스스크립트 템플릿 예제 4종 (구글시트 사본 + 웹앱)', body: '아래 4가지 예제에서 <b>[구글시트 사본 만들기]</b>를 클릭해 내 구글 드라이브로 복사한 뒤, 시트의 <code>확장 프로그램 → Apps Script</code>를 열어 코드를 확인해 보세요!' },
       { type: 'linkGrid', cols: 2, links: [
           {
@@ -195,11 +295,11 @@ window.SESSIONS = [
       },
       { type: 'tip', variant: 'warning', content: '⚠️ <b>배포 관련 핵심 팁:</b><br>• <b>액세스 권한:</b> 반드시 "모든 사용자(Anyone)"로 지정해야 학생이나 타 교사가 로그인 없이 접속할 수 있습니다.<br>• <b>코드 수정 후 재배포:</b> 코드를 새로 고친 후에는 반드시 <code>배포 ➔ 새 배포</code>를 통해 새로운 버전으로 배포해야 웹앱에 변경사항이 즉시 적용됩니다!' },
       { type: 'checklist', sessionId: 'session-3', items: [
-          { id: 's3-c1', label: '예제 템플릿 4종 웹앱 체험 및 동작 확인' },
-          { id: 's3-c2', label: '최소 1개 이상 구글 시트 사본 복사 완료' },
-          { id: 's3-c3', label: '확장 프로그램 ➔ Apps Script 편집기 열기' },
-          { id: 's3-c4', label: 'Code.gs 파일과 Index.html 파일 구조 뜯어보기' },
-          { id: 's3-c5', label: '상세 가이드에 따라 웹앱 새 배포 실행 및 URL 접속 성공' }
+          { id: 's3-c1', label: 'sheets.new에서 방명록 코드(Code.gs / Index.html) 입력 후 첫 웹앱 배포 성공' },
+          { id: 's3-c2', label: '구글 시트에 헤더행(작성일시/이름/내용)과 데이터가 자동으로 기록되는지 확인' },
+          { id: 's3-c3', label: '예제 템플릿 4종 웹앱 체험 및 동작 확인' },
+          { id: 's3-c4', label: '최소 1개 이상 구글 시트 사본 복사 완료' },
+          { id: 's3-c5', label: '확장 프로그램 ➔ Apps Script 편집기 열어 코드 구조 뜯어보기' }
         ]
       }
     ]
