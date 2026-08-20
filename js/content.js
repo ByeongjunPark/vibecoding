@@ -152,8 +152,8 @@ window.SESSIONS = [
       { type: 'steps', steps: [
           { title: 'Step 1: 새 구글 시트 만들기', description: '인터넷 브라우저 주소창에 <b>sheets.new</b> 입력 후 엔터를 누릅니다.' },
           { title: 'Step 2: 앱스스크립트 편집기 열기', description: '구글 시트 상단 메뉴에서 <b>[확장 프로그램] ➔ [Apps Script]</b>를 클릭합니다.' },
-          { title: 'Step 3: 백엔드 코드(Code.gs) 입력', description: '기존 코드를 지우고, 아래 <b>[Code.gs]</b> 코드를 복사해서 붙여넣고 저장(Ctrl + S)합니다.<br><i>(※ 웹앱이 실행되면 시트에 [작성일시, 이름, 방명록 내용] 제목행이 <b>짝!</b> 하고 자동으로 준비됩니다.)</i>' },
-          { title: 'Step 4: 프론트엔드 코드(Index.html) 추가', description: '좌측 파일 목록의 <b>+</b> 버튼 ➔ <b>[HTML]</b>을 선택하고 이름을 <code>Index</code>로 입력합니다. 아래 <b>[Index.html]</b> 코드를 복사해서 붙여넣고 저장(Ctrl + S)합니다.' },
+          { title: 'Step 3: 뒷단 코드(Code.gs) 입력', description: '기존 코드를 지우고, 아래 <b>[Code.gs]</b> 코드를 복사해서 붙여넣고 저장(Ctrl + S)합니다.<br><i>(※ 웹앱이 실행되면 시트에 [작성일시, 이름, 방명록 내용] 제목행이 <b>짝!</b> 하고 자동으로 준비됩니다.)</i>' },
+          { title: 'Step 4: 화면 코드(Index.html) 추가', description: '좌측 파일 목록의 <b>+</b> 버튼 ➔ <b>[HTML]</b>을 선택하고 이름을 <code>Index</code>로 입력합니다. 아래 <b>[Index.html]</b> 코드를 복사해서 붙여넣고 저장(Ctrl + S)합니다.' },
           { title: 'Step 5: 웹앱으로 배포하기', description: '우측 상단 <b>[배포] ➔ [새 배포]</b> ➔ 톱니바퀴 <b>[웹 앱]</b> 선택 ➔ 실행: <b>나 (My Account)</b>, 액세스 권한: <b>모든 사용자 (Anyone)</b> 설정 후 배포! 생성된 URL로 접속해 테스트합니다.' }
         ]
       },
@@ -166,8 +166,8 @@ function doGet() {
   }
   
   return HtmlService.createHtmlOutputFromFile('Index')
-    .setTitle('우리반 학생 방명록')
-    .setXframeOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+    .setTitle('OO초등학교 학생 방명록')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL); // ※ Frame의 F는 반드시 대문자!
 }
 
 // 2. 학생이 입력한 이름과 방명록 글을 구글 시트에 저장하는 함수
@@ -189,58 +189,163 @@ function addGuestbookEntry(name, message) {
   return '방명록이 구글 시트에 잘 저장되었습니다!';
 }` },
       { type: 'code', filename: 'Index.html (학생들이 보는 화면 코드)', language: 'html', code: `<!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OO초등학교 학생 방명록</title>
   <style>
-    body { font-family: 'Malgun Gothic', sans-serif; padding: 20px; background-color: #f8fafc; color: #334155; }
-    .card { background: white; padding: 24px; border-radius: 12px; max-width: 400px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
-    h2 { color: #0D7377; margin-top: 0; text-align: center; font-size: 1.4rem; }
-    p.desc { font-size: 0.9rem; color: #64748b; text-align: center; margin-bottom: 20px; }
-    label { font-weight: bold; font-size: 0.9rem; display: block; margin-bottom: 6px; }
-    input, textarea { width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 0.95rem; font-family: inherit; }
-    button { width: 100%; padding: 12px; background-color: #0D7377; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem; }
-    button:hover { background-color: #095255; }
-    #status { margin-top: 14px; text-align: center; font-weight: bold; color: #2563EB; font-size: 0.95rem; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+      background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+      margin: 0;
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: #ffffff;
+      padding: 32px 28px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e2e8f0;
+    }
+    .header-badge {
+      display: inline-block;
+      background: #eff6ff;
+      color: #2563eb;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    h2 {
+      color: #0f172a;
+      margin: 0 0 8px 0;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    p.desc {
+      font-size: 0.92rem;
+      color: #64748b;
+      margin: 0 0 24px 0;
+      line-height: 1.5;
+    }
+    .form-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #334155;
+      margin-bottom: 8px;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      background-color: #f8fafc;
+    }
+    input[type="text"]:focus, textarea:focus {
+      border-color: #0D7377;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(13, 115, 119, 0.15);
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #0D7377 0%, #149197 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(13, 115, 119, 0.25);
+      transition: all 0.2s ease;
+      margin-top: 8px;
+    }
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(13, 115, 119, 0.35);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    #status {
+      margin-top: 18px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      min-height: 24px;
+    }
   </style>
 </head>
 <body>
   <div class="card">
-    <h2>📝 우리반 방명록</h2>
-    <p class="desc">오늘 수업 소감이나 하고 싶은 말을 적어주세요!</p>
+    <div style="text-align:center;">
+      <span class="header-badge">🏫 우리반 방명록</span>
+      <h2>OO초등학교 학생 방명록</h2>
+      <p class="desc">오늘 수업 소감이나 선생님, 친구들에게 전하고 싶은 메시지를 남겨주세요! ✨</p>
+    </div>
     
-    <label for="studentName">이름 (또는 모둠명)</label>
-    <input type="text" id="studentName" placeholder="예: 홍길동">
+    <div class="form-group">
+      <label for="studentName">👤 이름 (또는 모둠명)</label>
+      <input type="text" id="studentName" placeholder="예: 5학년 1반 홍길동">
+    </div>
     
-    <label for="guestMessage">방명록 내용</label>
-    <textarea id="guestMessage" rows="3" placeholder="남기고 싶은 말을 자유롭게 적어주세요"></textarea>
+    <div class="form-group">
+      <label for="guestMessage">💬 방명록 내용</label>
+      <textarea id="guestMessage" rows="3" placeholder="남기고 싶은 소감이나 이야기를 써주세요."></textarea>
+    </div>
     
-    <button onclick="submitGuestbook()">방명록 제출하기 🚀</button>
+    <button onclick="submitGuestbook()">방명록 등록하기 🚀</button>
+    
     <div id="status"></div>
   </div>
 
   <script>
     function submitGuestbook() {
-      var name = document.getElementById('studentName').value;
-      var message = document.getElementById('guestMessage').value;
+      var nameInput = document.getElementById('studentName');
+      var messageInput = document.getElementById('guestMessage');
+      var name = nameInput.value.trim();
+      var message = messageInput.value.trim();
       var statusDiv = document.getElementById('status');
 
       if (!name || !message) {
-        alert('이름과 내용을 모두 입력해 주세요!');
+        alert('이름과 내용을 모두 입력해주세요!');
         return;
       }
 
-      statusDiv.innerText = '구글 시트로 전달하는 중... ⏳';
+      statusDiv.style.color = '#2563eb';
+      statusDiv.innerText = '구글 시트에 방명록을 기록하는 중입니다... ⏳';
 
-      // 구글 시트 뒷단 함수 호출하기
+      // 구글 시트 뒷단 함수(Code.gs) 호출
       google.script.run
         .withSuccessHandler(function(response) {
+          statusDiv.style.color = '#059669';
           statusDiv.innerText = '🎉 ' + response;
-          document.getElementById('studentName').value = '';
-          document.getElementById('guestMessage').value = '';
+          nameInput.value = '';
+          messageInput.value = '';
         })
         .withFailureHandler(function(err) {
-          statusDiv.innerText = '❌ 오류가 발생했습니다: ' + err.message;
+          statusDiv.style.color = '#dc2626';
+          statusDiv.innerText = '❌ 오류 발생: ' + err.message;
         })
         .addGuestbookEntry(name, message);
     }
