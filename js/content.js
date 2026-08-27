@@ -509,6 +509,74 @@ function addGuestbookEntry(name, message) {
       },
       { type: 'tip', variant: 'tip', content: '프롬프트를 작성할 때, API 도큐먼트의 URL 주소를 함께 복사해서 AI에게 알려주면 최신 정보를 바탕으로 훨씬 정확한 코드를 만들어냅니다!' },
       { type: 'tip', variant: 'warning', content: 'API 호출(사용)에는 사용량 제한이 있거나 요금이 부과될 수 있습니다. 처음 테스트할 때는 1~2개의 적은 데이터로만 조심스럽게 실험해보세요.' },
+      { type: 'concept', icon: '⚡', title: '업스테이지 Solar AI API 연동 코드 스니펫 (복사해서 활용하기)', body: `
+        업스테이지(Upstage)의 Solar-pro 인공지능 모델을 내 프로그램에서 직접 불러오는 완성형 코드 스니펫입니다.<br>
+        상단 우측의 <b>[📋 복사]</b> 버튼을 누르면 코드가 클립보드에 복사되어 내 스크립트에 바로 붙여넣을 수 있습니다!
+      ` },
+      { type: 'code', filename: 'Code.gs (구글 앱스스크립트 전용 - UrlFetchApp 방식)', language: 'javascript', code: `/**
+ * [구글 앱스스크립트 전용] 업스테이지 Solar AI API 호출 함수
+ * 앱스스크립트 환경에서는 UrlFetchApp을 이용하여 외부 AI API를 호출합니다.
+ */
+function callUpstageSolar() {
+  var apiKey = "up_iU3oiUYNN2ag7dPOuvxyDohmNcZZq"; // 발급받은 업스테이지 API 키
+  var url = "https://api.upstage.ai/v1/chat/completions";
+  
+  var payload = {
+    "model": "solar-pro",
+    "messages": [
+      {
+        "role": "user",
+        "content": "An $80 item gets a 20% discount, then 10% tax is added. What is the final price? Answer with only the dollar amount."
+      }
+    ]
+  };
+
+  var options = {
+    "method": "post",
+    "contentType": "application/json",
+    "headers": {
+      "Authorization": "Bearer " + apiKey
+    },
+    "payload": JSON.stringify(payload),
+    "muteHttpExceptions": true
+  };
+
+  var response = UrlFetchApp.fetch(url, options);
+  var result = JSON.parse(response.getContentText());
+  
+  var answer = result.choices[0].message.content;
+  Logger.log("🤖 Solar AI 응답: " + answer);
+  return answer;
+}` },
+      { type: 'code', filename: 'main.js (Node.js / OpenAI SDK 호환 방식)', language: 'javascript', code: `import OpenAI from "openai";
+
+const apiKey = "up_iU3oiUYNN2ag7dPOuvxyDohmNcZZq";
+const openai = new OpenAI({
+  apiKey,
+  baseURL: "https://api.upstage.ai/v1"
+});
+
+async function main() {
+  const response = await openai.chat.completions.create({
+    model: "solar-pro",
+    messages: [
+      {
+        "role": "user",
+        "content": "An $80 item gets a 20% discount, then 10% tax is added. What is the final price? Answer with only the dollar amount."
+      }
+    ]
+  });
+
+  const message = response.choices[0].message;
+
+  if (message.reasoning) {
+    console.log("생각 과정:", message.reasoning);
+  }
+
+  console.log("답변:", message.content);
+}
+
+main();` },
       { type: 'divider' },
       { type: 'concept', icon: '🎓', title: '7~8차시 준비: 깃허브(GitHub) 교육용 인증 사전 신청하기', body: `
         다음 7~8차시에서는 안티그래비티와 깃허브(GitHub)를 연동하여 내가 만든 프로젝트를 웹사이트로 공개할 예정입니다.<br>
@@ -534,7 +602,8 @@ function addGuestbookEntry(name, message) {
           { id: 's6-c3', label: '코드에 내 API 키 설정하기' },
           { id: 's6-c4', label: 'API 연동 테스트 성공' },
           { id: 's6-c5', label: '결과 확인 및 추가 수정 요청해보기' },
-          { id: 's6-c6', label: '7~8차시를 위한 깃허브 가입 및 교육용 인증(Education Benefits) 미리 신청하기' }
+          { id: 's6-c6', label: '7~8차시를 위한 깃허브 가입 및 교육용 인증(Education Benefits) 미리 신청하기' },
+          { id: 's6-c7', label: '업스테이지 Solar AI API 코드 스니펫 복사 및 호출 테스트' }
         ]
       }
     ]
