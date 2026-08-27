@@ -493,9 +493,9 @@ function addGuestbookEntry(name, message) {
     id: 'session-6',
     number: 6,
     title: 'API 도큐먼트를 활용해서 바이브코딩으로 인공지능 기반 솔루션 주문해보기',
-    subtitle: 'AI API 연동 실습 및 깃허브 교육 인증 준비',
+    subtitle: 'AI API 연동 실습',
     duration: '50분',
-    objectives: ['API 도큐먼트 읽는 법 배우기', '바이브코딩으로 API 연동 앱 만들기', 'AI 기반 솔루션 직접 만들어보기', '7~8차시 연동을 위한 깃허브 교육용 인증(Education Benefits) 사전 신청하기'],
+    objectives: ['API 도큐먼트 읽는 법 배우기', '바이브코딩으로 API 연동 앱 만들기', 'AI 기반 솔루션 직접 만들어보기', '업스테이지 Solar AI API 연동 코드 스니펫 활용해보기'],
     sections: [
       { type: 'concept', icon: '📖', title: 'API 도큐먼트 읽기', body: '새로운 전자제품을 사면 들어있는 \'사용 설명서\'와 같습니다. ① 어떤 인터넷 주소로 ② 어떤 형태의 데이터를 보내면 ③ 어떤 결과값을 돌려주는지 아주 상세히 적혀있습니다.' },
       { type: 'concept', icon: '🤝', title: '바이브코딩 + API = 무한한 가능성', body: 'API 도큐먼트를 우리가 직접 다 이해할 필요는 없습니다. AI 챗봇에게 "이 사용 설명서(API)를 참고해서 이런 기능을 하는 프로그램을 만들어줘"라고 주문하기만 하면, 어려운 연동 코드까지 알아서 척척 짜줍니다.' },
@@ -577,33 +577,13 @@ async function main() {
 }
 
 main();` },
-      { type: 'divider' },
-      { type: 'concept', icon: '🎓', title: '7~8차시 준비: 깃허브(GitHub) 교육용 인증 사전 신청하기', body: `
-        다음 7~8차시에서는 안티그래비티와 깃허브(GitHub)를 연동하여 내가 만든 프로젝트를 웹사이트로 공개할 예정입니다.<br>
-        깃허브 교직원/학생 교육용 혜택(GitHub Education Benefits)을 미리 신청해두면 <b>GitHub Copilot 등의 고급 개발 지원 도구를 무료로 활용</b>할 수 있으므로, 6차시를 마치기 전 미리 신청을 진행해 두시는 것을 추천합니다!
-      ` },
-      { type: 'link', title: '깃허브 교육용 혜택 신청 페이지', description: 'github.com/settings/education/benefits — 바로 접속하여 교육용 인증 신청하기', url: 'https://github.com/settings/education/benefits', icon: '🎓' },
-      { type: 'steps', steps: [
-          { title: 'Step 1: 깃허브 접속 및 로그인', description: 'github.com에 접속하여 로그인합니다. (계정이 없는 경우 먼저 가입합니다.)' },
-          { title: 'Step 2: 교육용 혜택 신청 페이지 이동', description: '상단 링크(github.com/settings/education/benefits)를 클릭하여 접속합니다.' },
-          { title: 'Step 3: 신분 선택 및 학교 이메일 입력', description: '<b>Faculty(교직원)</b> 또는 <b>Student(학생)</b>를 선택하고, 학교/교육청 공식 이메일 및 제출 자료를 첨부합니다.' },
-          { title: 'Step 4: 제출 완료 및 승인 대기 확인', description: '신청서를 제출하면 아래 화면과 같이 <b>Pending (승인 대기 중)</b> 상태로 변경되며, 며칠 이내로 공식 승인이 완료됩니다.' }
-        ]
-      },
-      { type: 'concept', icon: '📸', title: '깃허브 교육용 인증 제출 완료 화면 예시', body: `
-        신청서 제출이 잘 완료되면 아래와 같이 <b>Pending</b> 상태 바와 함께 <i>"Your application has been received and is currently pending review."</i> 안내문이 표시됩니다. 이 화면이 보이면 성공적으로 신청된 것입니다!
-        <div style="margin-top:16px;text-align:center;">
-          <img src="images/github_education_pending.png" alt="GitHub Education Pending 승인 대기 화면" style="max-width:100%;border-radius:var(--radius-sm);border:1px solid var(--border);box-shadow:var(--shadow-sm);">
-        </div>
-      ` },
       { type: 'checklist', sessionId: 'session-6', items: [
           { id: 's6-c1', label: 'API 도큐먼트 확인 완료' },
           { id: 's6-c2', label: '프롬프트 작성하여 코드 생성' },
           { id: 's6-c3', label: '코드에 내 API 키 설정하기' },
           { id: 's6-c4', label: 'API 연동 테스트 성공' },
           { id: 's6-c5', label: '결과 확인 및 추가 수정 요청해보기' },
-          { id: 's6-c6', label: '7~8차시를 위한 깃허브 가입 및 교육용 인증(Education Benefits) 미리 신청하기' },
-          { id: 's6-c7', label: '업스테이지 Solar AI API 코드 스니펫 복사 및 호출 테스트' }
+          { id: 's6-c6', label: '업스테이지 Solar AI API 코드 스니펫 복사 및 호출 테스트' }
         ]
       }
     ]
