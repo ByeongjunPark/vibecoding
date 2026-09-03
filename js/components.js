@@ -652,7 +652,7 @@ window.Components = (function () {
           })
         });
         const data = await response.json();
-        if (data.choices && data.choices[0]?.message?.content) {
+        if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
           return data.choices[0].message.content;
         }
       } catch (e) {
@@ -670,11 +670,17 @@ window.Components = (function () {
       const resultCode = document.getElementById('pg-result-code');
 
       genBtnGemini.addEventListener('click', () => {
-        const target = document.getElementById('pg-target')?.value.trim() || '학생';
-        const purpose = document.getElementById('pg-purpose')?.value.trim() || '교수학습 활동';
-        const appName = document.getElementById('pg-appname')?.value.trim() || '맞춤형 교육 웹앱';
-        const features = document.getElementById('pg-features')?.value.trim() || '사용하기 편리하고 직관적인 기능';
-        const style = document.getElementById('pg-style')?.value || '밝고 예쁜 스타일';
+        const elTarget = document.getElementById('pg-target');
+        const elPurpose = document.getElementById('pg-purpose');
+        const elAppName = document.getElementById('pg-appname');
+        const elFeatures = document.getElementById('pg-features');
+        const elStyle = document.getElementById('pg-style');
+
+        const target = (elTarget && elTarget.value ? elTarget.value.trim() : '') || '학생';
+        const purpose = (elPurpose && elPurpose.value ? elPurpose.value.trim() : '') || '교수학습 활동';
+        const appName = (elAppName && elAppName.value ? elAppName.value.trim() : '') || '맞춤형 교육 웹앱';
+        const features = (elFeatures && elFeatures.value ? elFeatures.value.trim() : '') || '사용하기 편리하고 직관적인 기능';
+        const style = (elStyle && elStyle.value ? elStyle.value : '') || '밝고 예쁜 스타일';
 
         const generatedPrompt = `🚨 **[최우선 필수 요구사항]**
 **제미나이(Gemini) 및 AI는 웹 화면 프론트엔드 코드를 중간 생략이나 축약 없이 '빠짐없이' 처음부터 끝까지 전체 완성형 코드로 산출해 주세요.**
@@ -727,12 +733,19 @@ ${features}
       const resultCode = document.getElementById('canva-result-code');
 
       genBtnCanva.addEventListener('click', () => {
-        const target = document.getElementById('canva-target')?.value.trim() || '학생/교사';
-        const purpose = document.getElementById('canva-purpose')?.value.trim() || '학급 관리 및 데이터 기록';
-        const appName = document.getElementById('canva-appname')?.value.trim() || '캔바 인터랙티브 웹앱';
-        const features = document.getElementById('canva-features')?.value.trim() || '목록 보기, 폼 입력 기능';
-        const datastruct = document.getElementById('canva-datastruct')?.value.trim() || '항목명, 점수/상태, 작성일자';
-        const style = document.getElementById('canva-style')?.value || '밝고 예쁜 파스텔 톤';
+        const elTarget = document.getElementById('canva-target');
+        const elPurpose = document.getElementById('canva-purpose');
+        const elAppName = document.getElementById('canva-appname');
+        const elFeatures = document.getElementById('canva-features');
+        const elDataStruct = document.getElementById('canva-datastruct');
+        const elStyle = document.getElementById('canva-style');
+
+        const target = (elTarget && elTarget.value ? elTarget.value.trim() : '') || '학생/교사';
+        const purpose = (elPurpose && elPurpose.value ? elPurpose.value.trim() : '') || '학급 관리 및 데이터 기록';
+        const appName = (elAppName && elAppName.value ? elAppName.value.trim() : '') || '캔바 인터랙티브 웹앱';
+        const features = (elFeatures && elFeatures.value ? elFeatures.value.trim() : '') || '목록 보기, 폼 입력 기능';
+        const datastruct = (elDataStruct && elDataStruct.value ? elDataStruct.value.trim() : '') || '항목명, 점수/상태, 작성일자';
+        const style = (elStyle && elStyle.value ? elStyle.value : '') || '밝고 예쁜 파스텔 톤';
 
         const generatedPrompt = `🚨 **[최우선 필수 요구사항]**
 **캔바 AI 및 AI는 프론트엔드 화면 UI와 백엔드 데이터 처리 구조를 생략이나 축약 없이 '각각', 그리고 '빠짐없이' 전체 구성으로 산출해 주세요.**
@@ -786,12 +799,19 @@ ${datastruct}
       const resultCode = document.getElementById('fb-result-code');
 
       genBtnFeedback.addEventListener('click', async () => {
-        const target = document.getElementById('fb-target')?.value.trim() || '초등학교 5학년';
-        const appName = document.getElementById('fb-appname')?.value.trim() || '다정한 AI 글쓰기 피드백 도구';
-        const rules = document.getElementById('fb-rules')?.value.trim() || '1. 잘한 점 칭찬 2가지 작성하기\n2. 문장을 더 생생하게 만드는 구체적 개선 제안 1가지 제시하기';
-        const tone = document.getElementById('fb-tone')?.value.trim() || '초등학생 눈높이에 맞춘 다정하고 친절한 선생님 어조';
-        const steps = document.getElementById('fb-steps')?.value.trim() || '1단계: 칭찬하기 ➔ 2단계: 문장 다듬기 팁 ➔ 3단계: 응원 메시지';
-        const upstageKey = document.getElementById('fb-upstage-key')?.value.trim();
+        const elTarget = document.getElementById('fb-target');
+        const elAppName = document.getElementById('fb-appname');
+        const elRules = document.getElementById('fb-rules');
+        const elTone = document.getElementById('fb-tone');
+        const elSteps = document.getElementById('fb-steps');
+        const elKey = document.getElementById('fb-upstage-key');
+
+        const target = (elTarget && elTarget.value ? elTarget.value.trim() : '') || '초등학교 5학년';
+        const appName = (elAppName && elAppName.value ? elAppName.value.trim() : '') || '다정한 AI 글쓰기 피드백 도구';
+        const rules = (elRules && elRules.value ? elRules.value.trim() : '') || '1. 잘한 점 칭찬 2가지 작성하기\n2. 문장을 더 생생하게 만드는 구체적 개선 제안 1가지 제시하기';
+        const tone = (elTone && elTone.value ? elTone.value.trim() : '') || '초등학생 눈높이에 맞춘 다정하고 친절한 선생님 어조';
+        const steps = (elSteps && elSteps.value ? elSteps.value.trim() : '') || '1단계: 칭찬하기 ➔ 2단계: 문장 다듬기 팁 ➔ 3단계: 응원 메시지';
+        const upstageKey = (elKey && elKey.value ? elKey.value.trim() : '');
 
         let basePrompt = `🚨 **[최우선 필수 요구사항 - 구글 앱스스크립트 전용 아키텍처]**
 **제미나이(Gemini) 및 AI는 본 웹앱이 '구글 앱스스크립트(Google Apps Script)' 기반으로 동작함을 명심하고, 서버 백엔드 코드(Code.gs)와 웹 화면 프론트엔드 코드(Index.html)를 중간 생략이나 축약 없이 '각각', 그리고 '빠짐없이' 처음부터 끝까지 전체 완성형 코드로 산출해 주세요.**
@@ -878,12 +898,19 @@ ${datastruct}
       const resultCode = document.getElementById('cb-result-code');
 
       genBtnChatbot.addEventListener('click', async () => {
-        const botName = document.getElementById('cb-botname')?.value.trim() || '세종대왕과의 역사 대화';
-        const target = document.getElementById('cb-target')?.value.trim() || '초등학생';
-        const persona = document.getElementById('cb-persona')?.value.trim() || '훈민정음을 창제하신 조선시대 4대 국왕 세종대왕';
-        const flow = document.getElementById('cb-flow')?.value.trim() || '1단계: 인사 ➔ 2단계: 대화 ➔ 3단계: 마무리';
-        const rules = document.getElementById('cb-rules')?.value.trim() || '조선 시대 왕의 말투 사용';
-        const upstageKey = document.getElementById('cb-upstage-key')?.value.trim();
+        const elBotName = document.getElementById('cb-botname');
+        const elTarget = document.getElementById('cb-target');
+        const elPersona = document.getElementById('cb-persona');
+        const elFlow = document.getElementById('cb-flow');
+        const elRules = document.getElementById('cb-rules');
+        const elKey = document.getElementById('cb-upstage-key');
+
+        const botName = (elBotName && elBotName.value ? elBotName.value.trim() : '') || '세종대왕과의 역사 대화';
+        const target = (elTarget && elTarget.value ? elTarget.value.trim() : '') || '초등학생';
+        const persona = (elPersona && elPersona.value ? elPersona.value.trim() : '') || '훈민정음을 창제하신 조선시대 4대 국왕 세종대왕';
+        const flow = (elFlow && elFlow.value ? elFlow.value.trim() : '') || '1단계: 인사 ➔ 2단계: 대화 ➔ 3단계: 마무리';
+        const rules = (elRules && elRules.value ? elRules.value.trim() : '') || '조선 시대 왕의 말투 사용';
+        const upstageKey = (elKey && elKey.value ? elKey.value.trim() : '');
 
         let basePrompt = `🚨 **[최우선 필수 요구사항 - 구글 앱스스크립트 전용 아키텍처]**
 **제미나이(Gemini) 및 AI는 본 웹앱이 '구글 앱스스크립트(Google Apps Script)' 기반으로 동작함을 명심하고, 서버 백엔드 코드(Code.gs)와 웹 화면 프론트엔드 코드(Index.html)를 중간 생략이나 축약 없이 '각각', 그리고 '빠짐없이' 처음부터 끝까지 전체 완성형 코드로 산출해 주세요.**
