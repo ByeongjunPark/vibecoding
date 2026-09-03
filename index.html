@@ -81,9 +81,18 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toast-container"></div>
 
-    <!-- Scripts -->
-    <script src="js/content.js?v=1.2.1"></script>
-    <script src="js/components.js?v=1.2.1"></script>
-    <script src="js/app.js?v=1.2.1"></script>
+    <!-- Scripts (Dynamic Anti-Cache Loader) -->
+    <script>
+      (function() {
+        var cacheBuster = 'v=1.2.5_' + Date.now();
+        var files = ['js/content.js', 'js/components.js', 'js/app.js'];
+        files.forEach(function(file) {
+          var s = document.createElement('script');
+          s.src = file + '?' + cacheBuster;
+          s.async = false;
+          document.body.appendChild(s);
+        });
+      })();
+    </script>
 </body>
 </html>
