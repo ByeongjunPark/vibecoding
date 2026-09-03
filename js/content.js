@@ -76,13 +76,17 @@ window.SESSIONS = [
           { title: '예시 4: 공정무역 설득 챌린지 챗봇 🤝', description: '상황별 설득 시뮬레이션을 해볼 수 있는 인공지능 챗봇 웹앱', url: 'https://gemini.google.com/share/eeaad1cdf8e1', icon: '🤖' }
         ]
       },
-      { type: 'divider' },
-      { type: 'link', title: '제미나이 캔버스 접속하기 (gemini.google.com)', description: '구글 계정으로 로그인 후 대화창에서 \'캔버스\' 모드를 실행해보세요.', url: 'https://gemini.google.com', icon: '🚀' },
+      { type: 'concept', icon: '⚡', title: '강력 추천 코딩 AI 도구: 구글 AI 스튜디오 (Google AI Studio)', body: '선생님, <b><a href="http://aistudio.google.com/" target="_blank" style="color:var(--primary);font-weight:700;">구글 AI 스튜디오(aistudio.google.com)</a></b>도 꼭 활용해보세요! 제미나이 일반 챗봇 외에도 구글 공식 개발자 플랫폼인 AI Studio 대화창에 프롬프트를 입력하면, 최신 Gemini 모델이 긴 문맥(Long Context)과 시스템 지침을 바탕으로 코딩을 훨씬 더 완벽하게 작성해 줍니다!' },
+      { type: 'linkGrid', cols: 2, links: [
+          { title: '제미나이 캔버스 접속하기 🚀', description: 'gemini.google.com 접속 후 대화창에서 \'캔버스\' 모드를 사용해보세요.', url: 'https://gemini.google.com', icon: '🚀' },
+          { title: '구글 AI 스튜디오 접속하기 ⚡', description: 'aistudio.google.com에서 최신 Gemini 모델로 막힘없이 코딩을 부탁해보세요.', url: 'http://aistudio.google.com/', icon: '⚡' }
+        ]
+      },
       { type: 'steps', steps: [
-          { title: 'Step 1', description: 'gemini.google.com 접속 후 대화창에서 \'캔버스\' 모드를 선택합니다.' },
+          { title: 'Step 1', description: 'gemini.google.com 또는 aistudio.google.com(구글 AI 스튜디오)에 접속합니다.' },
           { title: 'Step 2', description: '아래 \'교육용 프롬프트 제작소\'에서 원하는 조건을 입력하고 프롬프트를 생성합니다.' },
-          { title: 'Step 3', description: '복사한 프롬프트를 제미나이 대화창에 붙여넣고 엔터를 누릅니다.' },
-          { title: 'Step 4', description: '생성된 웹앱 미리보기를 확인하고, "배경색 바꿔줘", "버튼 크게 해줘" 등 자유롭게 추가 대화로 수정합니다.' }
+          { title: 'Step 3', description: '복사한 프롬프트를 제미나이/AI 스튜디오 대화창에 붙여넣고 엔터를 누릅니다.' },
+          { title: 'Step 4', description: '생성된 웹앱 코드를 확인하고, "배경색 바꿔줘", "버튼 크게 해줘" 등 자유롭게 추가 대화로 수정합니다.' }
         ]
       },
       { type: 'promptGenerator', title: '🛠️ 1차시 실습: 교육용 웹앱 프롬프트 제작소', description: '대상, 사용목적, 웹앱 제목, 필요한 기능을 적으면 제미나이 캔버스용 맞춤 프롬프트가 완성됩니다!' },
