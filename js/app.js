@@ -114,7 +114,17 @@
   function renderSessionView(session, idx, total) {
     const content = document.getElementById('content');
     const C = window.Components;
-    if (!C) { content.innerHTML = '<p>컴포넌트 로딩 오류</p>'; return; }
+    if (!C) {
+      const err = window.__LAST_JS_ERROR || 'window.Components 객체를 찾을 수 없습니다.';
+      content.innerHTML = `
+        <div style="background:#FEF2F2;border:2px solid #EF4444;color:#991B1B;padding:24px;border-radius:12px;margin:30px 0;">
+          <h2 style="margin-top:0;color:#DC2626;">🚨 교재 화면 로딩 오류 (스크립트 불러오기 실패)</h2>
+          <p>브라우저에서 자바스크립트 컴포넌트를 불러오는 중 오류가 발생하였습니다.</p>
+          <pre style="background:#FEE2E2;padding:12px;border-radius:6px;font-size:0.85rem;white-space:pre-wrap;">${err}</pre>
+          <p><b>💡 해결 방법:</b> 브라우저 강력 새로고침 (Ctrl + Shift + R) 또는 시크릿 창에서 새로 열어보세요.</p>
+        </div>`;
+      return;
+    }
 
     let html = C.renderSessionPage(session);
 
@@ -249,7 +259,10 @@
      키보드 네비게이션
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   function handleKeyNav(e) {
-    const tag = document.activeElement?.tagName;
+    const activeEl = document.activeElement;
+    const tag = activeEl && activeEl.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    if (currentSessionIndex < 0) return;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
     if (currentSessionIndex < 0) return;
 
