@@ -597,7 +597,7 @@ window.Components = (function () {
     // Helper: Call Upstage Solar API if key is present (with embedded key fallback)
     const callUpstageRefine = async (apiKey, basePrompt) => {
       const finalKey = apiKey || "up_8n84t1USbP93gILYJ4x7w7QRHkhYX";
-      showToast('🤖 업스테이지 Solar AI가 프롬프트를 직관적이고 완성도 높게 가공하는 중...');
+      showToast('🤖 업스테이지 Solar AI가 바이브코딩 프롬프트를 깔끔하게 다듬는 중...');
       try {
         const response = await fetch('https://api.upstage.ai/v1/chat/completions', {
           method: 'POST',
@@ -610,7 +610,12 @@ window.Components = (function () {
             messages: [
               {
                 role: 'system',
-                content: '당신은 바이브코딩(Vibe Coding) 프롬프트 전문 엔지니어입니다. 주어진 교사 요구사항, 피드백 원칙, 구글 시트 DB 자동 세팅(헤더행 자동 생성) 구조를 바탕으로 제미나이나 AI가 앱스스크립트(Code.gs)와 웹UI(Index.html)를 완성도 높게 생성할 수 있도록 완벽한 바이브코딩 프롬프트로 다듬어서 반환하세요.'
+                content: `당신은 바이브코딩(Vibe Coding) 프롬프트 다듬기 전문 엔지니어입니다.
+[최우선 필수 지침]
+1. 절대로 실제 HTML, CSS, JavaScript 완성 코드를 작성하거나 출력하지 마세요! 코드 블록(\`\`\`javascript 등)을 포함하지 마세요.
+2. 당신의 유일한 역할은 수강생이 제미나이(Gemini)나 AI 챗봇에 복사해서 붙여넣을 '자연어 프롬프트(Prompt)'만 깔끔하게 다듬는 것입니다.
+3. 실제 코드는 제미나이가 작성하도록 맡기고, 프롬프트 안에는 [목표], [피드백 원칙/페르소나 어포던스], [구글 시트 DB 자동 세팅(헤더 자동 생성)], [화면 구성요소]를 직관적인 항목 형식으로만 정리하세요.
+4. 긴 코드로 프롬프트를 비대하게 만들지 말고, 복사해서 바로 쓰기 좋은 300~500자 안팎의 명확하고 군더더기 없는 한국어 프롬프트로 다듬어 출력하세요.`
               },
               {
                 role: 'user',
