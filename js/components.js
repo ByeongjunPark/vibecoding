@@ -597,7 +597,7 @@ window.Components = (function () {
     // Helper: Call Upstage Solar API if key is present
     const callUpstageRefine = async (apiKey, basePrompt) => {
       if (!apiKey) return basePrompt;
-      showToast('🤖 업스테이지 Solar AI가 바이브코딩 프롬프트를 깔끔하게 다듬는 중...');
+      showToast('🤖 업스테이지 Solar AI가 5가지 구조화 마크다운 프롬프트로 다듬는 중...');
       try {
         const response = await fetch('https://api.upstage.ai/v1/chat/completions', {
           method: 'POST',
@@ -610,12 +610,35 @@ window.Components = (function () {
             messages: [
               {
                 role: 'system',
-                content: `당신은 바이브코딩(Vibe Coding) 프롬프트 다듬기 전문 엔지니어입니다.
-[최우선 필수 지침]
-1. 절대로 실제 HTML, CSS, JavaScript 완성 코드를 작성하거나 출력하지 마세요! 코드 블록(\`\`\`javascript 등)을 포함하지 마세요.
-2. 당신의 유일한 역할은 수강생이 제미나이(Gemini)나 AI 챗봇에 복사해서 붙여넣을 '자연어 프롬프트(Prompt)'만 깔끔하게 다듬는 것입니다.
-3. 실제 코드는 제미나이가 작성하도록 맡기고, 프롬프트 안에는 [목표], [피드백 원칙/페르소나 어포던스], [구글 시트 DB 자동 세팅(헤더 자동 생성)], [화면 구성요소]를 직관적인 항목 형식으로만 정리하세요.
-4. 긴 코드로 프롬프트를 비대하게 만들지 말고, 복사해서 바로 쓰기 좋은 300~500자 안팎의 명확하고 군더더기 없는 한국어 프롬프트로 다듬어 출력하세요.`
+                content: `당신은 바이브코딩(Vibe Coding) 프롬프트 전문 엔지니어입니다.
+주어진 교사 요구사항을 바탕으로 제미나이(Gemini)나 AI 챗봇에게 전달할 완벽한 마크다운 바이브코딩 주문서(Prompt)를 가공하세요.
+
+[최우선 필수 마크다운 출력 구조]
+반드시 다음 5가지 마크다운 헤더(#, ##) 구조를 엄격히 유지해서 프롬프트를 작성하세요:
+
+# [웹앱 제목] 바이브코딩 개발 주문서
+
+## 1. 배경 및 목표
+- 개발 배경 및 최종 목표 (교육 대상 포함)
+
+## 2. 사용자 분석
+- 주요 사용자, 사용 환경(PC/모바일 웹 브라우저), 사용자 특성/요구사항
+
+## 3. 핵심 기능 정의
+- 프론트엔드 UI 기능, 백엔드 AI API 연동 기능, 구글 시트 데이터베이스 자동 기록 기능
+
+## 4. 사용자 경험 흐름 (UX Flow)
+- 화면 접속 및 데이터베이스 자동 세팅(백엔드) ➔ 사용자 데이터 입력(프론트엔드) ➔ API 연동 및 로딩 표시(프론트-백엔드) ➔ AI 응답 생성 및 화면 출력/DB 기록(백엔드-프론트엔드) 절차 및 화면 연동 중심 설명
+
+## 5. 참고자료 및 기술 지침
+- 5.1 외부 API 연동 지침: 업스테이지 Solar API (https://api.upstage.ai/v1/chat/completions, model: solar-pro, Bearer "여기에_API_키를_넣으세요")
+- 5.2 프론트엔드 관련 지침: Index.html 파스텔 톤 모던 UI 및 반응형 CSS
+- 5.3 백엔드 관련 지침: Code.gs UrlFetchApp.fetch() 통신
+- 5.4 구글 시트 데이터베이스 구성 지침: 시트가 비어있거나 첫 행에 컬럼명이 없을 때 헤더 행이 '짝!' 하고 자동으로 생성되는 setupDatabase() 함수 코딩 지침
+
+[금지 사항]
+- 절대로 실제 완성된 HTML/JS/CSS 코드를 직접 쏟아내거나 코드 블록(\`\`\`javascript 등)을 출력하지 마세요!
+- 오직 수강생이 AI에게 복사해 넣을 5개 항목 마크다운 프롬프트 텍스트만 깔끔하게 출력하세요.`
               },
               {
                 role: 'user',
@@ -753,40 +776,51 @@ ${datastruct}
       const resultCode = document.getElementById('fb-result-code');
 
       genBtnFeedback.addEventListener('click', async () => {
-        const target = document.getElementById('fb-target')?.value.trim() || '학생';
-        const appName = document.getElementById('fb-appname')?.value.trim() || 'AI 글쓰기 피드백 도구';
-        const rules = document.getElementById('fb-rules')?.value.trim() || '1. 잘한 점 칭찬 2가지\n2. 개선점 1가지';
-        const tone = document.getElementById('fb-tone')?.value.trim() || '다정한 선생님 어조';
-        const steps = document.getElementById('fb-steps')?.value.trim() || '칭찬 ➔ 개선 팁 ➔ 응원';
+        const target = document.getElementById('fb-target')?.value.trim() || '초등학교 5학년';
+        const appName = document.getElementById('fb-appname')?.value.trim() || '다정한 AI 글쓰기 피드백 도구';
+        const rules = document.getElementById('fb-rules')?.value.trim() || '1. 잘한 점 칭찬 2가지 작성하기\n2. 문장을 더 생생하게 만드는 구체적 개선 제안 1가지 제시하기';
+        const tone = document.getElementById('fb-tone')?.value.trim() || '초등학생 눈높이에 맞춘 다정하고 친절한 선생님 어조';
+        const steps = document.getElementById('fb-steps')?.value.trim() || '1단계: 칭찬하기 ➔ 2단계: 문장 다듬기 팁 ➔ 3단계: 응원 메시지';
         const upstageKey = document.getElementById('fb-upstage-key')?.value.trim();
 
-        let basePrompt = `[선생님 맞춤형 AI 글쓰기 피드백 웹앱 제작 프롬프트]
-구글 시트 앱스스크립트(Code.gs)와 웹 화면(Index.html)으로 동작하는 '학생 글쓰기 AI 피드백 지원 도구'를 만들어줘.
+        let basePrompt = `# [${appName}] 바이브코딩 개발 주문서
 
-[기본 정보]
-- 교육 대상: ${target}
-- 웹앱 제목: ${appName}
+## 1. 배경 및 목표
+- **개발 배경**: 선생님이 설정한 피드백 원칙과 어조를 바탕으로 학생 글에 맞춰 따뜻하고 구체적인 피드백을 제공하기 위함
+- **최종 목표**: ${target}을 위한 '${appName}' 구글 앱스스크립트 웹 애플리케이션 개발
 
-[AI 피드백 역할 및 원칙 (System Prompt / Role)]
-- 피드백 원칙 및 기준:
-${rules}
-- 피드백 어조 및 스타일: ${tone}
-- 피드백 구성 단계: ${steps}
+## 2. 사용자 분석
+- **주요 사용자**: ${target} 및 담당 교사
+- **사용 환경**: PC 및 모바일 반응형 웹 브라우저
+- **사용자 특성 및 요구사항**: ${tone}를 적용하여 다정하고 직관적인 UI/UX 제공
 
-[🗄️ 구글 시트 데이터베이스(DB) 구조 자동 세팅 요구사항]
-- 구글 시트의 첫 번째 행에 데이터베이스 헤더(컬럼명)가 없거나 시트가 비어있을 경우, 앱스스크립트 코드가 실행될 때 헤더 행이 '짝!' 하고 자동으로 추가되도록 자동 세팅 함수(setupDatabase)를 반드시 포함해줘.
-- 데이터베이스 헤더 구성: ['작성일시', '피드백 원칙', '학생 글', 'AI 피드백']
+## 3. 핵심 기능 정의
+- **[기능 1] 프론트엔드 UI**: 피드백 원칙 수정 입력창, 학생 글 입력 폼, [✨ AI 피드백 받기] 버튼, 예쁜 피드백 결과 출력 카드
+- **[기능 2] 백엔드 AI 연동**: 업스테이지 Solar API를 호출하여 입력된 원칙과 어조에 맞게 피드백 생성
+- **[기능 3] DB 자동 기록**: 피드백 결과를 구글 시트 데이터베이스에 한 줄로 자동 저장
 
-[주요 기능 및 화면 요구사항]
-1. 프론트엔드 (Index.html):
-   - '피드백 원칙/기준'을 사용자가 필요 시 수정할 수 있는 입력창 제시
-   - '학생이 작성한 글' 입력란 및 [✨ AI 피드백 받기] 버튼
-   - 결과를 예쁘게 보여주는 피드백 결과 출력 카드 UI
+## 4. 사용자 경험 흐름 (UX Flow)
+1. **화면 접속 및 DB 자동 세팅**: 웹앱(Index.html) 접속 시 백엔드(Code.gs)가 구글 시트 헤더가 없으면 자동으로 세팅(setupDatabase)함
+2. **사용자 글 입력**: 학생/교사가 글을 작성하고 피드백 받기 버튼 클릭
+3. **API 연동 & 로딩 표시**: 화면에 로딩 상태를 보여주고 google.script.run으로 백엔드를 거쳐 업스테이지 Solar API 호출
+4. **AI 피드백 출력 & DB 저장**: 생성된 피드백을 결과 카드에 보여주고 시트 DB에도 자동 기록
 
-2. 백엔드 (Code.gs):
-   - 업스테이지 Solar API를 호출하여 위 '피드백 원칙'과 '어조'에 따라 '학생 글'을 분석하고 맞춤형 피드백을 생성하여 반환해줘.
-   - API 키 변수는 var apiKey = "여기에_API_키를_넣으세요"; 형태로 작성해줘.
-   - 피드백 결과 및 작성일시를 구글 시트 DB에 한 줄로 자동 기록해줘.`;
+## 5. 참고자료 및 기술 지침
+### 5.1 외부 API 연동 지침
+- **API Endpoint**: https://api.upstage.ai/v1/chat/completions
+- **인증 헤더**: Authorization: Bearer "여기에_API_키를_넣으세요"
+- **모델**: solar-pro
+- **피드백 원칙**: ${rules}
+- **피드백 단계**: ${steps}
+
+### 5.2 프론트엔드 지침 (Index.html)
+- 깔끔하고 친근한 파스텔 톤 디자인 및 반응형 레이아웃
+
+### 5.3 백엔드 지침 (Code.gs)
+- UrlFetchApp.fetch()를 사용하는 앱스스크립트 표준 코드
+
+### 5.4 구글 시트 데이터베이스 구성 지침
+- 시트 첫 행에 컬럼명이 없으면 ['작성일시', '피드백 원칙', '학생 글', 'AI 피드백'] 헤더 행이 '짝!' 하고 자동 생성되는 setupDatabase() 함수 포함`;
 
         if (upstageKey) {
           genBtnFeedback.disabled = true;
@@ -827,42 +861,52 @@ ${rules}
       const resultCode = document.getElementById('cb-result-code');
 
       genBtnChatbot.addEventListener('click', async () => {
-        const botName = document.getElementById('cb-botname')?.value.trim() || '맞춤형 AI 챗봇';
-        const target = document.getElementById('cb-target')?.value.trim() || '학생';
-        const persona = document.getElementById('cb-persona')?.value.trim() || '조선시대 4대 국왕 세종대왕';
+        const botName = document.getElementById('cb-botname')?.value.trim() || '세종대왕과의 역사 대화';
+        const target = document.getElementById('cb-target')?.value.trim() || '초등학생';
+        const persona = document.getElementById('cb-persona')?.value.trim() || '훈민정음을 창제하신 조선시대 4대 국왕 세종대왕';
         const flow = document.getElementById('cb-flow')?.value.trim() || '1단계: 인사 ➔ 2단계: 대화 ➔ 3단계: 마무리';
         const rules = document.getElementById('cb-rules')?.value.trim() || '조선 시대 왕의 말투 사용';
         const upstageKey = document.getElementById('cb-upstage-key')?.value.trim();
 
-        let basePrompt = `[맞춤형 AI 대화형 챗봇 웹앱 제작 프롬프트]
-구글 시트 앱스스크립트(Code.gs)와 웹 화면(Index.html)으로 동작하는 '인공지능 대화형 챗봇'을 만들어줘.
+        let basePrompt = `# [${botName}] 바이브코딩 개발 주문서
 
-[기본 정보]
-- 챗봇 이름/제목: ${botName}
-- 대화 대상: ${target}
+## 1. 배경 및 목표
+- **개발 배경**: 챗봇의 페르소나, 대화 순서, 대화 조건(어포던스)을 반영하여 생생하고 유익한 AI 대화 경험을 제공하기 위함
+- **최종 목표**: ${target}을 위한 '${botName}' 대화형 챗봇 웹 애플리케이션 개발
 
-[챗봇 페르소나 및 어포던스 (Role & Rules)]
-1. 챗봇 페르소나 (역할 및 인물):
-   ${persona}
+## 2. 사용자 분석
+- **주요 사용자**: ${target}
+- **사용 환경**: PC 및 모바일 반응형 웹 브라우저
+- **사용자 특성 및 요구사항**: 대화 몰입도를 높이는 카카오톡 스타일 대화 UI 및 친근한 페르소나 적용
 
-2. 대화 순서 및 단계 (Conversation Flow):
-${flow}
+## 3. 핵심 기능 정의
+- **[기능 1] 프론트엔드 UI**: 카카오톡 스타일 모던 대화창, 메시지 입력란 및 [전송] 버튼, 대화 말풍선 목록
+- **[기능 2] 백엔드 AI 연동**: 업스테이지 Solar API를 호출하여 페르소나와 대화 규칙에 따른 맞춤형 응답 생성
+- **[기능 3] DB 자동 기록**: 대화 내역 및 일시를 구글 시트 데이터베이스에 자동 기록
 
-3. 대화 조건 및 어포던스 (말투 및 행동 규칙):
-${rules}
+## 4. 사용자 경험 흐름 (UX Flow)
+1. **화면 접속 및 DB 자동 세팅**: 웹앱 접속 시 백엔드가 구글 시트 헤더가 없으면 자동으로 세팅(setupDatabase)함
+2. **대화 시작 및 입력**: 사용자가 대화창에 메시지를 입력하고 전송 버튼 클릭
+3. **API 연동 & 대화 맥락 유지**: 로딩 말풍선을 표시하며 이전 대화 맥락과 페르소나 조건을 포함해 업스테이지 API 호출
+4. **AI 챗봇 응답 출력 & DB 저장**: AI 답변을 말풍선으로 보여주고 구글 시트 DB에도 대화 내역 자동 저장
 
-[🗄️ 구글 시트 데이터베이스(DB) 구조 자동 세팅 요구사항]
-- 구글 시트의 첫 번째 행에 데이터베이스 헤더(컬럼명)가 없거나 시트가 비어있을 경우, 앱스스크립트 코드가 실행될 때 헤더 행이 '짝!' 하고 자동으로 추가되도록 자동 세팅 함수(setupDatabase)를 반드시 포함해줘.
-- 데이터베이스 헤더 구성: ['대화일시', '사용자 메시지', '챗봇 응답', '페르소나/조건']
+## 5. 참고자료 및 기술 지침
+### 5.1 외부 API 연동 지침
+- **API Endpoint**: https://api.upstage.ai/v1/chat/completions
+- **인증 헤더**: Authorization: Bearer "여기에_API_키를_넣으세요"
+- **모델**: solar-pro
+- **챗봇 페르소나**: ${persona}
+- **대화 순서/단계**: ${flow}
+- **대화 조건/어포던스**: ${rules}
 
-[주요 기능 및 화면 요구사항]
-1. 프론트엔드 (Index.html):
-   - 카카오톡 스타일의 깔끔하고 모던한 대화창 UI ([전송] 버튼, 실시간 대화 말풍선)
+### 5.2 프론트엔드 지침 (Index.html)
+- 카카오톡 스타일 모던 채팅 UI 및 반응형 레이아웃
 
-2. 백엔드 (Code.gs):
-   - 업스테이지 Solar API를 호출하여 이전 대화 맥락과 위 '페르소나/어포던스 조건'을 유지하며 답변 생성
-   - API 키 변수는 var apiKey = "여기에_API_키를_넣으세요"; 형태로 작성해줘.
-   - 대화 내역 및 일시를 구글 시트 DB에 함께 기록해줘.`;
+### 5.3 백엔드 지침 (Code.gs)
+- UrlFetchApp.fetch()를 사용하는 앱스스크립트 표준 코드
+
+### 5.4 구글 시트 데이터베이스 구성 지침
+- 시트 첫 행에 컬럼명이 없으면 ['대화일시', '사용자 메시지', '챗봇 응답', '페르소나/조건'] 헤더 행이 '짝!' 하고 자동 생성되는 setupDatabase() 함수 포함`;
 
         if (upstageKey) {
           genBtnChatbot.disabled = true;
