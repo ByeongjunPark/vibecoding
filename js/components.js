@@ -467,9 +467,9 @@ window.Components = (function () {
         </div>
 
         <div style="margin-bottom:20px;background:var(--surface-muted);padding:14px;border-radius:var(--radius-sm);border:1px dashed #059669;">
-          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:#047857;">⚡ 내장된 업스테이지 API 키 (Solar AI 실시간 프롬프트 정제)</label>
-          <input type="text" id="${prefix}upstage-key" class="pg-input" value="up_8n84t1USbP93gILYJ4x7w7QRHkhYX" placeholder="up_..." style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.875rem;outline:none;background:white;">
-          <span style="font-size:0.8rem;color:var(--text-muted);display:block;margin-top:4px;">💡 업스테이지 API 키가 기본 내장되어 있어 버튼 클릭 한 번으로 Solar AI가 프롬프트를 자동 정제합니다.</span>
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:#047857;">⚡ (선택) 업스테이지 API 키로 프롬프트 실시간 정제하기</label>
+          <input type="text" id="${prefix}upstage-key" class="pg-input" value="" placeholder="up_... (발급받은 API 키를 입력하면 업스테이지 Solar AI가 바이브코딩 프롬프트를 한층 정교하게 다듬어줍니다)" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.875rem;outline:none;background:white;">
+          <span style="font-size:0.8rem;color:var(--text-muted);display:block;margin-top:4px;">💡 API 키를 입력하지 않아도 맞춤형 프롬프트가 즉시 생성되며, 키를 입력하면 Solar AI가 실시간 정제합니다.</span>
         </div>
       `;
     } else if (isChatbot) {
@@ -511,9 +511,9 @@ window.Components = (function () {
         </div>
 
         <div style="margin-bottom:20px;background:var(--surface-muted);padding:14px;border-radius:var(--radius-sm);border:1px dashed #2563EB;">
-          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:#1D4ED8;">⚡ 내장된 업스테이지 API 키 (Solar AI 실시간 프롬프트 정제)</label>
-          <input type="text" id="${prefix}upstage-key" class="pg-input" value="up_8n84t1USbP93gILYJ4x7w7QRHkhYX" placeholder="up_..." style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.875rem;outline:none;background:white;">
-          <span style="font-size:0.8rem;color:var(--text-muted);display:block;margin-top:4px;">💡 업스테이지 API 키가 기본 내장되어 있어 버튼 클릭 한 번으로 Solar AI가 프롬프트를 자동 정제합니다.</span>
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:#1D4ED8;">⚡ (선택) 업스테이지 API 키로 프롬프트 실시간 정제하기</label>
+          <input type="text" id="${prefix}upstage-key" class="pg-input" value="" placeholder="up_... (발급받은 API 키를 입력하면 업스테이지 Solar AI가 바이브코딩 프롬프트를 한층 정교하게 다듬어줍니다)" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.875rem;outline:none;background:white;">
+          <span style="font-size:0.8rem;color:var(--text-muted);display:block;margin-top:4px;">💡 API 키를 입력하지 않아도 맞춤형 프롬프트가 즉시 생성되며, 키를 입력하면 Solar AI가 실시간 정제합니다.</span>
         </div>
       `;
     } else {
@@ -594,16 +594,16 @@ window.Components = (function () {
   };
 
   const initPromptGenerator = () => {
-    // Helper: Call Upstage Solar API if key is present (with embedded key fallback)
+    // Helper: Call Upstage Solar API if key is present
     const callUpstageRefine = async (apiKey, basePrompt) => {
-      const finalKey = apiKey || "up_8n84t1USbP93gILYJ4x7w7QRHkhYX";
+      if (!apiKey) return basePrompt;
       showToast('🤖 업스테이지 Solar AI가 바이브코딩 프롬프트를 깔끔하게 다듬는 중...');
       try {
         const response = await fetch('https://api.upstage.ai/v1/chat/completions', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + finalKey
+            'Authorization': 'Bearer ' + apiKey
           },
           body: JSON.stringify({
             model: 'solar-pro',
