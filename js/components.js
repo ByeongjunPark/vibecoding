@@ -860,7 +860,7 @@ ${datastruct}
           try {
             await navigator.clipboard.writeText(text);
             copyBtn.textContent = '✅ 복사 완료!';
-            showToast('클립보드에 복사되었습니다!');
+            showToast('클립보드에 복사되었습니다! 제미나이(gemini.google.com) 또는 구글 AI 스튜디오(aistudio.google.com) 대화창에 붙여넣으세요.');
             setTimeout(() => { copyBtn.textContent = '📋 프롬프트 복사하기'; }, 2000);
           } catch {
             showToast('복사에 실패했습니다.');
@@ -953,7 +953,7 @@ ${datastruct}
           try {
             await navigator.clipboard.writeText(text);
             copyBtn.textContent = '✅ 복사 완료!';
-            showToast('클립보드에 복사되었습니다!');
+            showToast('클립보드에 복사되었습니다! 제미나이(gemini.google.com) 또는 구글 AI 스튜디오(aistudio.google.com) 대화창에 붙여넣으세요.');
             setTimeout(() => { copyBtn.textContent = '📋 프롬프트 복사하기'; }, 2000);
           } catch {
             showToast('복사에 실패했습니다.');
