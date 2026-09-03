@@ -504,7 +504,7 @@ function addGuestbookEntry(name, message) {
           { title: 'Step 1', description: '업스테이지 API 도큐먼트에서 내가 사용해보고 싶은 흥미로운 기능을 하나 고릅니다.' },
           { title: 'Step 2', description: '제미나이나 Gems 챗봇에게 주문합니다. 예: "업스테이지 Document AI API를 사용해서 학생이 제출한 독후감 사진을 텍스트로 변환하고, 글자 수를 세어주는 구글 시트 앱스스크립트를 만들어줘. API 키는 스크립트 속성에 저장할거야."' },
           { title: 'Step 3', description: '챗봇이 만들어준 코드를 구글 시트 앱스스크립트 편집기에 복사하여 붙여넣습니다.' },
-          { title: 'Step 4', description: '코드 스니펫에 내장된 API 키(up_8n84t1...)를 확인하고 그대로 사용하거나 내 API 키로 변경합니다.' },
+          { title: 'Step 4', description: '발급받은 내 API 키를 스크립트 코드의 "여기에_API_키를_넣으세요" 위치에 붙여넣습니다.' },
           { title: 'Step 5', description: '실행 버튼을 눌러 내 시트에서 AI 기능이 잘 작동하는지 테스트해봅니다.' }
         ]
       },
@@ -519,7 +519,7 @@ function addGuestbookEntry(name, message) {
  * 앱스스크립트 환경에서는 UrlFetchApp을 이용하여 외부 AI API를 호출합니다.
  */
 function callUpstageSolar() {
-  var apiKey = "up_8n84t1USbP93gILYJ4x7w7QRHkhYX"; // 내장된 업스테이지 API 키
+  var apiKey = "여기에_API_키를_넣으세요"; // 발급받은 업스테이지 API 키
   var url = "https://api.upstage.ai/v1/chat/completions";
   
   var payload = {
@@ -551,7 +551,7 @@ function callUpstageSolar() {
 }` },
       { type: 'code', filename: 'main.js (Node.js / OpenAI SDK 호환 방식)', language: 'javascript', code: `import OpenAI from "openai";
 
-const apiKey = "up_8n84t1USbP93gILYJ4x7w7QRHkhYX";
+const apiKey = "여기에_API_키를_넣으세요";
 const openai = new OpenAI({
   apiKey,
   baseURL: "https://api.upstage.ai/v1"
