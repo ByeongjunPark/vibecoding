@@ -848,11 +848,11 @@ ${datastruct}
 - **피드백 원칙**: ${rules}
 - **피드백 단계**: ${steps}
 
-### 5.2 프론트엔드 지침 (`Index.html` - 구글 앱스스크립트 HTML 서비스)
+### 5.2 프론트엔드 지침 ('Index.html' - 구글 앱스스크립트 HTML 서비스)
 - google.script.run 비동기 통신으로 백엔드 Code.gs 함수 호출
 - 깔끔하고 친근한 파스텔 톤 디자인 및 반응형 HTML/CSS 레이아웃
 
-### 5.3 백엔드 지침 (`Code.gs` - 구글 앱스스크립트 서버 스크립트)
+### 5.3 백엔드 지침 ('Code.gs' - 구글 앱스스크립트 서버 스크립트)
 - 웹 앱 출력을 위한 필수 doGet() 구현: HtmlService.createHtmlOutputFromFile('Index').setTitle('${appName}').setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
 - UrlFetchApp.fetch()를 사용하는 업스테이지 API 호출 및 SpreadsheetApp DB 자동 연동
 
@@ -948,11 +948,11 @@ ${datastruct}
 - **대화 순서/단계**: ${flow}
 - **대화 조건/어포던스**: ${rules}
 
-### 5.2 프론트엔드 지침 (`Index.html` - 구글 앱스스크립트 HTML 서비스)
+### 5.2 프론트엔드 지침 ('Index.html' - 구글 앱스스크립트 HTML 서비스)
 - google.script.run 비동기 통신으로 백엔드 Code.gs 함수 호출
 - 카카오톡 스타일 모던 채팅 UI 및 반응형 HTML/CSS 레이아웃
 
-### 5.3 백엔드 지침 (`Code.gs` - 구글 앱스스크립트 서버 스크립트)
+### 5.3 백엔드 지침 ('Code.gs' - 구글 앱스스크립트 서버 스크립트)
 - 웹 앱 출력을 위한 필수 doGet() 구현: HtmlService.createHtmlOutputFromFile('Index').setTitle('${botName}').setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
 - UrlFetchApp.fetch()를 사용하는 업스테이지 API 호출 및 SpreadsheetApp DB 자동 연동
 
