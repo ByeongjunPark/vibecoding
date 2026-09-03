@@ -465,6 +465,11 @@ window.Components = (function () {
           <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">📊 피드백 구성 단계 (수정 가능)</label>
           <input type="text" id="${prefix}steps" class="pg-input" value="1단계: 칭찬하기 ➔ 2단계: 문장 다듬기 팁 ➔ 3단계: 응원 메시지" placeholder="예: 칭찬 ➔ 개선 팁 ➔ 응원" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
         </div>
+
+        <div style="margin-bottom:20px;background:var(--surface-muted);padding:14px;border-radius:var(--radius-sm);border:1px dashed #059669;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:#047857;">⚡ (선택) 업스테이지 API 키로 프롬프트 실시간 정제하기</label>
+          <input type="text" id="${prefix}upstage-key" class="pg-input" placeholder="up_... (발급받은 API 키를 입력하면 업스테이지 Solar AI가 바이브코딩 프롬프트를 한층 정교하게 다듬어줍니다)" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.875rem;outline:none;background:white;">
+        </div>
       `;
     } else if (isChatbot) {
       fieldsHTML = `
@@ -502,6 +507,11 @@ window.Components = (function () {
 3. 정답을 바로 말하지 않고 힌트 주기" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;">1. 고풍스럽고 다정한 조선 시대 왕의 말투(~하오, ~하노라)를 사용할 것
 2. 한 번에 150자 이내로 답변할 것
 3. 정답을 바로 말하지 않고 학생들이 스스로 생각할 수 있는 힌트를 줄 것</textarea>
+        </div>
+
+        <div style="margin-bottom:20px;background:var(--surface-muted);padding:14px;border-radius:var(--radius-sm);border:1px dashed #2563EB;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:#1D4ED8;">⚡ (선택) 업스테이지 API 키로 프롬프트 실시간 정제하기</label>
+          <input type="text" id="${prefix}upstage-key" class="pg-input" placeholder="up_... (발급받은 API 키를 입력하면 업스테이지 Solar AI가 바이브코딩 프롬프트를 한층 정교하게 다듬어줍니다)" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.875rem;outline:none;background:white;">
         </div>
       `;
     } else {
@@ -582,6 +592,40 @@ window.Components = (function () {
   };
 
   const initPromptGenerator = () => {
+    // Helper: Call Upstage Solar API if key is present
+    const callUpstageRefine = async (apiKey, basePrompt) => {
+      showToast('🤖 업스테이지 Solar AI가 프롬프트를 직관적이고 완성도 높게 가공하는 중...');
+      try {
+        const response = await fetch('https://api.upstage.ai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + apiKey
+          },
+          body: JSON.stringify({
+            model: 'solar-pro',
+            messages: [
+              {
+                role: 'system',
+                content: '당신은 바이브코딩(Vibe Coding) 프롬프트 전문 엔지니어입니다. 주어진 교사 요구사항, 피드백 원칙, 구글 시트 DB 자동 세팅(헤더행 자동 생성) 구조를 바탕으로 제미나이나 AI가 앱스스크립트(Code.gs)와 웹UI(Index.html)를 완성도 높게 생성할 수 있도록 완벽한 바이브코딩 프롬프트로 다듬어서 반환하세요.'
+              },
+              {
+                role: 'user',
+                content: basePrompt
+              }
+            ]
+          })
+        });
+        const data = await response.json();
+        if (data.choices && data.choices[0]?.message?.content) {
+          return data.choices[0].message.content;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+      return basePrompt;
+    };
+
     // 1. Gemini 모드 (1차시)
     const genBtnGemini = document.getElementById('pg-generate-btn');
     if (genBtnGemini && !genBtnGemini.dataset.init) {
@@ -700,14 +744,15 @@ ${datastruct}
       const resultBox = document.getElementById('fb-result-container');
       const resultCode = document.getElementById('fb-result-code');
 
-      genBtnFeedback.addEventListener('click', () => {
+      genBtnFeedback.addEventListener('click', async () => {
         const target = document.getElementById('fb-target')?.value.trim() || '학생';
         const appName = document.getElementById('fb-appname')?.value.trim() || 'AI 글쓰기 피드백 도구';
         const rules = document.getElementById('fb-rules')?.value.trim() || '1. 잘한 점 칭찬 2가지\n2. 개선점 1가지';
         const tone = document.getElementById('fb-tone')?.value.trim() || '다정한 선생님 어조';
         const steps = document.getElementById('fb-steps')?.value.trim() || '칭찬 ➔ 개선 팁 ➔ 응원';
+        const upstageKey = document.getElementById('fb-upstage-key')?.value.trim();
 
-        const generatedPrompt = `[선생님 맞춤형 AI 글쓰기 피드백 웹앱 제작 프롬프트]
+        let basePrompt = `[선생님 맞춤형 AI 글쓰기 피드백 웹앱 제작 프롬프트]
 구글 시트 앱스스크립트(Code.gs)와 웹 화면(Index.html)으로 동작하는 '학생 글쓰기 AI 피드백 지원 도구'를 만들어줘.
 
 [기본 정보]
@@ -720,6 +765,10 @@ ${rules}
 - 피드백 어조 및 스타일: ${tone}
 - 피드백 구성 단계: ${steps}
 
+[🗄️ 구글 시트 데이터베이스(DB) 구조 자동 세팅 요구사항]
+- 구글 시트의 첫 번째 행에 데이터베이스 헤더(컬럼명)가 없거나 시트가 비어있을 경우, 앱스스크립트 코드가 실행될 때 헤더 행이 '짝!' 하고 자동으로 추가되도록 자동 세팅 함수(setupDatabase)를 반드시 포함해줘.
+- 데이터베이스 헤더 구성: ['작성일시', '피드백 원칙', '학생 글', 'AI 피드백']
+
 [주요 기능 및 화면 요구사항]
 1. 프론트엔드 (Index.html):
    - '피드백 원칙/기준'을 사용자가 필요 시 수정할 수 있는 입력창 제시
@@ -729,9 +778,17 @@ ${rules}
 2. 백엔드 (Code.gs):
    - 업스테이지 Solar API를 호출하여 위 '피드백 원칙'과 '어조'에 따라 '학생 글'을 분석하고 맞춤형 피드백을 생성하여 반환해줘.
    - API 키 변수는 var apiKey = "여기에_API_키를_넣으세요"; 형태로 작성해줘.
-   - 피드백 결과는 구글 시트(작성일시, 피드백 원칙, 학생 글, AI 피드백)에도 한 줄로 기록해줘.`;
+   - 피드백 결과 및 작성일시를 구글 시트 DB에 한 줄로 자동 기록해줘.`;
 
-        resultCode.textContent = generatedPrompt;
+        if (upstageKey) {
+          genBtnFeedback.disabled = true;
+          genBtnFeedback.textContent = '⏳ 업스테이지 AI 정제 중...';
+          basePrompt = await callUpstageRefine(upstageKey, basePrompt);
+          genBtnFeedback.disabled = false;
+          genBtnFeedback.textContent = '✨ AI 글쓰기 피드백 도구 프롬프트 생성하기';
+        }
+
+        resultCode.textContent = basePrompt;
         resultBox.style.display = 'block';
         resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         showToast('✨ AI 글쓰기 피드백 도구 프롬프트가 성공적으로 생성되었습니다!');
@@ -761,14 +818,15 @@ ${rules}
       const resultBox = document.getElementById('cb-result-container');
       const resultCode = document.getElementById('cb-result-code');
 
-      genBtnChatbot.addEventListener('click', () => {
+      genBtnChatbot.addEventListener('click', async () => {
         const botName = document.getElementById('cb-botname')?.value.trim() || '맞춤형 AI 챗봇';
         const target = document.getElementById('cb-target')?.value.trim() || '학생';
         const persona = document.getElementById('cb-persona')?.value.trim() || '조선시대 4대 국왕 세종대왕';
         const flow = document.getElementById('cb-flow')?.value.trim() || '1단계: 인사 ➔ 2단계: 대화 ➔ 3단계: 마무리';
         const rules = document.getElementById('cb-rules')?.value.trim() || '조선 시대 왕의 말투 사용';
+        const upstageKey = document.getElementById('cb-upstage-key')?.value.trim();
 
-        const generatedPrompt = `[맞춤형 AI 대화형 챗봇 웹앱 제작 프롬프트]
+        let basePrompt = `[맞춤형 AI 대화형 챗봇 웹앱 제작 프롬프트]
 구글 시트 앱스스크립트(Code.gs)와 웹 화면(Index.html)으로 동작하는 '인공지능 대화형 챗봇'을 만들어줘.
 
 [기본 정보]
@@ -785,6 +843,10 @@ ${flow}
 3. 대화 조건 및 어포던스 (말투 및 행동 규칙):
 ${rules}
 
+[🗄️ 구글 시트 데이터베이스(DB) 구조 자동 세팅 요구사항]
+- 구글 시트의 첫 번째 행에 데이터베이스 헤더(컬럼명)가 없거나 시트가 비어있을 경우, 앱스스크립트 코드가 실행될 때 헤더 행이 '짝!' 하고 자동으로 추가되도록 자동 세팅 함수(setupDatabase)를 반드시 포함해줘.
+- 데이터베이스 헤더 구성: ['대화일시', '사용자 메시지', '챗봇 응답', '페르소나/조건']
+
 [주요 기능 및 화면 요구사항]
 1. 프론트엔드 (Index.html):
    - 카카오톡 스타일의 깔끔하고 모던한 대화창 UI ([전송] 버튼, 실시간 대화 말풍선)
@@ -792,9 +854,17 @@ ${rules}
 2. 백엔드 (Code.gs):
    - 업스테이지 Solar API를 호출하여 이전 대화 맥락과 위 '페르소나/어포던스 조건'을 유지하며 답변 생성
    - API 키 변수는 var apiKey = "여기에_API_키를_넣으세요"; 형태로 작성해줘.
-   - 대화 내역은 구글 시트에 날짜, 사용자 메시지, 챗봇 답변 형태로 함께 기록해줘.`;
+   - 대화 내역 및 일시를 구글 시트 DB에 함께 기록해줘.`;
 
-        resultCode.textContent = generatedPrompt;
+        if (upstageKey) {
+          genBtnChatbot.disabled = true;
+          genBtnChatbot.textContent = '⏳ 업스테이지 AI 정제 중...';
+          basePrompt = await callUpstageRefine(upstageKey, basePrompt);
+          genBtnChatbot.disabled = false;
+          genBtnChatbot.textContent = '✨ AI 대화형 챗봇 프롬프트 생성하기';
+        }
+
+        resultCode.textContent = basePrompt;
         resultBox.style.display = 'block';
         resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         showToast('✨ AI 대화형 챗봇 프롬프트가 성공적으로 생성되었습니다!');
