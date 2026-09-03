@@ -523,13 +523,14 @@ function callUpstageSolar() {
   var url = "https://api.upstage.ai/v1/chat/completions";
   
   var payload = {
-    "model": "solar-pro",
+    "model": "solar-pro3",
     "messages": [
       {
         "role": "user",
         "content": "An $80 item gets a 20% discount, then 10% tax is added. What is the final price? Answer with only the dollar amount."
       }
-    ]
+    ],
+    "reasoning_effort": "medium"
   };
 
   var options = {
@@ -545,13 +546,18 @@ function callUpstageSolar() {
   var response = UrlFetchApp.fetch(url, options);
   var result = JSON.parse(response.getContentText());
   
-  var answer = result.choices[0].message.content;
+  var message = result.choices[0].message;
+  if (message.reasoning) {
+    Logger.log("🧠 생각 과정: " + message.reasoning);
+  }
+  
+  var answer = message.content;
   Logger.log("🤖 Solar AI 응답: " + answer);
   return answer;
 }` },
       { type: 'code', filename: 'main.js (Node.js / OpenAI SDK 호환 방식)', language: 'javascript', code: `import OpenAI from "openai";
 
-const apiKey = "여기에_API_키를_넣으세요";
+const apiKey = "여기에 API 키를 입력하시오";
 const openai = new OpenAI({
   apiKey,
   baseURL: "https://api.upstage.ai/v1"
@@ -559,22 +565,23 @@ const openai = new OpenAI({
 
 async function main() {
   const response = await openai.chat.completions.create({
-    model: "solar-pro",
+    model: "solar-pro3",
     messages: [
       {
         "role": "user",
         "content": "An $80 item gets a 20% discount, then 10% tax is added. What is the final price? Answer with only the dollar amount."
       }
-    ]
+    ],
+    reasoning_effort: "medium"
   });
 
   const message = response.choices[0].message;
 
   if (message.reasoning) {
-    console.log("생각 과정:", message.reasoning);
+    console.log(message.reasoning);
   }
 
-  console.log("답변:", message.content);
+  console.log(message.content);
 }
 
 main();` },
