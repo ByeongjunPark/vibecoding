@@ -464,7 +464,7 @@ function addGuestbookEntry(name, message) {
     title: '인공지능 API를 붙인 솔루션 만들어보기',
     subtitle: '업스테이지 API 시작하기',
     duration: '50분',
-    objectives: ['API 개념 이해하기', '업스테이지 AI 이니셔티브 가입', 'API 키 발급받기'],
+    objectives: ['API 개념 이해하기', '업스테이지 AI 이니셔티브 가입', 'API 키 발급받기', 'AI 글쓰기 피드백 지원 도구 프롬프트 작성하기'],
     sections: [
       { type: 'concept', icon: '🔌', title: 'API란?', body: '택배 서비스로 비유해볼까요? 우리가 물건(데이터/요청)을 보내면, 배송센터(AI 서버)가 복잡한 처리를 대신 해주고 결과물만 우리 집으로 쏙 보내주는 시스템입니다. 덕분에 코드 한 줄만으로 강력한 AI의 능력을 내 프로그램에 얹어 쓸 수 있어요.' },
       { type: 'concept', icon: '🚀', title: '업스테이지란?', body: '세계적인 기술력을 인정받는 한국의 대표적인 AI 스타트업입니다. 학생들의 손글씨를 읽어내는 문서 이해(Document AI), 번역, 텍스트 분석 등 교육 현장에서 유용하게 쓰일 수 있는 다양한 AI 기능을 API 형태로 제공하고 있습니다.' },
@@ -475,16 +475,17 @@ function addGuestbookEntry(name, message) {
           { title: 'Step 1', description: '업스테이지 콘솔 홈페이지에 접속하여 회원가입을 진행합니다.' },
           { title: 'Step 2', description: 'AI 이니셔티브 안내 페이지로 이동하여 교육용 무료 사용 혜택을 신청합니다.' },
           { title: 'Step 3', description: '콘솔 화면에서 \'API 키(Key)\'를 발급받습니다.' },
-          { title: 'Step 4', description: '발급받은 복잡한 문자열(API 키)을 안전한 메모장 등에 복사해둡니다.' }
+          { title: 'Step 4', description: '발급받은 내 API 키를 복사하여 확인합니다.' }
         ]
       },
       { type: 'tip', variant: 'warning', content: 'API 키는 내 통장의 비밀번호와 같습니다! 절대 다른 사람에게 알려주거나 인터넷 공개된 곳에 올리면 안 됩니다. 누군가 내 키를 도용해서 요금이 발생할 수 있어요.' },
-      { type: 'tip', variant: 'tip', content: '방금 발급받은 API 키를 내 컴퓨터의 메모장에 안전하게 저장해두세요. 다음 6차시 실습에서 바로 사용할 예정입니다.' },
+      { type: 'promptGenerator', mode: 'feedback', title: '🛠️ 5차시 실습: AI 글쓰기 피드백 도구 프롬프트 제작소', description: '선생님이 원하는 피드백 역할, 원칙, 어조, 포함 단계를 직접 수정 및 입력하여 맞춤형 AI 글쓰기 피드백 지원 도구 프롬프트를 만듭니다.' },
       { type: 'checklist', sessionId: 'session-5', items: [
           { id: 's5-c1', label: 'API 개념 이해하기' },
           { id: 's5-c2', label: '업스테이지 콘솔 회원가입 완료' },
           { id: 's5-c3', label: 'AI 이니셔티브 신청 완료' },
-          { id: 's5-c4', label: 'API 키 발급 및 안전하게 저장하기' }
+          { id: 's5-c4', label: 'API 키 발급 및 확인 완료' },
+          { id: 's5-c5', label: '피드백 원칙/어조를 지정하여 AI 글쓰기 피드백 도구 프롬프트 작성하기' }
         ]
       }
     ]
@@ -495,7 +496,7 @@ function addGuestbookEntry(name, message) {
     title: 'API 도큐먼트를 활용해서 바이브코딩으로 인공지능 기반 솔루션 주문해보기',
     subtitle: 'AI API 연동 실습',
     duration: '50분',
-    objectives: ['API 도큐먼트 읽는 법 배우기', '바이브코딩으로 API 연동 앱 만들기', 'AI 기반 솔루션 직접 만들어보기', '업스테이지 Solar AI API 연동 코드 스니펫 활용해보기'],
+    objectives: ['API 도큐먼트 읽는 법 배우기', '바이브코딩으로 API 연동 앱 만들기', 'AI 기반 솔루션 직접 만들어보기', '페르소나/어포던스 설정 AI 챗봇 프롬프트 작성하기'],
     sections: [
       { type: 'concept', icon: '📖', title: 'API 도큐먼트 읽기', body: '새로운 전자제품을 사면 들어있는 \'사용 설명서\'와 같습니다. ① 어떤 인터넷 주소로 ② 어떤 형태의 데이터를 보내면 ③ 어떤 결과값을 돌려주는지 아주 상세히 적혀있습니다.' },
       { type: 'concept', icon: '🤝', title: '바이브코딩 + API = 무한한 가능성', body: 'API 도큐먼트를 우리가 직접 다 이해할 필요는 없습니다. AI 챗봇에게 "이 사용 설명서(API)를 참고해서 이런 기능을 하는 프로그램을 만들어줘"라고 주문하기만 하면, 어려운 연동 코드까지 알아서 척척 짜줍니다.' },
@@ -503,7 +504,7 @@ function addGuestbookEntry(name, message) {
           { title: 'Step 1', description: '업스테이지 API 도큐먼트에서 내가 사용해보고 싶은 흥미로운 기능을 하나 고릅니다.' },
           { title: 'Step 2', description: '제미나이나 Gems 챗봇에게 주문합니다. 예: "업스테이지 Document AI API를 사용해서 학생이 제출한 독후감 사진을 텍스트로 변환하고, 글자 수를 세어주는 구글 시트 앱스스크립트를 만들어줘. API 키는 스크립트 속성에 저장할거야."' },
           { title: 'Step 3', description: '챗봇이 만들어준 코드를 구글 시트 앱스스크립트 편집기에 복사하여 붙여넣습니다.' },
-          { title: 'Step 4', description: '지난 시간에 메모장에 적어둔 내 API 키를 스크립트 설정에 붙여넣습니다.' },
+          { title: 'Step 4', description: '발급받은 내 API 키를 스크립트 코드의 "여기에_API_키를_넣으세요" 위치에 붙여넣습니다.' },
           { title: 'Step 5', description: '실행 버튼을 눌러 내 시트에서 AI 기능이 잘 작동하는지 테스트해봅니다.' }
         ]
       },
@@ -518,7 +519,7 @@ function addGuestbookEntry(name, message) {
  * 앱스스크립트 환경에서는 UrlFetchApp을 이용하여 외부 AI API를 호출합니다.
  */
 function callUpstageSolar() {
-  var apiKey = "up_iU3oiUYNN2ag7dPOuvxyDohmNcZZq"; // 발급받은 업스테이지 API 키
+  var apiKey = "여기에_API_키를_넣으세요"; // 발급받은 업스테이지 API 키
   var url = "https://api.upstage.ai/v1/chat/completions";
   
   var payload = {
@@ -550,7 +551,7 @@ function callUpstageSolar() {
 }` },
       { type: 'code', filename: 'main.js (Node.js / OpenAI SDK 호환 방식)', language: 'javascript', code: `import OpenAI from "openai";
 
-const apiKey = "up_iU3oiUYNN2ag7dPOuvxyDohmNcZZq";
+const apiKey = "여기에_API_키를_넣으세요";
 const openai = new OpenAI({
   apiKey,
   baseURL: "https://api.upstage.ai/v1"
@@ -577,13 +578,15 @@ async function main() {
 }
 
 main();` },
+      { type: 'promptGenerator', mode: 'chatbot', title: '🛠️ 6차시 실습: 페르소나 및 어포던스 설정 AI 챗봇 프롬프트 제작소', description: '챗봇의 역할(페르소나), 대화 단계, 말투 및 규칙(어포던스)을 직접 수정 및 설정하여 나만의 대화형 AI 챗봇 프롬프트를 만듭니다.' },
       { type: 'checklist', sessionId: 'session-6', items: [
           { id: 's6-c1', label: 'API 도큐먼트 확인 완료' },
           { id: 's6-c2', label: '프롬프트 작성하여 코드 생성' },
           { id: 's6-c3', label: '코드에 내 API 키 설정하기' },
           { id: 's6-c4', label: 'API 연동 테스트 성공' },
           { id: 's6-c5', label: '결과 확인 및 추가 수정 요청해보기' },
-          { id: 's6-c6', label: '업스테이지 Solar AI API 코드 스니펫 복사 및 호출 테스트' }
+          { id: 's6-c6', label: '업스테이지 Solar AI API 코드 스니펫 복사 및 호출 테스트' },
+          { id: 's6-c7', label: '페르소나/어포던스를 설정하여 AI 대화형 챗봇 프롬프트 제작하기' }
         ]
       }
     ]
