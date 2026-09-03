@@ -2,6 +2,20 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
+    <script>
+      window.onerror = function(msg, url, line, col, error) {
+        var errText = "🚨 JS ERROR: " + msg + " [File: " + (url || "").split('/').pop() + ", Line: " + line + ", Col: " + col + "]";
+        console.error(errText, error);
+        window.__LAST_JS_ERROR = errText;
+        if (document.body) {
+          var div = document.createElement('div');
+          div.id = 'js-error-banner';
+          div.style.cssText = 'background:#DC2626;color:white;padding:20px;font-size:1.2rem;font-weight:bold;position:fixed;top:0;left:0;right:0;z-index:999999;box-shadow:0 4px 12px rgba(0,0,0,0.5);';
+          div.innerText = errText;
+          document.body.appendChild(div);
+        }
+      };
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>구글 도구와 함께하는 바이브코딩 | 교수학습 콘텐츠 만들기</title>
     
