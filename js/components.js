@@ -606,7 +606,7 @@ window.Components = (function () {
             'Authorization': 'Bearer ' + apiKey
           },
           body: JSON.stringify({
-            model: 'solar-pro',
+            model: 'solar-pro3',
             messages: [
               {
                 role: 'system',
@@ -634,7 +634,7 @@ window.Components = (function () {
 - 화면 접속 및 데이터베이스 자동 세팅(백엔드) ➔ 사용자 데이터 입력(프론트엔드) ➔ API 연동 및 로딩 표시(프론트-백엔드) ➔ AI 응답 생성 및 화면 출력/DB 기록(백엔드-프론트엔드) 절차 및 화면 연동 중심 설명
 
 ## 5. 참고자료 및 기술 지침
-- 5.1 외부 API 연동 지침: 업스테이지 Solar API (https://api.upstage.ai/v1/chat/completions, model: solar-pro, Bearer "여기에_API_키를_넣으세요")
+- 5.1 외부 API 연동 지침 (업스테이지 Solar API 공식 도큐먼트 사양: https://api.upstage.ai/v1/chat/completions, model: "solar-pro3", reasoning_effort: "medium", Authorization: Bearer "여기에_API_키를_넣으세요", message.reasoning 추론 및 message.content 응답 처리)
 - 5.2 프론트엔드 관련 지침: Index.html 파스텔 톤 모던 UI 및 반응형 CSS
 - 5.3 백엔드 관련 지침: Code.gs UrlFetchApp.fetch() 통신
 - 5.4 구글 시트 데이터베이스 구성 지침: 시트가 비어있거나 첫 행에 컬럼명이 없을 때 헤더 행이 '짝!' 하고 자동으로 생성되는 setupDatabase() 함수 코딩 지침
@@ -647,7 +647,8 @@ window.Components = (function () {
                 role: 'user',
                 content: basePrompt
               }
-            ]
+            ],
+            reasoning_effort: 'medium'
           })
         });
         const data = await response.json();
@@ -818,10 +819,11 @@ ${datastruct}
 4. **AI 피드백 출력 & DB 저장**: 생성된 피드백을 결과 카드에 보여주고 시트 DB에도 자동 기록
 
 ## 5. 참고자료 및 기술 지침
-### 5.1 외부 API 연동 지침
-- **API Endpoint**: https://api.upstage.ai/v1/chat/completions
+### 5.1 외부 API 연동 지침 (Upstage Solar API 공식 도큐먼트 사양)
+- **API Endpoint**: https://api.upstage.ai/v1/chat/completions (또는 OpenAI SDK baseURL: https://api.upstage.ai/v1)
 - **인증 헤더**: Authorization: Bearer "여기에_API_키를_넣으세요"
-- **모델**: solar-pro
+- **모델 및 사양**: model: "solar-pro3", reasoning_effort: "medium"
+- **추론 및 답변 처리**: message.reasoning (생각 과정) 확인 및 message.content (최종 답변) 추출
 - **피드백 원칙**: ${rules}
 - **피드백 단계**: ${steps}
 
@@ -906,10 +908,11 @@ ${datastruct}
 4. **AI 챗봇 응답 출력 & DB 저장**: AI 답변을 말풍선으로 보여주고 구글 시트 DB에도 대화 내역 자동 저장
 
 ## 5. 참고자료 및 기술 지침
-### 5.1 외부 API 연동 지침
-- **API Endpoint**: https://api.upstage.ai/v1/chat/completions
+### 5.1 외부 API 연동 지침 (Upstage Solar API 공식 도큐먼트 사양)
+- **API Endpoint**: https://api.upstage.ai/v1/chat/completions (또는 OpenAI SDK baseURL: https://api.upstage.ai/v1)
 - **인증 헤더**: Authorization: Bearer "여기에_API_키를_넣으세요"
-- **모델**: solar-pro
+- **모델 및 사양**: model: "solar-pro3", reasoning_effort: "medium"
+- **추론 및 답변 처리**: message.reasoning (생각 과정) 확인 및 message.content (최종 답변) 추출
 - **챗봇 페르소나**: ${persona}
 - **대화 순서/단계**: ${flow}
 - **대화 조건/어포던스**: ${rules}
