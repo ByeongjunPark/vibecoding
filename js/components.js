@@ -793,14 +793,15 @@ ${datastruct}
         const steps = document.getElementById('fb-steps')?.value.trim() || '1단계: 칭찬하기 ➔ 2단계: 문장 다듬기 팁 ➔ 3단계: 응원 메시지';
         const upstageKey = document.getElementById('fb-upstage-key')?.value.trim();
 
-        let basePrompt = `🚨 **[최우선 필수 요구사항]**
-**제미나이(Gemini) 및 AI는 구글 앱스스크립트 백엔드 코드(Code.gs)와 웹 화면 프론트엔드 코드(Index.html)를 중간 생략이나 축약 없이 '각각', 그리고 '빠짐없이' 처음부터 끝까지 전체 완성형 코드로 산출해 주세요.**
+        let basePrompt = `🚨 **[최우선 필수 요구사항 - 구글 앱스스크립트 전용 아키텍처]**
+**제미나이(Gemini) 및 AI는 본 웹앱이 '구글 앱스스크립트(Google Apps Script)' 기반으로 동작함을 명심하고, 서버 백엔드 코드(Code.gs)와 웹 화면 프론트엔드 코드(Index.html)를 중간 생략이나 축약 없이 '각각', 그리고 '빠짐없이' 처음부터 끝까지 전체 완성형 코드로 산출해 주세요.**
 
 # [${appName}] 바이브코딩 개발 주문서
 
 ## 1. 배경 및 목표
+- **개발 환경 및 아키텍처**: 구글 앱스스크립트(Google Apps Script) 기반 (서버 백엔드: Code.gs, 클라이언트 프론트엔드: Index.html, DB: 구글 시트)
 - **개발 배경**: 선생님이 설정한 피드백 원칙과 어조를 바탕으로 학생 글에 맞춰 따뜻하고 구체적인 피드백을 제공하기 위함
-- **최종 목표**: ${target}을 위한 '${appName}' 구글 앱스스크립트 웹 애플리케이션 개발
+- **최종 목표**: ${target}을 위한 '${appName}' 구글 앱스스크립트 연동 웹 애플리케이션 개발
 
 ## 2. 사용자 분석
 - **주요 사용자**: ${target} 및 담당 교사
@@ -808,15 +809,15 @@ ${datastruct}
 - **사용자 특성 및 요구사항**: ${tone}를 적용하여 다정하고 직관적인 UI/UX 제공
 
 ## 3. 핵심 기능 정의
-- **[기능 1] 프론트엔드 UI**: 피드백 원칙 수정 입력창, 학생 글 입력 폼, [✨ AI 피드백 받기] 버튼, 예쁜 피드백 결과 출력 카드
-- **[기능 2] 백엔드 AI 연동**: 업스테이지 Solar API를 호출하여 입력된 원칙과 어조에 맞게 피드백 생성
-- **[기능 3] DB 자동 기록**: 피드백 결과를 구글 시트 데이터베이스에 한 줄로 자동 저장
+- **[기능 1] 프론트엔드 UI (Index.html)**: 피드백 원칙 수정 입력창, 학생 글 입력 폼, [✨ AI 피드백 받기] 버튼, 예쁜 피드백 결과 출력 카드
+- **[기능 2] 백엔드 AI 연동 (Code.gs)**: 업스테이지 Solar API를 호출하여 입력된 원칙과 어조에 맞게 피드백 생성
+- **[기능 3] DB 자동 기록 (Code.gs)**: 피드백 결과를 구글 시트 데이터베이스에 한 줄로 자동 저장
 
 ## 4. 사용자 경험 흐름 (UX Flow)
-1. **화면 접속 및 DB 자동 세팅**: 웹앱(Index.html) 접속 시 백엔드(Code.gs)가 구글 시트 헤더가 없으면 자동으로 세팅(setupDatabase)함
-2. **사용자 글 입력**: 학생/교사가 글을 작성하고 피드백 받기 버튼 클릭
-3. **API 연동 & 로딩 표시**: 화면에 로딩 상태를 보여주고 google.script.run으로 백엔드를 거쳐 업스테이지 Solar API 호출
-4. **AI 피드백 출력 & DB 저장**: 생성된 피드백을 결과 카드에 보여주고 시트 DB에도 자동 기록
+1. **웹앱 접속 및 DB 자동 세팅 (백엔드)**: 구글 앱스스크립트 웹 앱 URL 접속 시 doGet() 함수가 Index.html을 렌더링하며, 백엔드(Code.gs)가 구글 시트 헤더를 자동 세팅(setupDatabase)함
+2. **사용자 글 입력 (프론트엔드)**: 학생/교사가 Index.html 화면에서 글을 작성하고 피드백 받기 버튼 클릭
+3. **앱스스크립트 비동기 통신 (프론트엔드 ➔ 백엔드)**: google.script.run으로 백엔드(Code.gs)를 비동기 호출하고, 백엔드가 업스테이지 Solar API와 통신함
+4. **AI 피드백 출력 & DB 저장 (백엔드 ➔ 프론트엔드)**: AI 응답을 Index.html 화면 카드에 출력하고, 구글 시트 DB에도 한 줄로 자동 기록함
 
 ## 5. 참고자료 및 기술 지침
 ### 5.1 외부 API 연동 지침 (Upstage Solar API 공식 도큐먼트 사양)
@@ -827,11 +828,13 @@ ${datastruct}
 - **피드백 원칙**: ${rules}
 - **피드백 단계**: ${steps}
 
-### 5.2 프론트엔드 지침 (Index.html)
-- 깔끔하고 친근한 파스텔 톤 디자인 및 반응형 레이아웃
+### 5.2 프론트엔드 지침 (`Index.html` - 구글 앱스스크립트 HTML 서비스)
+- google.script.run 비동기 통신으로 백엔드 Code.gs 함수 호출
+- 깔끔하고 친근한 파스텔 톤 디자인 및 반응형 HTML/CSS 레이아웃
 
-### 5.3 백엔드 지침 (Code.gs)
-- UrlFetchApp.fetch()를 사용하는 앱스스크립트 표준 코드
+### 5.3 백엔드 지침 (`Code.gs` - 구글 앱스스크립트 서버 스크립트)
+- 웹 앱 출력을 위한 필수 doGet() 구현: HtmlService.createHtmlOutputFromFile('Index').setTitle('${appName}').setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
+- UrlFetchApp.fetch()를 사용하는 업스테이지 API 호출 및 SpreadsheetApp DB 자동 연동
 
 ### 5.4 구글 시트 데이터베이스 구성 지침
 - 시트 첫 행에 컬럼명이 없으면 ['작성일시', '피드백 원칙', '학생 글', 'AI 피드백'] 헤더 행이 '짝!' 하고 자동 생성되는 setupDatabase() 함수 포함`;
@@ -882,12 +885,13 @@ ${datastruct}
         const rules = document.getElementById('cb-rules')?.value.trim() || '조선 시대 왕의 말투 사용';
         const upstageKey = document.getElementById('cb-upstage-key')?.value.trim();
 
-        let basePrompt = `🚨 **[최우선 필수 요구사항]**
-**제미나이(Gemini) 및 AI는 구글 앱스스크립트 백엔드 코드(Code.gs)와 웹 화면 프론트엔드 코드(Index.html)를 중간 생략이나 축약 없이 '각각', 그리고 '빠짐없이' 처음부터 끝까지 전체 완성형 코드로 산출해 주세요.**
+        let basePrompt = `🚨 **[최우선 필수 요구사항 - 구글 앱스스크립트 전용 아키텍처]**
+**제미나이(Gemini) 및 AI는 본 웹앱이 '구글 앱스스크립트(Google Apps Script)' 기반으로 동작함을 명심하고, 서버 백엔드 코드(Code.gs)와 웹 화면 프론트엔드 코드(Index.html)를 중간 생략이나 축약 없이 '각각', 그리고 '빠짐없이' 처음부터 끝까지 전체 완성형 코드로 산출해 주세요.**
 
 # [${botName}] 바이브코딩 개발 주문서
 
 ## 1. 배경 및 목표
+- **개발 환경 및 아키텍처**: 구글 앱스스크립트(Google Apps Script) 기반 (서버 백엔드: Code.gs, 클라이언트 프론트엔드: Index.html, DB: 구글 시트)
 - **개발 배경**: 챗봇의 페르소나, 대화 순서, 대화 조건(어포던스)을 반영하여 생생하고 유익한 AI 대화 경험을 제공하기 위함
 - **최종 목표**: ${target}을 위한 '${botName}' 대화형 챗봇 웹 애플리케이션 개발
 
@@ -897,15 +901,15 @@ ${datastruct}
 - **사용자 특성 및 요구사항**: 대화 몰입도를 높이는 카카오톡 스타일 대화 UI 및 친근한 페르소나 적용
 
 ## 3. 핵심 기능 정의
-- **[기능 1] 프론트엔드 UI**: 카카오톡 스타일 모던 대화창, 메시지 입력란 및 [전송] 버튼, 대화 말풍선 목록
-- **[기능 2] 백엔드 AI 연동**: 업스테이지 Solar API를 호출하여 페르소나와 대화 규칙에 따른 맞춤형 응답 생성
-- **[기능 3] DB 자동 기록**: 대화 내역 및 일시를 구글 시트 데이터베이스에 자동 기록
+- **[기능 1] 프론트엔드 UI (Index.html)**: 카카오톡 스타일 모던 대화창, 메시지 입력란 및 [전송] 버튼, 대화 말풍선 목록
+- **[기능 2] 백엔드 AI 연동 (Code.gs)**: 업스테이지 Solar API를 호출하여 페르소나와 대화 규칙에 따른 맞춤형 응답 생성
+- **[기능 3] DB 자동 기록 (Code.gs)**: 대화 내역 및 일시를 구글 시트 데이터베이스에 자동 기록
 
 ## 4. 사용자 경험 흐름 (UX Flow)
-1. **화면 접속 및 DB 자동 세팅**: 웹앱 접속 시 백엔드가 구글 시트 헤더가 없으면 자동으로 세팅(setupDatabase)함
-2. **대화 시작 및 입력**: 사용자가 대화창에 메시지를 입력하고 전송 버튼 클릭
-3. **API 연동 & 대화 맥락 유지**: 로딩 말풍선을 표시하며 이전 대화 맥락과 페르소나 조건을 포함해 업스테이지 API 호출
-4. **AI 챗봇 응답 출력 & DB 저장**: AI 답변을 말풍선으로 보여주고 구글 시트 DB에도 대화 내역 자동 저장
+1. **웹앱 접속 및 DB 자동 세팅 (백엔드)**: 구글 앱스스크립트 웹 앱 URL 접속 시 doGet() 함수가 Index.html을 렌더링하며, 백엔드(Code.gs)가 구글 시트 헤더를 자동 세팅(setupDatabase)함
+2. **대화 시작 및 입력 (프론트엔드)**: 사용자가 Index.html 대화창에 메시지를 입력하고 전송 버튼 클릭
+3. **앱스스크립트 비동기 통신 (프론트엔드 ➔ 백엔드)**: google.script.run으로 백엔드(Code.gs)를 비동기 호출하고, 백엔드가 이전 대화 맥락과 페르소나 조건을 포함해 업스테이지 API를 호출함
+4. **AI 챗봇 응답 출력 & DB 저장 (백엔드 ➔ 프론트엔드)**: AI 답변을 Index.html 말풍선으로 출력하고, 구글 시트 DB에도 대화 내역을 자동 저장함
 
 ## 5. 참고자료 및 기술 지침
 ### 5.1 외부 API 연동 지침 (Upstage Solar API 공식 도큐먼트 사양)
@@ -917,11 +921,13 @@ ${datastruct}
 - **대화 순서/단계**: ${flow}
 - **대화 조건/어포던스**: ${rules}
 
-### 5.2 프론트엔드 지침 (Index.html)
-- 카카오톡 스타일 모던 채팅 UI 및 반응형 레이아웃
+### 5.2 프론트엔드 지침 (`Index.html` - 구글 앱스스크립트 HTML 서비스)
+- google.script.run 비동기 통신으로 백엔드 Code.gs 함수 호출
+- 카카오톡 스타일 모던 채팅 UI 및 반응형 HTML/CSS 레이아웃
 
-### 5.3 백엔드 지침 (Code.gs)
-- UrlFetchApp.fetch()를 사용하는 앱스스크립트 표준 코드
+### 5.3 백엔드 지침 (`Code.gs` - 구글 앱스스크립트 서버 스크립트)
+- 웹 앱 출력을 위한 필수 doGet() 구현: HtmlService.createHtmlOutputFromFile('Index').setTitle('${botName}').setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
+- UrlFetchApp.fetch()를 사용하는 업스테이지 API 호출 및 SpreadsheetApp DB 자동 연동
 
 ### 5.4 구글 시트 데이터베이스 구성 지침
 - 시트 첫 행에 컬럼명이 없으면 ['대화일시', '사용자 메시지', '챗봇 응답', '페르소나/조건'] 헤더 행이 '짝!' 하고 자동 생성되는 setupDatabase() 함수 포함`;
