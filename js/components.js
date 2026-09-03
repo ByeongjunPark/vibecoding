@@ -613,8 +613,11 @@ window.Components = (function () {
                 content: `당신은 바이브코딩(Vibe Coding) 프롬프트 전문 엔지니어입니다.
 주어진 교사 요구사항을 바탕으로 제미나이(Gemini)나 AI 챗봇에게 전달할 완벽한 마크다운 바이브코딩 주문서(Prompt)를 가공하세요.
 
-[최우선 필수 마크다운 출력 구조]
-반드시 다음 5가지 마크다운 헤더(#, ##) 구조를 엄격히 유지해서 프롬프트를 작성하세요:
+[최우선 필수 지침]
+반드시 프롬프트의 '가장 맨 처음(첫 줄)'에 다음 코딩 요구사항을 문구 그대로 배치하고, 이어서 5가지 마크다운 헤더(#, ##) 구조를 엄격히 유지해서 프롬프트를 작성하세요:
+
+🚨 **[최우선 필수 요구사항]**
+**제미나이(Gemini) 및 AI는 구글 앱스스크립트 백엔드 코드(Code.gs)와 웹 화면 프론트엔드 코드(Index.html)를 중간 생략이나 축약 없이 '각각', 그리고 '빠짐없이' 처음부터 끝까지 전체 완성형 코드로 산출해 주세요.**
 
 # [웹앱 제목] 바이브코딩 개발 주문서
 
@@ -672,7 +675,10 @@ window.Components = (function () {
         const features = document.getElementById('pg-features')?.value.trim() || '사용하기 편리하고 직관적인 기능';
         const style = document.getElementById('pg-style')?.value || '밝고 예쁜 스타일';
 
-        const generatedPrompt = `다음 조건에 맞는 HTML/CSS/JavaScript 싱글 페이지 웹 애플리케이션을 제미나이 캔버스(Canvas)용으로 만들어줘.
+        const generatedPrompt = `🚨 **[최우선 필수 요구사항]**
+**제미나이(Gemini) 및 AI는 웹 화면 프론트엔드 코드를 중간 생략이나 축약 없이 '빠짐없이' 처음부터 끝까지 전체 완성형 코드로 산출해 주세요.**
+
+다음 조건에 맞는 HTML/CSS/JavaScript 싱글 페이지 웹 애플리케이션을 제미나이 캔버스(Canvas)용으로 만들어줘.
 
 [기본 정보]
 - 교육 대상: ${target}
@@ -727,7 +733,10 @@ ${features}
         const datastruct = document.getElementById('canva-datastruct')?.value.trim() || '항목명, 점수/상태, 작성일자';
         const style = document.getElementById('canva-style')?.value || '밝고 예쁜 파스텔 톤';
 
-        const generatedPrompt = `캔바 AI(Canva AI) 웹사이트 생성용 프롬프트입니다.
+        const generatedPrompt = `🚨 **[최우선 필수 요구사항]**
+**캔바 AI 및 AI는 프론트엔드 화면 UI와 백엔드 데이터 처리 구조를 생략이나 축약 없이 '각각', 그리고 '빠짐없이' 전체 구성으로 산출해 주세요.**
+
+캔바 AI(Canva AI) 웹사이트 생성용 프롬프트입니다.
 
 [기본 정보]
 - 대상: ${target}
@@ -783,7 +792,10 @@ ${datastruct}
         const steps = document.getElementById('fb-steps')?.value.trim() || '1단계: 칭찬하기 ➔ 2단계: 문장 다듬기 팁 ➔ 3단계: 응원 메시지';
         const upstageKey = document.getElementById('fb-upstage-key')?.value.trim();
 
-        let basePrompt = `# [${appName}] 바이브코딩 개발 주문서
+        let basePrompt = `🚨 **[최우선 필수 요구사항]**
+**제미나이(Gemini) 및 AI는 구글 앱스스크립트 백엔드 코드(Code.gs)와 웹 화면 프론트엔드 코드(Index.html)를 중간 생략이나 축약 없이 '각각', 그리고 '빠짐없이' 처음부터 끝까지 전체 완성형 코드로 산출해 주세요.**
+
+# [${appName}] 바이브코딩 개발 주문서
 
 ## 1. 배경 및 목표
 - **개발 배경**: 선생님이 설정한 피드백 원칙과 어조를 바탕으로 학생 글에 맞춰 따뜻하고 구체적인 피드백을 제공하기 위함
@@ -868,7 +880,10 @@ ${datastruct}
         const rules = document.getElementById('cb-rules')?.value.trim() || '조선 시대 왕의 말투 사용';
         const upstageKey = document.getElementById('cb-upstage-key')?.value.trim();
 
-        let basePrompt = `# [${botName}] 바이브코딩 개발 주문서
+        let basePrompt = `🚨 **[최우선 필수 요구사항]**
+**제미나이(Gemini) 및 AI는 구글 앱스스크립트 백엔드 코드(Code.gs)와 웹 화면 프론트엔드 코드(Index.html)를 중간 생략이나 축약 없이 '각각', 그리고 '빠짐없이' 처음부터 끝까지 전체 완성형 코드로 산출해 주세요.**
+
+# [${botName}] 바이브코딩 개발 주문서
 
 ## 1. 배경 및 목표
 - **개발 배경**: 챗봇의 페르소나, 대화 순서, 대화 조건(어포던스)을 반영하여 생생하고 유익한 AI 대화 경험을 제공하기 위함
