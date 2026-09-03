@@ -393,29 +393,130 @@ window.Components = (function () {
      11. 교육용 프롬프트 제작소
   ────────────────────────────── */
   const renderPromptGenerator = (data = {}) => {
-    const mode = data.mode || 'gemini'; // 'gemini' | 'canva'
+    const mode = data.mode || 'gemini'; // 'gemini' | 'canva' | 'feedback' | 'chatbot'
     const isCanva = mode === 'canva';
-    const title = data.title || (isCanva ? '🛠️ 캔바 AI 전용 데이터구조 프롬프트 제작소' : '🛠️ 교육용 웹앱 프롬프트 제작소');
-    const desc = data.description || (isCanva ? '캔바 AI는 임시 데이터구조(백엔드 데이터)를 정의하여 폼 입력, 목록 저장, 단순 점수 합산 등을 구조화할 수 있습니다.' : '아래 항목을 입력하면 제미나이 캔버스에 바로 사용할 수 있는 완벽한 프롬프트가 생성됩니다!');
-    const prefix = isCanva ? 'canva-' : 'pg-';
+    const isFeedback = mode === 'feedback';
+    const isChatbot = mode === 'chatbot';
+    
+    let prefix = 'pg-';
+    let borderColor = 'var(--primary-light)';
+    let titleColor = 'var(--primary)';
+    let btnColor = 'var(--primary)';
+    let btnText = '✨ 맞춤형 프롬프트 생성하기';
 
-    const dataStructureField = isCanva ? `
-      <div style="margin-bottom:20px;">
-        <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🗄️ 백엔드 데이터 구조 설계 (저장할 데이터 항목)</label>
-        <textarea id="${prefix}datastruct" class="pg-input" rows="3" placeholder="예: 
-1. 상벌점 데이터: 학생이름, 구분(상점/벌점), 항목명, 점수, 입력일자
-2. 할일(TO-DO) 데이터: 항목내용, 마감일, 완료여부(true/false), 우선순위" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;"></textarea>
-        <span style="font-size:0.8rem;color:var(--primary);font-weight:500;">💡 캔바 AI는 1차시 제미나이 캔버스와 달리 단순 화면(프론트)을 넘어 폼 데이터를 받는 구조(백엔드 데이터)까지 프롬프트로 설계할 수 있습니다!</span>
-      </div>
-    ` : '';
+    if (isCanva) {
+      prefix = 'canva-';
+      borderColor = '#8B5CF6';
+      titleColor = '#6D28D9';
+      btnColor = '#7C3AED';
+      btnText = '✨ 캔바 AI 전용 프롬프트 생성하기';
+    } else if (isFeedback) {
+      prefix = 'fb-';
+      borderColor = '#059669';
+      titleColor = '#047857';
+      btnColor = '#059669';
+      btnText = '✨ AI 글쓰기 피드백 도구 프롬프트 생성하기';
+    } else if (isChatbot) {
+      prefix = 'cb-';
+      borderColor = '#3B82F6';
+      titleColor = '#1D4ED8';
+      btnColor = '#2563EB';
+      btnText = '✨ AI 대화형 챗봇 프롬프트 생성하기';
+    }
 
-    return `
-      <div class="card prompt-generator-card fade-in" data-mode="${mode}" style="background:var(--surface);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);border:2px solid ${isCanva ? '#8B5CF6' : 'var(--primary-light)'};margin-bottom:24px;">
-        <h3 style="display:flex;align-items:center;gap:8px;margin-bottom:8px;color:${isCanva ? '#6D28D9' : 'var(--primary)'};font-size:1.25rem;">
-          ${esc(title)}
-        </h3>
-        <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:20px;">${esc(desc)}</p>
-        
+    const title = data.title || (
+      isCanva ? '🛠️ 캔바 AI 전용 데이터구조 프롬프트 제작소' :
+      isFeedback ? '🛠️ 5차시 실습: AI 글쓰기 피드백 도구 프롬프트 제작소' :
+      isChatbot ? '🛠️ 6차시 실습: 페르소나/어포던스 설정 AI 챗봇 프롬프트 제작소' :
+      '🛠️ 교육용 웹앱 프롬프트 제작소'
+    );
+    const desc = data.description || '아래 항목을 직접 입력/수정하여 나만의 맞춤형 AI 바이브코딩 프롬프트를 만드세요!';
+
+    // Mode-specific fields
+    let fieldsHTML = '';
+
+    if (isFeedback) {
+      fieldsHTML = `
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;margin-bottom:20px;">
+          <div>
+            <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">👨‍🎓 교육 대상 / 사용 대상</label>
+            <input type="text" id="${prefix}target" class="pg-input" value="초등학교 5학년" placeholder="예: 초등학교 5학년, 중학생" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+          </div>
+          <div>
+            <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">💡 웹앱 제목</label>
+            <input type="text" id="${prefix}appname" class="pg-input" value="다정한 AI 글쓰기 피드백 도구" placeholder="예: 우리반 글쓰기 피드백 도구" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🎯 피드백 역할 및 원칙 (수정 가능)</label>
+          <textarea id="${prefix}rules" class="pg-input" rows="3" placeholder="예: 
+1. 잘한 점 칭찬 2가지 작성하기
+2. 문장을 더 생생하게 만드는 구체적 개선 제안 1가지 제시하기" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;">1. 잘한 점 칭찬 2가지 작성하기
+2. 문장을 더 생생하게 만드는 구체적 개선 제안 1가지 제시하기</textarea>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🗣️ 피드백 어조 및 스타일 (수정 가능)</label>
+          <input type="text" id="${prefix}tone" class="pg-input" value="초등학생 눈높이에 맞춘 다정하고 친절한 선생님 어조" placeholder="예: 다정한 선생님 어조, 엄격하고 정확한 편집자 어조" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">📊 피드백 구성 단계 (수정 가능)</label>
+          <input type="text" id="${prefix}steps" class="pg-input" value="1단계: 칭찬하기 ➔ 2단계: 문장 다듬기 팁 ➔ 3단계: 응원 메시지" placeholder="예: 칭찬 ➔ 개선 팁 ➔ 응원" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+        </div>
+      `;
+    } else if (isChatbot) {
+      fieldsHTML = `
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;margin-bottom:20px;">
+          <div>
+            <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🤖 챗봇 이름 / 제목</label>
+            <input type="text" id="${prefix}botname" class="pg-input" value="세종대왕과의 역사 대화" placeholder="예: 세종대왕 챗봇, 과학자 장영실" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+          </div>
+          <div>
+            <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">👨‍🎓 대화 대상</label>
+            <input type="text" id="${prefix}target" class="pg-input" value="초등학생" placeholder="예: 초등학생, 중학생" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🎭 챗봇 페르소나 (역할 및 캐릭터) (수정 가능)</label>
+          <textarea id="${prefix}persona" class="pg-input" rows="2" placeholder="예: 훈민정음을 창제하신 조선 4대 국왕 세종대왕" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;">훈민정음을 창제하신 조선시대 4대 국왕 세종대왕</textarea>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🔄 대화 순서 및 단계 (Conversation Flow) (수정 가능)</label>
+          <textarea id="${prefix}flow" class="pg-input" rows="3" placeholder="예: 
+1단계: 반갑게 인사하고 학생 이름과 관심사 묻기
+2단계: 훈민정음 창제 이야기 나누기
+3단계: 학생 질문에 답변하고 덕담하기" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;">1단계: 반갑게 인사하고 학생 이름과 관심사 묻기
+2단계: 훈민정음 창제 목적 및 과학 발명품 이야기 나누기
+3단계: 학생 질문 답변 및 격려의 덕담으로 마무리하기</textarea>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">⚙️ 대화 조건 및 어포던스 (말투 / 규칙) (수정 가능)</label>
+          <textarea id="${prefix}rules" class="pg-input" rows="3" placeholder="예: 
+1. 조선 시대 왕의 말투(~하오, ~하노라) 사용하기
+2. 150자 이내로 답변하기
+3. 정답을 바로 말하지 않고 힌트 주기" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;">1. 고풍스럽고 다정한 조선 시대 왕의 말투(~하오, ~하노라)를 사용할 것
+2. 한 번에 150자 이내로 답변할 것
+3. 정답을 바로 말하지 않고 학생들이 스스로 생각할 수 있는 힌트를 줄 것</textarea>
+        </div>
+      `;
+    } else {
+      // Standard / Canva mode
+      const dataStructureField = isCanva ? `
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🗄️ 백엔드 데이터 구조 설계 (저장할 데이터 항목)</label>
+          <textarea id="${prefix}datastruct" class="pg-input" rows="3" placeholder="예: 
+  1. 상벌점 데이터: 학생이름, 구분(상점/벌점), 항목명, 점수, 입력일자
+  2. 할일(TO-DO) 데이터: 항목내용, 마감일, 완료여부(true/false), 우선순위" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;"></textarea>
+          <span style="font-size:0.8rem;color:var(--primary);font-weight:500;">💡 캔바 AI는 1차시 제미나이 캔버스와 달리 단순 화면(프론트)을 넘어 폼 데이터를 받는 구조(백엔드 데이터)까지 프롬프트로 설계할 수 있습니다!</span>
+        </div>
+      ` : '';
+
+      fieldsHTML = `
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;margin-bottom:20px;">
           <div>
             <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">👨‍🎓 교육 대상</label>
@@ -450,17 +551,28 @@ window.Components = (function () {
             <option value="눈이 편안하고 따뜻한 크림/우드 파스텔 톤 디자인">🌿 따뜻하고 편안한 친환경 스타일</option>
           </select>
         </div>
+      `;
+    }
+
+    return `
+      <div class="card prompt-generator-card fade-in" data-mode="${mode}" style="background:var(--surface);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);border:2px solid ${borderColor};margin-bottom:24px;">
+        <h3 style="display:flex;align-items:center;gap:8px;margin-bottom:8px;color:${titleColor};font-size:1.25rem;">
+          ${esc(title)}
+        </h3>
+        <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:20px;">${esc(desc)}</p>
+
+        ${fieldsHTML}
 
         <div style="text-align:center;margin-bottom:20px;">
-          <button id="${prefix}generate-btn" style="background:${isCanva ? '#7C3AED' : 'var(--primary)'};color:white;border:none;padding:12px 28px;font-size:1rem;font-weight:700;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s ease;box-shadow:0 4px 12px ${isCanva ? 'rgba(124,58,237,0.25)' : 'rgba(13,115,119,0.25)'};">
-            ✨ ${isCanva ? '캔바 AI 전용 프롬프트 생성하기' : '맞춤형 프롬프트 생성하기'}
+          <button id="${prefix}generate-btn" style="background:${btnColor};color:white;border:none;padding:12px 28px;font-size:1rem;font-weight:700;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s ease;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+            ${btnText}
           </button>
         </div>
 
         <div id="${prefix}result-container" style="display:none;margin-top:20px;padding-top:20px;border-top:1px dashed var(--border);">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-            <strong style="color:${isCanva ? '#6D28D9' : 'var(--primary)'};font-size:0.95rem;">🚀 생성된 프롬프트</strong>
-            <button id="${prefix}copy-btn" style="background:${isCanva ? '#F3E8FF' : 'var(--primary-light)'};color:${isCanva ? '#6D28D9' : 'var(--primary-hover)'};border:1px solid ${isCanva ? '#7C3AED' : 'var(--primary)'};padding:6px 14px;border-radius:var(--radius-sm);font-weight:600;font-size:0.85rem;cursor:pointer;">
+            <strong style="color:${titleColor};font-size:0.95rem;">🚀 생성된 맞춤형 바이브코딩 프롬프트</strong>
+            <button id="${prefix}copy-btn" style="background:var(--primary-light);color:var(--primary-hover);border:1px solid var(--primary);padding:6px 14px;border-radius:var(--radius-sm);font-weight:600;font-size:0.85rem;cursor:pointer;">
               📋 프롬프트 복사하기
             </button>
           </div>
@@ -470,7 +582,7 @@ window.Components = (function () {
   };
 
   const initPromptGenerator = () => {
-    // 1. Gemini 모드
+    // 1. Gemini 모드 (1차시)
     const genBtnGemini = document.getElementById('pg-generate-btn');
     if (genBtnGemini && !genBtnGemini.dataset.init) {
       genBtnGemini.dataset.init = 'true';
@@ -524,7 +636,7 @@ ${features}
       }
     }
 
-    // 2. Canva 모드
+    // 2. Canva 모드 (2차시)
     const genBtnCanva = document.getElementById('canva-generate-btn');
     if (genBtnCanva && !genBtnCanva.dataset.init) {
       genBtnCanva.dataset.init = 'true';
@@ -572,6 +684,130 @@ ${datastruct}
             await navigator.clipboard.writeText(text);
             copyBtn.textContent = '✅ 복사 완료!';
             showToast('클립보드에 복사되었습니다! canva.com/ai 대화창에 붙여넣으세요.');
+            setTimeout(() => { copyBtn.textContent = '📋 프롬프트 복사하기'; }, 2000);
+          } catch {
+            showToast('복사에 실패했습니다.');
+          }
+        });
+      }
+    }
+
+    // 3. Feedback 모드 (5차시)
+    const genBtnFeedback = document.getElementById('fb-generate-btn');
+    if (genBtnFeedback && !genBtnFeedback.dataset.init) {
+      genBtnFeedback.dataset.init = 'true';
+      const copyBtn = document.getElementById('fb-copy-btn');
+      const resultBox = document.getElementById('fb-result-container');
+      const resultCode = document.getElementById('fb-result-code');
+
+      genBtnFeedback.addEventListener('click', () => {
+        const target = document.getElementById('fb-target')?.value.trim() || '학생';
+        const appName = document.getElementById('fb-appname')?.value.trim() || 'AI 글쓰기 피드백 도구';
+        const rules = document.getElementById('fb-rules')?.value.trim() || '1. 잘한 점 칭찬 2가지\n2. 개선점 1가지';
+        const tone = document.getElementById('fb-tone')?.value.trim() || '다정한 선생님 어조';
+        const steps = document.getElementById('fb-steps')?.value.trim() || '칭찬 ➔ 개선 팁 ➔ 응원';
+
+        const generatedPrompt = `[선생님 맞춤형 AI 글쓰기 피드백 웹앱 제작 프롬프트]
+구글 시트 앱스스크립트(Code.gs)와 웹 화면(Index.html)으로 동작하는 '학생 글쓰기 AI 피드백 지원 도구'를 만들어줘.
+
+[기본 정보]
+- 교육 대상: ${target}
+- 웹앱 제목: ${appName}
+
+[AI 피드백 역할 및 원칙 (System Prompt / Role)]
+- 피드백 원칙 및 기준:
+${rules}
+- 피드백 어조 및 스타일: ${tone}
+- 피드백 구성 단계: ${steps}
+
+[주요 기능 및 화면 요구사항]
+1. 프론트엔드 (Index.html):
+   - '피드백 원칙/기준'을 사용자가 필요 시 수정할 수 있는 입력창 제시
+   - '학생이 작성한 글' 입력란 및 [✨ AI 피드백 받기] 버튼
+   - 결과를 예쁘게 보여주는 피드백 결과 출력 카드 UI
+
+2. 백엔드 (Code.gs):
+   - 업스테이지 Solar API를 호출하여 위 '피드백 원칙'과 '어조'에 따라 '학생 글'을 분석하고 맞춤형 피드백을 생성하여 반환해줘.
+   - API 키 변수는 var apiKey = "여기에_API_키를_넣으세요"; 형태로 작성해줘.
+   - 피드백 결과는 구글 시트(작성일시, 피드백 원칙, 학생 글, AI 피드백)에도 한 줄로 기록해줘.`;
+
+        resultCode.textContent = generatedPrompt;
+        resultBox.style.display = 'block';
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        showToast('✨ AI 글쓰기 피드백 도구 프롬프트가 성공적으로 생성되었습니다!');
+      });
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          const text = resultCode.textContent;
+          if (!text) return;
+          try {
+            await navigator.clipboard.writeText(text);
+            copyBtn.textContent = '✅ 복사 완료!';
+            showToast('클립보드에 복사되었습니다!');
+            setTimeout(() => { copyBtn.textContent = '📋 프롬프트 복사하기'; }, 2000);
+          } catch {
+            showToast('복사에 실패했습니다.');
+          }
+        });
+      }
+    }
+
+    // 4. Chatbot 모드 (6차시)
+    const genBtnChatbot = document.getElementById('cb-generate-btn');
+    if (genBtnChatbot && !genBtnChatbot.dataset.init) {
+      genBtnChatbot.dataset.init = 'true';
+      const copyBtn = document.getElementById('cb-copy-btn');
+      const resultBox = document.getElementById('cb-result-container');
+      const resultCode = document.getElementById('cb-result-code');
+
+      genBtnChatbot.addEventListener('click', () => {
+        const botName = document.getElementById('cb-botname')?.value.trim() || '맞춤형 AI 챗봇';
+        const target = document.getElementById('cb-target')?.value.trim() || '학생';
+        const persona = document.getElementById('cb-persona')?.value.trim() || '조선시대 4대 국왕 세종대왕';
+        const flow = document.getElementById('cb-flow')?.value.trim() || '1단계: 인사 ➔ 2단계: 대화 ➔ 3단계: 마무리';
+        const rules = document.getElementById('cb-rules')?.value.trim() || '조선 시대 왕의 말투 사용';
+
+        const generatedPrompt = `[맞춤형 AI 대화형 챗봇 웹앱 제작 프롬프트]
+구글 시트 앱스스크립트(Code.gs)와 웹 화면(Index.html)으로 동작하는 '인공지능 대화형 챗봇'을 만들어줘.
+
+[기본 정보]
+- 챗봇 이름/제목: ${botName}
+- 대화 대상: ${target}
+
+[챗봇 페르소나 및 어포던스 (Role & Rules)]
+1. 챗봇 페르소나 (역할 및 인물):
+   ${persona}
+
+2. 대화 순서 및 단계 (Conversation Flow):
+${flow}
+
+3. 대화 조건 및 어포던스 (말투 및 행동 규칙):
+${rules}
+
+[주요 기능 및 화면 요구사항]
+1. 프론트엔드 (Index.html):
+   - 카카오톡 스타일의 깔끔하고 모던한 대화창 UI ([전송] 버튼, 실시간 대화 말풍선)
+
+2. 백엔드 (Code.gs):
+   - 업스테이지 Solar API를 호출하여 이전 대화 맥락과 위 '페르소나/어포던스 조건'을 유지하며 답변 생성
+   - API 키 변수는 var apiKey = "여기에_API_키를_넣으세요"; 형태로 작성해줘.
+   - 대화 내역은 구글 시트에 날짜, 사용자 메시지, 챗봇 답변 형태로 함께 기록해줘.`;
+
+        resultCode.textContent = generatedPrompt;
+        resultBox.style.display = 'block';
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        showToast('✨ AI 대화형 챗봇 프롬프트가 성공적으로 생성되었습니다!');
+      });
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          const text = resultCode.textContent;
+          if (!text) return;
+          try {
+            await navigator.clipboard.writeText(text);
+            copyBtn.textContent = '✅ 복사 완료!';
+            showToast('클립보드에 복사되었습니다!');
             setTimeout(() => { copyBtn.textContent = '📋 프롬프트 복사하기'; }, 2000);
           } catch {
             showToast('복사에 실패했습니다.');
