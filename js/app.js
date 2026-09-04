@@ -11,7 +11,7 @@
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      초기화
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  document.addEventListener('DOMContentLoaded', () => {
+  function initApp() {
     buildSidebar();
     initMobile();
     updateProgress();
@@ -20,7 +20,13 @@
     window.addEventListener('hashchange', handleRoute);
     window.addEventListener('keydown', handleKeyNav);
     window.addEventListener('checklist-updated', updateProgress);
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+  } else {
+    initApp();
+  }
 
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      라우터
