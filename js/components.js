@@ -393,11 +393,12 @@ window.Components = (function () {
      11. 교육용 프롬프트 제작소
   ────────────────────────────── */
   const renderPromptGenerator = (data = {}) => {
-    const mode = data.mode || 'gemini'; // 'gemini' | 'canva' | 'feedback' | 'chatbot'
+    const mode = data.mode || 'gemini'; // 'gemini' | 'canva' | 'feedback' | 'chatbot' | 'antigravity'
     const isCanva = mode === 'canva';
     const isFeedback = mode === 'feedback';
     const isChatbot = mode === 'chatbot';
-    
+    const isAntigravity = mode === 'antigravity';
+
     let prefix = 'pg-';
     let borderColor = 'var(--primary-light)';
     let titleColor = 'var(--primary)';
@@ -422,12 +423,19 @@ window.Components = (function () {
       titleColor = '#1D4ED8';
       btnColor = '#2563EB';
       btnText = '✨ AI 대화형 챗봇 프롬프트 생성하기';
+    } else if (isAntigravity) {
+      prefix = 'ag-';
+      borderColor = '#4F46E5';
+      titleColor = '#4338CA';
+      btnColor = '#4F46E5';
+      btnText = '✨ 안티그래비티 주문서 만들기';
     }
 
     const title = data.title || (
       isCanva ? '🛠️ 캔바 AI 전용 데이터구조 프롬프트 제작소' :
       isFeedback ? '🛠️ 5차시 실습: AI 글쓰기 피드백 도구 프롬프트 제작소' :
       isChatbot ? '🛠️ 6차시 실습: 페르소나/어포던스 설정 AI 챗봇 프롬프트 제작소' :
+      isAntigravity ? '🛠️ 7차시 실습: 안티그래비티 주문서(프롬프트) 제작소' :
       '🛠️ 교육용 웹앱 프롬프트 제작소'
     );
     const desc = data.description || '아래 항목을 직접 입력/수정하여 나만의 맞춤형 AI 바이브코딩 프롬프트를 만드세요!';
@@ -514,6 +522,47 @@ window.Components = (function () {
           <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:#1D4ED8;">⚡ (선택) 업스테이지 API 키로 프롬프트 실시간 정제하기</label>
           <input type="text" id="${prefix}upstage-key" class="pg-input" value="" placeholder="up_... (발급받은 API 키를 입력하면 업스테이지 Solar AI가 바이브코딩 프롬프트를 한층 정교하게 다듬어줍니다)" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.875rem;outline:none;background:white;">
           <span style="font-size:0.8rem;color:var(--text-muted);display:block;margin-top:4px;">💡 API 키를 입력하지 않아도 맞춤형 프롬프트가 즉시 생성되며, 키를 입력하면 Solar AI가 실시간 정제합니다.</span>
+        </div>
+      `;
+    } else if (isAntigravity) {
+      fieldsHTML = `
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;margin-bottom:20px;">
+          <div>
+            <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">👨‍🎓 누가 사용하나요? (교육 대상)</label>
+            <input type="text" id="${prefix}target" class="pg-input" value="초등학교 5학년 학생" placeholder="예: 우리 반 학생, 3학년, 동학년 선생님" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+          </div>
+          <div>
+            <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🖥️ 무엇을 만들까요? (한 줄로)</label>
+            <input type="text" id="${prefix}goal" class="pg-input" value="쪽지시험을 자동으로 채점해주는 웹페이지" placeholder="예: 출석부, 카드 뒤집기 게임, 퀴즈 웹페이지" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;">
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">📚 어떤 수업 / 활동에 쓰나요? (교육적 아이디어만 편하게 적어주세요)</label>
+          <textarea id="${prefix}idea" class="pg-input" rows="3" placeholder="예: 5학년 수학 시간에 학생들이 스스로 곱셈 문제를 풀고, 맞으면 칭찬 도장이 찍히면 좋겠어요." style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;">5학년 수학 시간에 학생들이 스스로 곱셈 문제를 풀고, 맞으면 칭찬 도장이 찍히면 좋겠어요.</textarea>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">✨ 꼭 있었으면 하는 기능 (없으면 비워두세요 — 안티그래비티가 알아서 채워줍니다)</label>
+          <textarea id="${prefix}features" class="pg-input" rows="3" placeholder="예:
+1. 문제는 10개, 다 풀면 점수와 칭찬 메시지 보여주기
+2. 큰 글씨, 알록달록한 색깔
+3. 휴대폰에서도 잘 보이게" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;resize:vertical;font-family:inherit;"></textarea>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--text);">🎨 분위기 / 느낌</label>
+          <select id="${prefix}style" class="pg-input" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;outline:none;background:white;">
+            <option value="학생들이 좋아할 만한 밝고 귀여운 파스텔 톤">🎨 밝고 귀여운 파스텔 (초등 추천)</option>
+            <option value="깔끔하고 모던하며 신뢰감 있는 톤">💻 깔끔하고 모던함 (고등·업무용 추천)</option>
+            <option value="레트로 8비트 게임 느낌의 재미있는 톤">🎮 레트로 게임 느낌</option>
+            <option value="눈이 편안하고 따뜻한 크림·우드 톤">🌿 따뜻하고 편안한 느낌</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom:4px;background:var(--surface-muted);padding:14px;border-radius:var(--radius-sm);border:1px dashed #4F46E5;">
+          <span style="font-size:0.85rem;color:#4338CA;font-weight:600;">🧑‍🏫 선생님은 위 5칸만 채우면 끝!</span>
+          <span style="font-size:0.82rem;color:var(--text-muted);display:block;margin-top:4px;">버튼을 누르면 코드를 한 줄도 몰라도 되는 <b>친절한 주문서</b>가 만들어집니다. 그대로 복사해서 안티그래비티 채팅창에 붙여넣으세요. 파일 만들기·코드 작성·오류 수정·미리보기까지 전부 안티그래비티가 합니다.</span>
         </div>
       `;
     } else {
@@ -981,6 +1030,77 @@ ${datastruct}
             await navigator.clipboard.writeText(text);
             copyBtn.textContent = '✅ 복사 완료!';
             showToast('클립보드에 복사되었습니다! 제미나이(gemini.google.com) 또는 구글 AI 스튜디오(aistudio.google.com) 대화창에 붙여넣으세요.');
+            setTimeout(() => { copyBtn.textContent = '📋 프롬프트 복사하기'; }, 2000);
+          } catch {
+            showToast('복사에 실패했습니다.');
+          }
+        });
+      }
+    }
+
+    // 5. Antigravity 모드 (7차시)
+    const genBtnAg = document.getElementById('ag-generate-btn');
+    if (genBtnAg && !genBtnAg.dataset.init) {
+      genBtnAg.dataset.init = 'true';
+      const copyBtn = document.getElementById('ag-copy-btn');
+      const resultBox = document.getElementById('ag-result-container');
+      const resultCode = document.getElementById('ag-result-code');
+
+      genBtnAg.addEventListener('click', () => {
+        const elTarget = document.getElementById('ag-target');
+        const elGoal = document.getElementById('ag-goal');
+        const elIdea = document.getElementById('ag-idea');
+        const elFeatures = document.getElementById('ag-features');
+        const elStyle = document.getElementById('ag-style');
+
+        const target = (elTarget && elTarget.value ? elTarget.value.trim() : '') || '우리 반 학생';
+        const goal = (elGoal && elGoal.value ? elGoal.value.trim() : '') || '수업에 쓸 웹페이지';
+        const idea = (elIdea && elIdea.value ? elIdea.value.trim() : '') || '수업 활동에 활용하고 싶어요.';
+        const features = (elFeatures && elFeatures.value ? elFeatures.value.trim() : '') || '(특별히 정한 기능은 없어요. 안티그래비티가 알아서 필요한 기능을 넣어주세요.)';
+        const style = (elStyle && elStyle.value ? elStyle.value : '') || '밝고 보기 좋은 느낌';
+
+        const generatedPrompt = `안녕! 나는 코딩을 전혀 모르는 선생님이야.
+아래 아이디어대로 웹페이지(웹앱)를 처음부터 끝까지 네가 다 만들어줘.
+폴더/파일 만들기, 코드 작성, 오류 수정, 미리보기 실행까지 전부 네가 알아서 해줘. 나는 코드를 직접 건드리지 않을 거야.
+
+[누가 사용하나요]
+${target}
+
+[무엇을 만들까요]
+${goal}
+
+[어떤 수업 / 활동에 쓰나요]
+${idea}
+
+[꼭 있었으면 하는 기능]
+${features}
+
+[분위기 / 디자인]
+${style} 느낌으로, 큰 글씨와 또렷한 색으로. PC와 휴대폰 둘 다에서 잘 보이게 해줘.
+
+[진행 방식 부탁 - 꼭 지켜줘]
+1. 먼저 "무엇을 만들지" 1~2줄로 아주 쉽게 요약해서 나에게 확인받고 시작해줘.
+2. 필요한 파일은 네가 알아서 다 만들고, 코드도 네가 다 써줘.
+3. 다 만들면 미리보기(preview)를 띄워서 결과 화면을 보여줘.
+4. 어려운 전문 용어는 쓰지 말고, 꼭 써야 하면 초등학생도 알 만한 쉬운 말로 풀어서 설명해줘.
+5. 내가 "글씨 크게", "색 바꿔줘", "버튼 위로" 처럼 말하면 바로 고쳐줘.
+6. 애매한 부분은 혼자 정하지 말고, 나에게 보기(선택지)를 주고 골라달라고 물어봐줘.
+7. 다 끝나면 이 결과물을 어떻게 저장하고 인터넷에 올리는지도 다음 단계로 알려줘.`;
+
+        resultCode.textContent = generatedPrompt;
+        resultBox.style.display = 'block';
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        showToast('✨ 안티그래비티 주문서가 만들어졌습니다! 복사해서 안티그래비티에 붙여넣으세요.');
+      });
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          const text = resultCode.textContent;
+          if (!text) return;
+          try {
+            await navigator.clipboard.writeText(text);
+            copyBtn.textContent = '✅ 복사 완료!';
+            showToast('클립보드에 복사되었습니다! 안티그래비티 채팅창에 붙여넣으세요.');
             setTimeout(() => { copyBtn.textContent = '📋 프롬프트 복사하기'; }, 2000);
           } catch {
             showToast('복사에 실패했습니다.');
