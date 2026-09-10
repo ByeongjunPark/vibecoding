@@ -473,7 +473,7 @@ function addGuestbookEntry(name, message) {
       { type: 'concept', icon: '🔌', title: 'API란?', body: '택배 서비스로 비유해볼까요? 우리가 물건(데이터/요청)을 보내면, 배송센터(AI 서버)가 복잡한 처리를 대신 해주고 결과물만 우리 집으로 쏙 보내주는 시스템입니다. 덕분에 코드 한 줄만으로 강력한 AI의 능력을 내 프로그램에 얹어 쓸 수 있어요.' },
       { type: 'concept', icon: '🚀', title: '업스테이지란?', body: '세계적인 기술력을 인정받는 한국의 대표적인 AI 스타트업입니다. 학생들의 손글씨를 읽어내는 문서 이해(Document AI), 번역, 텍스트 분석 등 교육 현장에서 유용하게 쓰일 수 있는 다양한 AI 기능을 API 형태로 제공하고 있습니다.' },
       { type: 'concept', icon: '🎁', title: 'AI 이니셔티브', body: '선생님들의 교육 혁신과 연구를 지원하기 위해, 업스테이지에서 교육 목적으로 API를 무료로 사용할 수 있게 혜택을 제공하는 뜻깊은 프로그램입니다.' },
-      { type: 'link', title: '업스테이지 API 문서', description: 'API 사용법이 정리된 공식 문서', url: 'https://console.upstage.ai/docs/getting-started' },
+      { type: 'link', title: '📖 업스테이지 Documentation (공식 API 문서)', description: 'API 사용법·엔드포인트·예제 코드가 모두 정리된 업스테이지 공식 개발자 문서(Getting Started)입니다.', url: 'https://console.upstage.ai/docs/getting-started', icon: '📖' },
       { type: 'link', title: 'AI 이니셔티브 신청', description: '교육용 API 무료 사용 신청 페이지', url: 'https://www.upstage.ai/ko/events/ai-initiative-2026-ko' },
       { type: 'steps', steps: [
           { title: 'Step 1', description: '업스테이지 콘솔 홈페이지에 접속하여 회원가입을 진행합니다.' },
@@ -504,8 +504,9 @@ function addGuestbookEntry(name, message) {
     sections: [
       { type: 'concept', icon: '📖', title: 'API 도큐먼트 읽기', body: '새로운 전자제품을 사면 들어있는 \'사용 설명서\'와 같습니다. ① 어떤 인터넷 주소로 ② 어떤 형태의 데이터를 보내면 ③ 어떤 결과값을 돌려주는지 아주 상세히 적혀있습니다.' },
       { type: 'concept', icon: '🤝', title: '바이브코딩 + API = 무한한 가능성', body: 'API 도큐먼트를 우리가 직접 다 이해할 필요는 없습니다. AI 챗봇에게 "이 사용 설명서(API)를 참고해서 이런 기능을 하는 프로그램을 만들어줘"라고 주문하기만 하면, 어려운 연동 코드까지 알아서 척척 짜줍니다.' },
+      { type: 'link', title: '📖 업스테이지 Documentation (공식 API 문서)', description: 'API 사용법·엔드포인트·예제 코드가 모두 정리된 업스테이지 공식 개발자 문서입니다. 아래 프롬프트에 이 주소(https://console.upstage.ai/docs/getting-started)를 함께 넣어주면 AI가 최신 사양으로 연동 코드를 만들어줍니다.', url: 'https://console.upstage.ai/docs/getting-started', icon: '📖' },
       { type: 'steps', steps: [
-          { title: 'Step 1', description: '업스테이지 API 도큐먼트에서 내가 사용해보고 싶은 흥미로운 기능을 하나 고릅니다.' },
+          { title: 'Step 1', description: '위 <b>[업스테이지 Documentation]</b> 링크를 열어, 내가 사용해보고 싶은 흥미로운 기능을 하나 고릅니다.' },
           { title: 'Step 2', description: '제미나이나 Gems 챗봇에게 주문합니다. 예: "업스테이지 Document AI API를 사용해서 학생이 제출한 독후감 사진을 텍스트로 변환하고, 글자 수를 세어주는 구글 시트 앱스스크립트를 만들어줘. API 키는 스크립트 속성에 저장할거야."' },
           { title: 'Step 3', description: '챗봇이 만들어준 코드를 구글 시트 앱스스크립트 편집기에 복사하여 붙여넣습니다.' },
           { title: 'Step 4', description: '발급받은 내 API 키를 스크립트 코드의 "여기에_API_키를_넣으세요" 위치에 붙여넣습니다.' },
@@ -612,8 +613,14 @@ main();` },
     sections: [
       { type: 'concept', icon: '🛸', title: '안티그래비티란?', body: '구글 딥마인드가 개발한 최첨단 AI 코딩 어시스턴트입니다. 캔버스가 단순한 웹페이지용이라면, 안티그래비티는 대화만으로 복잡한 파일들을 알아서 생성하고 수정하며 하나의 거대한 프로젝트를 통째로 만들어내는 강력한 마법 지팡이입니다.' },
       { type: 'concept', icon: '💻', title: 'IDE란?', body: '통합 개발 환경(Integrated Development Environment)의 약자입니다. 코드를 쓰고, 실행해보고, 오류를 잡는 등 프로그램 개발의 모든 과정을 한 곳에서 할 수 있는 \'전문 작업실\'입니다. 안티그래비티는 이 작업실에서 선생님을 돕는 유능한 조수입니다.' },
+      { type: 'concept', icon: '⬇️', title: '안티그래비티 설치하기 (공식 다운로드 페이지)', body: '아래 <b>공식 다운로드 페이지</b>에 접속해 내 컴퓨터 운영체제(Windows / macOS / Linux)에 맞는 설치 파일을 내려받으세요. 설치 파일을 실행하고 <b>구글 계정으로 로그인</b>하면 바로 사용할 수 있습니다.' },
+      { type: 'linkGrid', cols: 2, links: [
+          { title: '안티그래비티 설치 페이지 (공식 다운로드) 🛸', description: 'antigravity.google/download 에 접속 → 내 운영체제용 설치 파일 다운로드 → 실행 → 구글 계정 로그인이면 설치 끝입니다.', url: 'https://antigravity.google/download', icon: '🛸' },
+          { title: '안티그래비티 공식 시작 가이드 (Docs) 📘', description: '설치부터 첫 프로젝트 생성, 에이전트 사용법까지 안내하는 구글 공식 Getting Started 문서입니다.', url: 'https://antigravity.google/docs/ide/getting-started/', icon: '📘' }
+        ]
+      },
       { type: 'steps', steps: [
-          { title: 'Step 1', description: '강사가 안내하는 설치 링크를 통해 안티그래비티를 컴퓨터에 설치합니다.' },
+          { title: 'Step 1', description: '위 <b>[안티그래비티 설치 페이지]</b> 링크(antigravity.google/download)에서 내 운영체제(Windows/Mac)에 맞는 설치 파일을 내려받아 실행하고, 구글 계정으로 로그인합니다.' },
           { title: 'Step 2', description: '프로그램을 실행한 뒤 바탕화면에 새 폴더를 만들고 프로젝트 폴더로 엽니다.' },
           { title: 'Step 3', description: '채팅창에 첫 지시를 내립니다. 예: "학생들의 출석부를 관리할 수 있는 모던하고 깔끔한 웹페이지를 만들어줘"' },
           { title: 'Step 4', description: 'AI가 스스로 여러 파일들을 만들고 코드를 작성하는 놀라운 과정을 지켜봅니다.' },
@@ -639,25 +646,78 @@ main();` },
     title: '깃허브와 연동시켜보기',
     subtitle: '안티그래비티로 웹 호스팅하기',
     duration: '50분',
-    objectives: ['깃허브 개념 이해하기', '안티그래비티로 깃허브 연동하기', '만든 웹앱을 세상에 공개하기'],
+    objectives: ['깃허브 개념 이해하기', '깃허브 계정 만들기 + 내 컴퓨터에 Git 설치하기', '안티그래비티 채팅으로 코드를 깃허브에 푸시(업로드)하기', '만든 웹앱을 세상에 공개하기'],
     sections: [
       { type: 'concept', icon: '🐙', title: '깃허브란?', body: '전 세계의 수많은 개발자들이 코드를 보관하고 공유하는 거대한 저장소(Repository)입니다. 구글 드라이브에 문서를 안전하게 저장하듯, 깃허브(GitHub)에는 우리가 만든 프로그램 코드를 체계적으로 저장합니다.' },
       { type: 'concept', icon: '🌐', title: '웹 호스팅이란?', body: '지금까지 내 컴퓨터 안에서만 돌아가던 웹페이지를 인터넷 세상에 띄워, 전 세계 누구나 주소를 치고 들어올 수 있게 만드는 과정입니다. GitHub Pages나 Vercel 같은 서비스를 쓰면 이 과정을 무료로 할 수 있습니다.' },
+      { type: 'concept', icon: '⬇️', title: '깃허브 연동 준비물 2가지 (설치·가입 페이지)', body: '안티그래비티가 코드를 깃허브에 올리려면 <b>① 깃허브 계정</b>과 <b>② 내 컴퓨터에 설치된 Git 프로그램</b>이 필요합니다. 아래 두 페이지에서 각각 준비하세요. (Git은 설치 창에서 <b>[Next]만 계속 클릭</b>하면 됩니다.)' },
+      { type: 'linkGrid', cols: 2, links: [
+          { title: '깃허브(GitHub) 회원가입 페이지 🐙', description: 'github.com/signup 에서 이메일 · 비밀번호 · 사용자 이름(영문)만 입력하면 1~2분 만에 무료 계정이 만들어집니다.', url: 'https://github.com/signup', icon: '🐙' },
+          { title: 'Git 설치 페이지 (Git for Windows) ⚙️', description: 'git-scm.com/downloads 에서 내 운영체제용 설치 파일을 내려받아 실행 → [Next] 반복 클릭으로 설치 완료. 설치 후 안티그래비티를 다시 실행하세요.', url: 'https://git-scm.com/downloads', icon: '⚙️' }
+        ]
+      },
       { type: 'steps', steps: [
-          { title: 'Step 1', description: 'github.com에 접속하여 회원가입을 하고 나만의 계정을 만듭니다.' },
+          { title: 'Step 1', description: '위 <b>[깃허브 회원가입 페이지]</b>에서 회원가입을 하고 나만의 계정을 만듭니다. (그리고 <b>[Git 설치 페이지]</b>에서 Git도 미리 설치해두세요.)' },
           { title: 'Step 2', description: '안티그래비티 채팅창에 말합니다: "지금까지 만든 이 프로젝트를 내 깃허브에 올려줘"' },
           { title: 'Step 3', description: '화면에 뜨는 깃허브 로그인 및 인증 절차를 차분히 따라갑니다.' },
           { title: 'Step 4', description: '깃허브 사이트에 내 코드가 담긴 새로운 저장소가 잘 만들어졌는지 확인합니다.' },
           { title: 'Step 5', description: '인터넷에 배포하기 위해 요청합니다: "이 프로젝트를 다른 사람들도 인터넷에서 볼 수 있게 배포해줘"' }
         ]
       },
+      { type: 'divider' },
+      { type: 'concept', icon: '📦', title: '잠깐! "깃허브에 푸시(Push)한다"는 게 무슨 뜻인가요?', body: `
+        안티그래비티가 만든 코드는 지금 <b>내 컴퓨터 폴더 안</b>에만 있습니다. 이걸 인터넷 저장소인 깃허브로 <b>업로드</b>하는 과정을 <b>"푸시(Push)"</b>라고 불러요. 스마트폰 사진을 구글 포토에 백업하는 것과 똑같습니다!<br><br>
+        딱 <b>3단계</b>만 기억하세요:<br>
+        <b>① 커밋(Commit)</b> — 지금까지 만든 파일들을 "이 시점 저장!" 하고 하나의 꾸러미로 묶기 <span style="color:var(--text-muted);">(사진 앨범 한 권 만들기)</span><br>
+        <b>② 리모트(Remote) 연결</b> — 내 컴퓨터 폴더와 깃허브의 저장소를 서로 연결하기 <span style="color:var(--text-muted);">(백업할 클라우드 계정 연결하기)</span><br>
+        <b>③ 푸시(Push)</b> — 묶은 꾸러미를 깃허브로 실제 업로드하기 <span style="color:var(--text-muted);">(백업 버튼 누르기)</span><br><br>
+        💡 <b>좋은 소식:</b> 안티그래비티에서는 이 3단계를 채팅창에 <b>한 문장</b>으로 부탁하면 AI가 알아서 다 해줍니다. 우리는 명령어를 외울 필요가 없어요!
+      ` },
+      { type: 'concept', icon: '💬', title: '안티그래비티에게 이렇게 부탁하세요 (복사해서 사용)', body: '프로젝트 폴더를 연 상태에서, 안티그래비티 채팅창에 아래 문장을 그대로 입력하면 됩니다.' },
+      { type: 'code', filename: '안티그래비티 채팅창에 붙여넣을 요청문', language: 'text', code: `지금까지 만든 이 프로젝트 전체를 내 깃허브(GitHub)에 올려줘.
+
+- 새 저장소(repository) 이름: my-first-web
+- 공개 범위: 공개(public)
+- 커밋 메시지: "안티그래비티로 만든 첫 웹페이지"
+- API 키나 비밀번호가 든 파일이 있으면 .gitignore에 넣어서 올리지 말아줘
+
+깃허브 로그인이 필요하면 지금 진행해줘.` },
+      { type: 'steps', steps: [
+          { title: 'Step 1. 준비물 확인', description: '① <b>깃허브 계정</b>과 ② 내 컴퓨터에 <b>Git 설치</b>가 되어 있는지 확인합니다. (위 [깃허브 회원가입]·[Git 설치] 링크) 이 두 가지가 있어야 안티그래비티가 푸시할 수 있습니다.' },
+          { title: 'Step 2. 채팅창에 요청문 붙여넣기', description: '프로젝트 폴더를 연 상태에서, 위 <b>[요청문]</b>을 복사해 안티그래비티 채팅창에 붙여넣고 전송합니다.' },
+          { title: 'Step 3. 깃허브 로그인 승인하기', description: '처음 한 번은 브라우저 창이 뜨면서 "안티그래비티가 깃허브에 접근하도록 허용할까요?"라고 물어봅니다. <b>[Authorize / 승인]</b>을 누르고, 화면에 나오는 인증 코드를 복사해 안티그래비티에 붙여넣습니다.' },
+          { title: 'Step 4. AI가 자동 실행하는 과정 지켜보기', description: 'AI가 터미널에서 <code>git init → git add → git commit → 저장소 생성 → git push</code> 를 차례대로 실행합니다. "Successfully pushed" 또는 저장소 주소(https://github.com/...)가 나오면 성공입니다!' },
+          { title: 'Step 5. 깃허브에서 내 눈으로 확인', description: '<code>github.com/내아이디/my-first-web</code> 로 접속해 방금 만든 파일들(index.html 등)이 올라와 있는지 확인합니다.' }
+        ]
+      },
+      { type: 'code', filename: '참고: 안티그래비티가 대신 실행해 주는 실제 명령어 (직접 칠 필요 없음)', language: 'bash', code: `# 1. 현재 폴더를 Git이 관리하도록 시작
+git init
+
+# 2. 모든 파일을 "저장 대기" 상태로 추가
+git add .
+
+# 3. 파일 꾸러미를 메시지와 함께 저장(커밋)
+git commit -m "안티그래비티로 만든 첫 웹페이지"
+
+# 4. 기본 브랜치 이름을 main 으로 지정
+git branch -M main
+
+# 5. 내 폴더와 깃허브의 저장소를 연결(리모트 등록)
+git remote add origin https://github.com/내아이디/my-first-web.git
+
+# 6. 깃허브로 실제 업로드(푸시)!
+git push -u origin main` },
+      { type: 'tip', variant: 'tip', content: '💡 <b>코드를 고친 뒤 다시 올릴 때는 딱 한 문장이면 됩니다:</b> 채팅창에 <code>방금 수정한 내용 깃허브에 다시 올려줘 (커밋하고 푸시해줘)</code> 라고 하면 끝! GitHub Pages나 Vercel로 배포까지 해뒀다면, 푸시하는 순간 웹사이트도 자동으로 최신 버전으로 바뀝니다.' },
+      { type: 'tip', variant: 'warning', content: '🚨 <b>자주 겪는 문제 해결:</b><br>• <b>"git: command not found" / "git을 찾을 수 없음"</b> → 컴퓨터에 Git이 설치되지 않았습니다. 위 [Git 설치 페이지]에서 설치 후 안티그래비티를 <b>재시작</b>하세요.<br>• <b>로그인 창이 안 뜨거나 인증 실패</b> → 채팅창에 "깃허브 로그인부터 다시 해줘"라고 요청하세요.<br>• <b>비밀번호·API 키가 든 파일</b>은 푸시 전에 꼭 <code>.gitignore</code>에 넣어달라고 부탁하세요. 한 번 깃허브에 올라간 비밀 정보는 지워도 기록에 남습니다.' },
       { type: 'tip', variant: 'tip', content: '배포가 성공적으로 완료되면 고유한 웹사이트 주소(URL)가 생깁니다! 이 주소를 카카오톡 등으로 학생이나 동료 선생님들께 바로 공유해보세요.' },
       { type: 'tip', variant: 'tip', content: '한 번 배포했다고 끝이 아닙니다. 안티그래비티에서 코드를 수정하고 다시 깃허브에 올리면, 배포된 웹사이트도 자동으로 최신 버전으로 업데이트됩니다.' },
       { type: 'concept', icon: '🎉', title: '축하합니다!', body: '드디어 8차시의 모든 과정을 훌륭하게 완료하셨습니다! 이제 선생님은 코딩을 전혀 모르더라도 바이브코딩과 다양한 AI 도구를 지휘하여, 수업에 꼭 필요한 교수학습 콘텐츠를 뚝딱 만들고 전 세계와 공유할 수 있는 막강한 능력을 갖추셨습니다. 선생님의 다음 프로젝트를 응원합니다!' },
       { type: 'checklist', sessionId: 'session-8', items: [
           { id: 's8-c1', label: 'GitHub 계정 생성 완료' },
-          { id: 's8-c2', label: '안티그래비티로 깃허브 연동 성공' },
-          { id: 's8-c3', label: '내 깃허브 저장소 생성 확인' },
+          { id: 's8-c1b', label: '내 컴퓨터에 Git 설치 완료' },
+          { id: 's8-c2', label: '안티그래비티 채팅으로 깃허브 로그인(승인) 완료' },
+          { id: 's8-c2b', label: '안티그래비티 채팅으로 git push 성공 (커밋 → 푸시)' },
+          { id: 's8-c3', label: '깃허브에서 내 저장소에 파일이 올라온 것 확인' },
           { id: 's8-c4', label: '웹 배포 성공 (Vercel 등)' },
           { id: 's8-c5', label: '배포된 URL로 접속 확인' },
           { id: 's8-c6', label: '동료 선생님이나 학생에게 URL 공유하기' }
