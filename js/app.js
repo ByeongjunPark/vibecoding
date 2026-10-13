@@ -89,6 +89,11 @@
     }).join('');
 
     content.innerHTML = `
+      <div class="site-url-banner">
+        <span class="site-url-label">📌 이 교재 주소</span>
+        <span class="site-url-text">쌤.닷컴/바이브코딩</span>
+      </div>
+
       <div class="home-hero">
         <h1 class="home-hero-title">${(home.title || '').replace(/\n/g, '<br>')}</h1>
         <p class="home-hero-subtitle">${esc(home.subtitle || '')}</p>
