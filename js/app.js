@@ -89,12 +89,12 @@
     }).join('');
 
     content.innerHTML = `
-      <div class="site-url-banner">
-        <span class="site-url-label">📌 이 교재 주소</span>
-        <span class="site-url-text">쌤.닷컴/바이브코딩</span>
-      </div>
-
       <div class="home-hero">
+        <div class="site-url-banner">
+          <p class="site-url-sentence">이 웹페이지의 주소는 <strong class="site-url-text">쌤.닷컴/바이브코딩</strong> 입니다.</p>
+          <button type="button" class="site-url-copy-btn" id="site-url-copy-btn">📋 주소 복사</button>
+        </div>
+
         <h1 class="home-hero-title">${(home.title || '').replace(/\n/g, '<br>')}</h1>
         <p class="home-hero-subtitle">${esc(home.subtitle || '')}</p>
         <p class="home-hero-desc">${esc(home.description || '')}</p>
@@ -117,6 +117,25 @@
       <h2 class="home-section-title">📚 차시별 학습 내용</h2>
       <div class="home-grid">${cards}</div>
     `;
+
+    initSiteUrlCopy();
+  }
+
+  function initSiteUrlCopy() {
+    const btn = document.getElementById('site-url-copy-btn');
+    if (!btn) return;
+    btn.addEventListener('click', async () => {
+      const text = '쌤.닷컴/바이브코딩';
+      const C = window.Components;
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = '✅ 복사됨!';
+        if (C) C.showToast('주소가 클립보드에 복사되었습니다!');
+        setTimeout(() => { btn.textContent = '📋 주소 복사'; }, 2000);
+      } catch {
+        if (C) C.showToast('복사에 실패했습니다. 직접 선택해서 복사해주세요.');
+      }
+    });
   }
 
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━

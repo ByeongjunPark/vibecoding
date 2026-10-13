@@ -988,33 +988,59 @@ ul, ol {
 .site-url-banner {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 14px;
   flex-wrap: wrap;
-  text-align: center;
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
   color: #fff;
-  padding: 16px 20px;
-  border-radius: var(--radius);
-  margin-bottom: 20px;
-  box-shadow: var(--shadow-md);
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
 }
 
-.site-url-banner .site-url-label {
-  font-size: 0.95rem;
-  font-weight: 700;
-  opacity: 0.92;
+.site-url-sentence {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
 }
 
-.site-url-banner .site-url-text {
-  font-size: 1.75rem;
+.site-url-text {
+  font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: -0.01em;
+  color: #fff;
+  margin: 0 2px;
+}
+
+.site-url-copy-btn {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.site-url-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
 }
 
 @media (max-width: 480px) {
-  .site-url-banner .site-url-text {
-    font-size: 1.25rem;
+  .site-url-banner {
+    justify-content: center;
+    text-align: center;
+  }
+  .site-url-text {
+    font-size: 1.15rem;
+  }
+  .site-url-copy-btn {
+    width: 100%;
   }
 }
 
